@@ -288,18 +288,18 @@
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-3 mb-4">
                         <div>
                             <p class="text-sm opacity-80 mb-1">長榮無限萬哩遊・累積哩程</p>
-                            <p class="text-4xl sm:text-5xl font-black">49,812 <span class="text-xl font-normal opacity-80">哩</span></p>
+                            <p id="eva-miles-total" class="text-4xl sm:text-5xl font-black">49,812 <span class="text-xl font-normal opacity-80">哩</span></p>
                         </div>
                         <div class="text-left sm:text-right">
                             <p class="text-xs opacity-70">來回升豪經目標</p>
-                            <p class="text-2xl font-bold">50,000 哩</p>
-                            <p class="text-xs opacity-70 mt-0.5">距目標僅差 188 哩</p>
+                            <p id="eva-miles-target" class="text-2xl font-bold">50,000 哩</p>
+                            <p id="eva-miles-gap" class="text-xs opacity-70 mt-0.5">距目標僅差 188 哩</p>
                         </div>
                     </div>
                     <div class="w-full bg-white/25 rounded-full h-3">
-                        <div class="bg-white rounded-full h-3" style="width: 99.6%"></div>
+                        <div class="eva-progress-bar bg-white rounded-full h-3" style="width: 99.6%"></div>
                     </div>
-                    <p class="text-xs mt-2 opacity-70">99.6% 完成</p>
+                    <p id="eva-miles-percent" class="text-xs mt-2 opacity-70">99.6% 完成</p>
                 </div>
 
                 <!-- 哩程明細 -->
@@ -478,7 +478,7 @@
             <!-- 概覽 -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
-                    <p class="text-2xl sm:text-3xl font-black text-orange-500">28,600</p>
+                    <p id="emirates-total" class="text-2xl sm:text-3xl font-black text-orange-500">28,600</p>
                     <p class="text-xs sm:text-sm text-gray-500 mt-1">阿聯酋哩程</p>
                 </div>
                 <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
@@ -513,7 +513,7 @@
                                 <p class="text-xs opacity-80">15:00–18:20・約 3h20m 飛行</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-base sm:text-lg font-black">10,234</p>
+                                <p id="easyjet-out-miles" class="text-base sm:text-lg font-black">10,234</p>
                                 <p class="text-xs opacity-80">哩</p>
                             </div>
                         </div>
@@ -525,7 +525,7 @@
                                 <p class="text-xs opacity-80">12:20–15:30・約 3h10m 飛行</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-base sm:text-lg font-black">13,212</p>
+                                <p id="easyjet-ret-miles" class="text-base sm:text-lg font-black">13,212</p>
                                 <p class="text-xs opacity-80">哩</p>
                             </div>
                         </div>
@@ -1280,10 +1280,10 @@
                     </div>
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between bg-black/15 rounded-xl px-3 py-2">
-                            <span>現金支出</span><span class="font-black">~NT$12,000–15,000</span>
+                            <span>最便宜機票</span><span id="seoul-ticket-hero" class="font-black">NT$33,632</span>
                         </div>
                         <div class="flex justify-between bg-black/15 rounded-xl px-3 py-2">
-                            <span>阿聯酋哩程</span><span class="font-black">33,000（差 4,400）</span>
+                            <span>阿聯酋哩程</span><span id="seoul-emirates-label" class="font-black">33,000（差 4,400）</span>
                         </div>
                         <div class="flex justify-between bg-black/15 rounded-xl px-3 py-2">
                             <span>長榮哩程</span><span class="font-black">保留未用</span>
@@ -1334,7 +1334,7 @@
                             <span class="text-lg flex-shrink-0 mt-0.5">🇹🇼</span>
                             <div>
                                 <p class="font-bold text-gray-800">台北 (TPE) → 首爾 (ICN)</p>
-                                <p class="text-xs text-gray-500">現金買，約 2.5 小時・來回 ~NT$5,000–8,000</p>
+                                <p id="seoul-ticket-route" class="text-xs text-gray-500">最便宜方案 NT$33,632・轉機 1 次・25 小時 45 分鐘</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
@@ -1459,7 +1459,7 @@
                         <tbody class="divide-y divide-gray-100">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">機票現金支出</td>
-                                <td class="px-3 sm:px-4 py-3 text-center font-black text-emerald-600">~NT$12,000–15,000 ✅</td>
+                                <td id="seoul-ticket-compare" class="px-3 sm:px-4 py-3 text-center font-black text-emerald-600">NT$33,632 ✅<br><span class="text-xs font-normal text-gray-500">轉機 1 次・25h 45m</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-red-500">NT$56,254</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
@@ -1535,6 +1535,8 @@
         </div>
     </footer>
 
+    <script src="plan.js"></script>
+    <script src="sync.js"></script>
     <script>
         function switchVersion(v) {
             document.querySelectorAll('.version-content').forEach(el => el.classList.add('hidden'));
