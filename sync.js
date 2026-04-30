@@ -35,12 +35,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 華航哩程：進度條與數值 ───────────────────────────────
   const ci = P.miles.ci;
-  set('eva-miles-total',   `${fmt(ci.total)} <span class="text-xl font-normal opacity-80">哩</span>`);
+  const ciTotalFmt = fmt(ci.total);
+  const ciRemFmt   = fmt(ci.total - ci.target25k);
+  const ciGapBFmt  = fmt(ci.gap50k);
+
+  set('eva-miles-total',   `${ciTotalFmt} <span class="text-xl font-normal opacity-80">哩</span>`);
   set('eva-miles-target',  `${fmt(ci.target25k)} 哩`);
-  set('eva-miles-gap',     `升單程豪經後剩 ${fmt(ci.total - ci.target25k)} 哩`);
+  set('eva-miles-gap',     `升單程豪華經濟後剩 ${ciRemFmt} 哩`);
   set('eva-miles-percent', `${ci.progress25k}% 完成（單程升艙目標）`);
   document.querySelectorAll('.eva-progress-bar')
     .forEach(el => { el.style.width = ci.progress25k + '%'; });
+
+  // ── 華航哩程：ciSources 動態表格 ─────────────────────────
+  set('ci-sources-subtitle',     `Dynasty Flyer ${ciTotalFmt} 哩 累積方式`);
+  set('ci-sources-header-total', `${ciTotalFmt} <span class="text-base font-normal opacity-80">哩</span>`);
+
+  const colorMap = {
+    red: 'bg-red-100 text-red-600', blue: 'bg-sky-100 text-sky-600',
+    purple: 'bg-purple-100 text-purple-600', green: 'bg-green-100 text-green-600',
+    orange: 'bg-orange-100 text-orange-600',
+  };
+  set('ci-sources-body',
+    P.miles.ciSources.map(s => `
+      <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:hover:bg-slate-800/50">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 ${colorMap[s.color] || 'bg-gray-100 text-gray-600'} rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${s.short}</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-slate-300">${s.label}</span>
+        </div>
+        <span class="text-center text-xs text-gray-400 dark:text-slate-500">${s.points != null ? fmt(s.points) + ' pt・' : ''}${s.rate}</span>
+        <span class="text-right font-bold text-gray-800 dark:text-slate-100">${fmt(s.miles)} 哩</span>
+      </div>
+    `).join('') + `
+      <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-sky-50 dark:bg-sky-900/30">
+        <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">合計</span>
+        <span class="text-right font-black text-sky-600 text-lg sm:text-xl">${ciTotalFmt} 哩</span>
+      </div>
+    `
+  );
+
+  const cardCount = P.miles.ciSources.filter(s => s.points != null).length;
+  const hasExisting = P.miles.ciSources.some(s => s.points == null);
+  set('ci-sources-footer', hasExisting
+    ? `✅ ${cardCount} 張卡 + 帳戶現有，合計 ${ciTotalFmt} 哩`
+    : `✅ ${cardCount} 張卡哩程明細確認，合計 ${ciTotalFmt} 哩`);
+
+  // ── 通用 data-val 同步（CI 哩程數字散落各 tab）─────────────
+  const dataValMap = {
+    'ci-total':         ciTotalFmt + ' 哩',
+    'ci-total-num':     ciTotalFmt,
+    'ci-remaining':     ciRemFmt + ' 哩',
+    'ci-remaining-num': ciRemFmt,
+    'ci-gap-b':         ciGapBFmt + ' 哩',
+    'ci-gap-b-num':     ciGapBFmt,
+  };
+  document.querySelectorAll('[data-val]').forEach(el => {
+    const v = dataValMap[el.dataset.val];
+    if (v !== undefined) el.textContent = v;
+  });
 
   // ── 阿聯酋哩程：總哩程 ──────────────────────────────────
   set('emirates-total', fmt(P.miles.emirates.total));
