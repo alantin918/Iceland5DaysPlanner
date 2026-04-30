@@ -109,7 +109,7 @@ const PLAN = {
     ],
     // 完整行程串聯（倫敦方案 5天版）
     chain: [
-      { icon:"🇹🇼", label:"台北 → 倫敦", note:"長榮 Q 艙 + 49,812 哩升豪華經濟艙", price:"NT$56,254", color:"emerald" },
+      { icon:"🇹🇼", label:"台北 → 倫敦", note:"華航 T 艙 + 31,256 哩升豪華經濟艙（去程）", price:"NT$57,622", color:"sky" },
       { icon:"🚌", label:"LHR → LGW 轉機", note:"National Express 巴士・約 75 分鐘", price:"£10–16", color:"purple" },
       { icon:"🇬🇧", label:"10/30 LGW → KEF", note:"easyJet・15:00–18:20・阿聯酋哩程兌換", price:"10,234 哩", color:"orange" },
       { icon:"🇮🇸", label:"冰島 5 天 4 夜（10/30–11/3）", note:"雷克雅維克為基地・黃金圈・斯奈山半島", price:"See 行程", color:"blue" },
@@ -174,11 +174,11 @@ const PLAN = {
     },
     london: {
       label:"倫敦方案", emoji:"🇬🇧", route:"台北 → 倫敦 → 冰島",
-      cashSpend:56254,
+      cashSpend:57622,
       emiratesMiles:23446, emiratesLeft:5154,
-      evaStatus:"25,000–50,000（升艙）",
+      ciStatus:"25,000（去程升艙）",
       icelandPath:"LHR → LGW → KEF",
-      tpeLhr: { ticket:56254, miles:49812, ci:"直飛 ~13h", br:"轉曼谷 ~18–20h" },
+      tpeLhr: { ticket:57622, miles:31256, ci:"直飛 ~13h", br:"轉曼谷 ~18–20h" },
       lgwKef: { miles:10234, note:"10/30 最省班次" },
       kefLgw: { miles:13212, note:"11/3 最省班次" },
       icelandDays:"5–7",
@@ -186,7 +186,7 @@ const PLAN = {
         "重視長途飛行舒適度（升艙才睡得著）",
         "想讓兩個哩程帳戶都發揮最大效益",
         "想順遊倫敦（博物館・美食・建築）",
-        "長榮哩程沒有其他更好的使用計劃"
+        "華航直飛省 5–7 小時，哩程充裕去程升艙即可"
       ]
     }
   },
@@ -194,16 +194,16 @@ const PLAN = {
   compareRows: [
     { label:"機票現金支出",
       seoul: { text:"NT$33,632 ✅", sub:"轉機 1 次・25h 45m", color:"emerald" },
-      london:{ text:"NT$56,254",    color:"red" } },
+      london:{ text:"NT$57,622",    color:"red" } },
     { label:"阿聯酋哩程",
       seoul: { text:"22,000 哩 + NT$1,013 ✅", sub:"TPE↔ICN 來回・剩 6,600 哩", color:"emerald" },
       london:{ text:"23,446 哩 ✅", sub:"LGW↔KEF 來回・剩 5,154 哩", color:"blue" } },
-    { label:"長榮 49,812 哩",
+    { label:"華航 31,256 哩",
       seoul: { text:"保留（未用）", color:"gray" },
-      london:{ text:"升艙全用上 ✅", color:"emerald" } },
+      london:{ text:"去程升艙 ✅（剩 6,256 哩）", color:"emerald" } },
     { label:"長途飛行艙位",
       seoul: { text:"經濟艙（ICN→KEF 另購票）", color:"gray" },
-      london:{ text:"豪華經濟 / 商務艙 ✅", color:"blue" } },
+      london:{ text:"豪華經濟（去程升艙）✅", color:"blue" } },
     { label:"冰島飛行路徑",
       seoul: { text:"ICN→KEF（另購票）", sub:"非阿聯酋哩程", color:"gray" },
       london:{ text:"LGW→KEF（阿聯酋哩）", sub:"約 3h 20m ✅", color:"blue" } },
@@ -211,8 +211,8 @@ const PLAN = {
       seoul: { text:"首爾", color:"gray" },
       london:{ text:"倫敦", color:"gray" } },
     { label:"哩程整體效益",
-      seoul: { text:"長榮哩程閒置", color:"gray" },
-      london:{ text:"兩帳戶全用 ✅", color:"emerald" } }
+      seoul: { text:"華航哩程閒置", color:"gray" },
+      london:{ text:"兩帳戶均使用 ✅", color:"emerald" } }
   ],
 
   // ── 冰島 5 天行程 ─────────────────────────────────────────

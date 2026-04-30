@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
   set('seoul-emirates-label', emLabel);
 
 
-  // ── 長榮哩程：進度條與數值 ───────────────────────────────
-  const eva = P.miles.eva;
-  set('eva-miles-total',   `${fmt(eva.total)} <span class="text-xl font-normal opacity-80">哩</span>`);
-  set('eva-miles-target',  `${fmt(eva.target)} 哩`);
-  set('eva-miles-gap',     `距目標僅差 ${fmt(eva.gap)} 哩`);
-  set('eva-miles-percent', `${eva.progress}% 完成`);
+  // ── 華航哩程：進度條與數值 ───────────────────────────────
+  const ci = P.miles.ci;
+  set('eva-miles-total',   `${fmt(ci.total)} <span class="text-xl font-normal opacity-80">哩</span>`);
+  set('eva-miles-target',  `${fmt(ci.target25k)} 哩`);
+  set('eva-miles-gap',     `升單程豪經後剩 ${fmt(ci.total - ci.target25k)} 哩`);
+  set('eva-miles-percent', `${ci.progress25k}% 完成（單程升艙目標）`);
   document.querySelectorAll('.eva-progress-bar')
-    .forEach(el => { el.style.width = eva.progress + '%'; });
+    .forEach(el => { el.style.width = ci.progress25k + '%'; });
 
   // ── 阿聯酋哩程：總哩程 ──────────────────────────────────
   set('emirates-total', fmt(P.miles.emirates.total));
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   set('easyjet-ret-miles',      fmt(best.ret.miles));
 
   // ── 升艙基礎票價（多處共用）─────────────────────────────
-  const price = P.baseTicket.price;
+  const price = P.ciBaseTicket.price;
   document.querySelectorAll('.base-ticket-price')
     .forEach(el => { el.textContent = 'NT$' + fmt(price); });
 
