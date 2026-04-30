@@ -988,170 +988,200 @@
                 <div class="flex gap-2 bg-gray-100 dark:bg-slate-800 rounded-2xl p-1.5 mb-6">
                     <button id="vbtn-5" onclick="switchVersion('5')"
                         class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 shadow">
-                        5天版
+                        冰島 5天<br><span class="text-xs font-normal">4夜 · 10/30–11/3</span>
                     </button>
                     <button id="vbtn-6" onclick="switchVersion('6')"
                         class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500 dark:text-slate-400">
-                        6天版
+                        冰島 6天<br><span class="text-xs font-normal">5夜 · 11/1–11/6</span>
                     </button>
                     <button id="vbtn-7" onclick="switchVersion('7')"
                         class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500 dark:text-slate-400">
-                        7天版
+                        冰島 7天<br><span class="text-xs font-normal">6夜 · 11/1–11/7</span>
                     </button>
                 </div>
 
                 <!-- ── Version 5 ── -->
                 <div id="version-5" class="version-content space-y-4">
+                    <!-- Hero 數據 -->
                     <div class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-4 sm:p-5 text-white">
-                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">5天版 · 最省哩程</p>
-                        <h3 class="text-xl font-black mb-3">冰島 10/30 – 11/3（5天4夜）</h3>
-                        <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">easyJet哩程</p>
-                                <p class="text-xl font-black">23,446</p>
+                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">冰島 5天4夜 · 最省哩程</p>
+                        <h3 class="text-xl font-black mb-3">冰島 10/30（五）→ 11/3（二）</h3>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">前英國</p>
+                                <p class="text-lg font-black">1 天</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">剩餘哩程</p>
-                                <p class="text-xl font-black">5,154</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">冰島</p>
+                                <p class="text-lg font-black">4 夜</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">倫敦自由</p>
-                                <p class="text-xl font-black">1 天</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">後英國</p>
+                                <p class="text-lg font-black">~1 天</p>
+                            </div>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">easyJet</p>
+                                <p class="text-lg font-black">23,446</p>
+                                <p class="text-xs opacity-70">哩</p>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- BR v5 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-green-50 dark:bg-green-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-green-400"></span>
-                                <p class="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">長榮 BR 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-amber-600 font-medium">倫敦僅剩半天（LHR→LGW 巴士）</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
-                            </div>
+                    <!-- 完整時間軸（CI 確認方案） -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden text-sm">
+                        <!-- ① 前英國 -->
+                        <div class="px-4 py-2.5 bg-sky-50 dark:bg-sky-900/30 flex items-center gap-2.5 border-b border-sky-100 dark:border-sky-800/50">
+                            <span class="text-xs font-black text-white bg-sky-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">①</span>
+                            <p class="text-xs font-bold text-sky-700 dark:text-sky-300">台北 → 倫敦 ／ 前英國 1 天</p>
                         </div>
-                        <!-- CI v5 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-blue-600 font-medium">幾乎整天倫敦自由（LHR→LGW 巴士）</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
-                            </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 19:10 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 豪華經濟艙（升艙）</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 06:00 抵倫敦 LHR</p><p class="text-xs text-sky-600 dark:text-sky-400 font-medium">幾乎整天倫敦自由 ✓</p><p class="text-xs text-gray-400 dark:text-slate-500">LHR → LGW 巴士 約 75 分鐘</p></div></div>
+                        </div>
+                        <!-- ② 冰島 -->
+                        <div class="px-4 py-2.5 bg-emerald-50 dark:bg-emerald-900/30 flex items-center gap-2.5 border-b border-emerald-100 dark:border-emerald-800/50">
+                            <span class="text-xs font-black text-white bg-emerald-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">②</span>
+                            <p class="text-xs font-bold text-emerald-700 dark:text-emerald-300">冰島 5天4夜（10/30 – 11/3）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">10/30 (五) LGW → KEF 15:00–18:20</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 10,234 哩兌換</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇮🇸</span><div><p class="font-bold text-emerald-700 dark:text-emerald-400">冰島 10/30（五）– 11/3（二） · 4 夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">11/3 (二) KEF → LGW 12:20–15:30</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 13,212 哩兌換</p></div></div>
+                        </div>
+                        <!-- ③ 後英國 → 返台 -->
+                        <div class="px-4 py-2.5 bg-amber-50 dark:bg-amber-900/30 flex items-center gap-2.5 border-b border-amber-100 dark:border-amber-800/50">
+                            <span class="text-xs font-black text-white bg-amber-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">③</span>
+                            <p class="text-xs font-bold text-amber-700 dark:text-amber-300">後英國 → 返台（~1 天）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">11/3 (二) 15:30 返抵 LGW</p><p class="text-xs text-amber-600 dark:text-amber-400 font-medium">後英國：11/3 傍晚 ＋ 11/4 白天 ≈ 約 1 天</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🏠</span><div><p class="font-bold">建議返台：11/4 (四) CI81 LHR→TPE</p><p class="text-xs text-gray-500 dark:text-slate-400">CI81 可選日：週一／二／三／五／六（無週日／四）</p></div></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ── Version 6 ── -->
                 <div id="version-6" class="version-content hidden space-y-4">
+                    <!-- Hero 數據 -->
                     <div class="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-4 sm:p-5 text-white">
-                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">6天版 · 多一天冰島</p>
-                        <h3 class="text-xl font-black mb-3">冰島 11/1 – 11/6（6天5夜）</h3>
-                        <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">easyJet哩程</p>
-                                <p class="text-xl font-black">25,952</p>
+                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">冰島 6天5夜 · 多一天冰島</p>
+                        <h3 class="text-xl font-black mb-3">冰島 11/1（日）→ 11/6（五）</h3>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">前英國</p>
+                                <p class="text-lg font-black">2.5 天</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">剩餘哩程</p>
-                                <p class="text-xl font-black">2,648</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">冰島</p>
+                                <p class="text-lg font-black">5 夜</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">倫敦自由</p>
-                                <p class="text-xl font-black">2 天</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">後英國</p>
+                                <p class="text-lg font-black">~1–3 天</p>
+                            </div>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">easyJet</p>
+                                <p class="text-lg font-black">25,952</p>
+                                <p class="text-xs opacity-70">哩</p>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- BR v6 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-green-50 dark:bg-green-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-green-400"></span>
-                                <p class="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">長榮 BR 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 下午 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
-                            </div>
+                    <!-- 完整時間軸（CI 確認方案） -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden text-sm">
+                        <!-- ① 前英國 -->
+                        <div class="px-4 py-2.5 bg-sky-50 dark:bg-sky-900/30 flex items-center gap-2.5 border-b border-sky-100 dark:border-sky-800/50">
+                            <span class="text-xs font-black text-white bg-sky-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">①</span>
+                            <p class="text-xs font-bold text-sky-700 dark:text-sky-300">台北 → 倫敦 ／ 前英國 2.5 天</p>
                         </div>
-                        <!-- CI v6 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 整天 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
-                            </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 19:10 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 豪華經濟艙（升艙）</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 06:00 抵倫敦 LHR</p><p class="text-xs text-sky-600 dark:text-sky-400 font-medium">前英國：10/29 整天 ＋ 10/30 ＋ 10/31 ≈ 2.5 天</p><p class="text-xs text-gray-400 dark:text-slate-500">LHR → LGW 巴士 約 75 分鐘</p></div></div>
+                        </div>
+                        <!-- ② 冰島 -->
+                        <div class="px-4 py-2.5 bg-blue-50 dark:bg-blue-900/30 flex items-center gap-2.5 border-b border-blue-100 dark:border-blue-800/50">
+                            <span class="text-xs font-black text-white bg-blue-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">②</span>
+                            <p class="text-xs font-bold text-blue-700 dark:text-blue-300">冰島 6天5夜（11/1 – 11/6）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">11/1 (日) LGW → KEF 07:00–10:30</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 11,044 哩兌換（早班機）</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇮🇸</span><div><p class="font-bold text-blue-700 dark:text-blue-400">冰島 11/1（日）– 11/6（五） · 5 夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">11/6 (五) KEF → LGW 19:15–22:25</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 14,908 哩兌換（晚班機）</p></div></div>
+                        </div>
+                        <!-- ③ 後英國 → 返台 -->
+                        <div class="px-4 py-2.5 bg-amber-50 dark:bg-amber-900/30 flex items-center gap-2.5 border-b border-amber-100 dark:border-amber-800/50">
+                            <span class="text-xs font-black text-white bg-amber-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">③</span>
+                            <p class="text-xs font-bold text-amber-700 dark:text-amber-300">後英國 → 返台（~1–3 天，視返台日期）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">11/6 (五) 22:25 返抵 LGW</p><p class="text-xs text-amber-600 dark:text-amber-400 font-medium">抵達較晚，隔天 11/7 (六) 才能轉回 LHR</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🏠</span><div>
+                                <p class="font-bold">返台選項：</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">• 11/7 (六) CI81 — 後英國 1 天（11/7 整天）</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">• 11/10 (一) CI81 — 後英國 3 天（11/7–11/9）</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500 mt-1">CI81 可選日：週一／二／三／五／六（無週日／四）</p>
+                            </div></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ── Version 7 ── -->
                 <div id="version-7" class="version-content hidden space-y-4">
+                    <!-- Hero 數據 -->
                     <div class="bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl p-4 sm:p-5 text-white">
-                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">7天版 · 最長冰島行程</p>
-                        <h3 class="text-xl font-black mb-3">冰島 11/1 – 11/7（7天6夜）</h3>
-                        <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">easyJet哩程</p>
-                                <p class="text-xl font-black">26,762</p>
+                        <p class="text-xs opacity-80 uppercase tracking-wider mb-1">冰島 7天6夜 · 最長冰島行程</p>
+                        <h3 class="text-xl font-black mb-3">冰島 11/1（日）→ 11/7（六）</h3>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">前英國</p>
+                                <p class="text-lg font-black">2.5 天</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">剩餘哩程</p>
-                                <p class="text-xl font-black">1,838</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">冰島</p>
+                                <p class="text-lg font-black">6 夜</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
-                                <p class="text-xs opacity-80">倫敦自由</p>
-                                <p class="text-xl font-black">2 天</p>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">後英國</p>
+                                <p class="text-lg font-black">~2 天</p>
+                            </div>
+                            <div class="bg-white/20 rounded-xl p-2">
+                                <p class="text-xs opacity-80">easyJet</p>
+                                <p class="text-lg font-black">26,762</p>
+                                <p class="text-xs opacity-70">哩</p>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- BR v7 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-green-50 dark:bg-green-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-green-400"></span>
-                                <p class="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">長榮 BR 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 下午 + 10/30 + 10/31</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
-                            </div>
+                    <!-- 完整時間軸（CI 確認方案） -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden text-sm">
+                        <!-- ① 前英國 -->
+                        <div class="px-4 py-2.5 bg-sky-50 dark:bg-sky-900/30 flex items-center gap-2.5 border-b border-sky-100 dark:border-sky-800/50">
+                            <span class="text-xs font-black text-white bg-sky-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">①</span>
+                            <p class="text-xs font-bold text-sky-700 dark:text-sky-300">台北 → 倫敦 ／ 前英國 2.5 天</p>
                         </div>
-                        <!-- CI v7 -->
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
-                                <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
-                            </div>
-                            <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 整天 + 10/30 + 10/31</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
-                            </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 19:10 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 豪華經濟艙（升艙）</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 06:00 抵倫敦 LHR</p><p class="text-xs text-sky-600 dark:text-sky-400 font-medium">前英國：10/29 整天 ＋ 10/30 ＋ 10/31 ≈ 2.5 天</p><p class="text-xs text-gray-400 dark:text-slate-500">LHR → LGW 巴士 約 75 分鐘</p></div></div>
+                        </div>
+                        <!-- ② 冰島 -->
+                        <div class="px-4 py-2.5 bg-violet-50 dark:bg-violet-900/30 flex items-center gap-2.5 border-b border-violet-100 dark:border-violet-800/50">
+                            <span class="text-xs font-black text-white bg-violet-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">②</span>
+                            <p class="text-xs font-bold text-violet-700 dark:text-violet-300">冰島 7天6夜（11/1 – 11/7）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5 border-b border-gray-100 dark:border-slate-700">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">11/1 (日) LGW → KEF 07:00–10:30</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 11,044 哩兌換（早班機）</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇮🇸</span><div><p class="font-bold text-violet-700 dark:text-violet-400">冰島 11/1（日）– 11/7（六） · 6 夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">✈️</span><div><p class="font-bold">11/7 (六) KEF → LGW 18:35–21:45</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 阿聯酋哩程 15,718 哩兌換（晚班機）</p></div></div>
+                        </div>
+                        <!-- ③ 後英國 → 返台 -->
+                        <div class="px-4 py-2.5 bg-amber-50 dark:bg-amber-900/30 flex items-center gap-2.5 border-b border-amber-100 dark:border-amber-800/50">
+                            <span class="text-xs font-black text-white bg-amber-500 rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">③</span>
+                            <p class="text-xs font-bold text-amber-700 dark:text-amber-300">後英國 → 返台（~2 天）</p>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5">
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🇬🇧</span><div><p class="font-bold">11/7 (六) 21:45 返抵 LGW</p><p class="text-xs text-amber-600 dark:text-amber-400 font-medium">後英國：11/8（日）＋ 11/9（一）≈ 2 天</p></div></div>
+                            <div class="flex gap-3 items-start"><span class="text-base flex-shrink-0">🏠</span><div>
+                                <p class="font-bold">建議返台：11/10 (一) CI81 LHR→TPE</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">CI81 週日不飛，11/10（一）是最近可選日</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500 mt-1">CI81 可選日：週一／二／三／五／六（無週日／四）</p>
+                            </div></div>
                         </div>
                     </div>
                 </div>
@@ -1169,44 +1199,44 @@
                             <tr>
                                 <th class="px-3 sm:px-4 py-3 text-left">版本</th>
                                 <th class="px-3 sm:px-4 py-3 text-center">冰島期間</th>
-                                <th class="px-3 sm:px-4 py-3 text-center">去程哩程</th>
-                                <th class="px-3 sm:px-4 py-3 text-center">回程哩程</th>
-                                <th class="px-3 sm:px-4 py-3 text-right">總哩程</th>
-                                <th class="px-3 sm:px-4 py-3 text-center">倫敦 BR / CI</th>
+                                <th class="px-3 sm:px-4 py-3 text-center">前英國</th>
+                                <th class="px-3 sm:px-4 py-3 text-center">後英國</th>
+                                <th class="px-3 sm:px-4 py-3 text-center">建議返台</th>
+                                <th class="px-3 sm:px-4 py-3 text-right">easyJet 哩程</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
                             <tr class="bg-emerald-50 dark:bg-emerald-900/40 hover:bg-emerald-50">
-                                <td class="px-3 sm:px-4 py-3 font-black text-emerald-700 dark:text-emerald-400">5天版 ⭐</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">5天4夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">10/30–11/3</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">10,234</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">10/30 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">13,212</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/3 KEF→LGW</span></td>
+                                <td class="px-3 sm:px-4 py-3 font-black text-emerald-700 dark:text-emerald-400">冰島 5天 ⭐<br><span class="text-xs font-normal text-gray-500 dark:text-slate-400">4夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center">10/30–11/3<br><span class="text-gray-400 dark:text-slate-500 text-xs">5天4夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-sky-600 dark:text-sky-400">1 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">10/29</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-amber-600 dark:text-amber-400">~1 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/3 傍晚+11/4</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-xs">11/4 (四)<br><span class="text-gray-400 dark:text-slate-500">CI81</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-emerald-600">23,446</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-xs">半天 / 整天</td>
                             </tr>
                             <tr class="hover:bg-blue-50 dark:bg-blue-900/30">
-                                <td class="px-3 sm:px-4 py-3 font-black text-blue-700 dark:text-blue-400">6天版</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">6天5夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1–11/6</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">11,044</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">14,908</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/6 KEF→LGW</span></td>
+                                <td class="px-3 sm:px-4 py-3 font-black text-blue-700 dark:text-blue-400">冰島 6天<br><span class="text-xs font-normal text-gray-500 dark:text-slate-400">5夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center">11/1–11/6<br><span class="text-gray-400 dark:text-slate-500 text-xs">6天5夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-sky-600 dark:text-sky-400">2.5 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">10/29–10/31</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-amber-600 dark:text-amber-400">~1–3 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/7 起</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-xs">11/7 (六) 或<br><span class="text-gray-400 dark:text-slate-500">11/10 (一) CI81</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-blue-600">25,952</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-xs">2天 / 2.5天</td>
                             </tr>
                             <tr class="hover:bg-violet-50/30 dark:hover:bg-violet-900/20">
-                                <td class="px-3 sm:px-4 py-3 font-black text-violet-700">7天版</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">7天6夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1–11/7</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">11,044</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">15,718</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/7 KEF→LGW</span></td>
+                                <td class="px-3 sm:px-4 py-3 font-black text-violet-700 dark:text-violet-400">冰島 7天<br><span class="text-xs font-normal text-gray-500 dark:text-slate-400">6夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center">11/1–11/7<br><span class="text-gray-400 dark:text-slate-500 text-xs">7天6夜</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-sky-600 dark:text-sky-400">2.5 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">10/29–10/31</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center font-medium text-amber-600 dark:text-amber-400">~2 天<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/8–11/9</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-xs">11/10 (一)<br><span class="text-gray-400 dark:text-slate-500">CI81（週日不飛）</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-violet-600">26,762</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-xs">2天 / 2.5天</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="p-3 sm:p-4 bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 text-xs text-gray-500 dark:text-slate-400 space-y-1">
-                    <p>※ 兩家航空 10/28 均可出發，easyJet 哩程數兩種方案完全相同</p>
-                    <p>※ 長榮 BR 10/29 約 11:00 抵倫敦；華航 CI 10/29 約 06:00 抵倫敦，CI 多約半天倫敦時間</p>
-                    <p>※ 台北→倫敦：華航 T 艙搭配 31,256 哩升豪華經濟艙（去程升艙，詳見「台北→英國」分頁）</p>
+                    <p>※ 版本定義：「冰島 X天」指冰島入境日至離境日（含首尾），夜數 = 天數 − 1</p>
+                    <p>※ 台北→倫敦：10/28 (三) CI82 直飛，10/29 (四) 06:00 抵 LHR；CI81 返台可選日：週一／二／三／五／六</p>
+                    <p>※ 台北→倫敦：華航 T 艙搭配 31,256 哩升豪華經濟艙（去程升艙）</p>
                 </div>
             </div>
 
