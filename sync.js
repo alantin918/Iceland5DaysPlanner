@@ -61,6 +61,44 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.base-ticket-price')
     .forEach(el => { el.textContent = 'NT$' + fmt(price); });
 
+  // ── 值得嗎？分析 ───────────────────────────────────────────
+  const wa = P.worthItAnalysis;
+  if (wa) {
+    let pointsHtml = wa.points.map(p => `<li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">✓</span><span>${p}</span></li>`).join('');
+    set('worth-it-analysis-container', `
+        <div class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-100 dark:border-emerald-800/50 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-xl shadow-sm">🤔</div>
+                <h3 class="font-black text-lg text-emerald-900 dark:text-emerald-300">${wa.title}</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-4 border border-white dark:border-slate-700">
+                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-bold">方案對比</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between"><span>直接購豪經 (CI)</span><span class="font-bold">NT$${fmt(wa.directPE)}</span></div>
+                            <div class="flex justify-between text-emerald-600 dark:text-emerald-400 font-bold"><span>哩程升艙總成本</span><span>NT$${fmt(wa.upgradePath.total)}</span></div>
+                            <div class="pt-2 border-t border-emerald-100 dark:border-emerald-800 flex justify-between font-black text-lg">
+                                <span>省下金額</span><span class="text-emerald-500">NT$${fmt(wa.savings)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-emerald-500 text-white rounded-xl shadow-md">
+                        <p class="font-black text-lg mb-1">結論：${wa.conclusion.split('！')[0]}！</p>
+                        <p class="text-sm opacity-90">${wa.conclusion.split('！')[1]}</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm font-bold text-emerald-800 dark:text-emerald-400">關鍵點分析：</p>
+                    <ul class="space-y-3 text-sm text-emerald-900/80 dark:text-emerald-300/80">
+                        ${pointsHtml}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    `);
+  }
+
   // ── 暗黑模式切換邏輯 ─────────────────────────────────────
   const themeToggleBtn = document.getElementById('theme-toggle');
   const darkIcon = document.getElementById('theme-toggle-dark-icon');

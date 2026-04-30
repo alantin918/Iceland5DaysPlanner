@@ -6,7 +6,7 @@
 const PLAN = {
 
   // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
-  lastUpdated: "2026-04-30 17:24 (Asia/Taipei)",
+  lastUpdated: "2026-04-30 17:45 (Asia/Taipei)",
 
   // ── 哩程帳戶 ──────────────────────────────────────────────
 
@@ -41,13 +41,13 @@ const PLAN = {
     { id:"D", label:"升艙商務艙・單程（BY艙）", tag:"方案 D ❌ 差 8,688 哩", miles:58500, feasible:false, gap:8688, color:"indigo",
       note:"比 Q 艙升商務少需 11,500 哩，可查詢 BY 艙票價後評估" }
   ],
-  baseTicket: { code: "Q", price: 56254 },
-  ciBaseTicket: { code: "T", price: 57622 },
+  baseTicket: { code: "Q", price: 56254, pePrice: 79983 },
+  ciBaseTicket: { code: "T", price: 57644, pePrice: 84037 },
   ciUpgrades: [
     { id:"A", label:"升艙豪經・單程", tag:"方案 A ✅ 立即可行",  miles:25000, feasible:true,  remaining:6256, color:"emerald",
       note:"31,256 哩充裕，去程 13h 直飛最舒適" },
     { id:"B", label:"升艙豪經・來回", tag:"方案 B ❌ 差 18,744 哩", miles:50000, feasible:false, gap:18744, color:"red",
-      note:"需補購哩程或改搭長榮（長榮差 188 哩即可達標）" }
+      note:"補購 19,000 哩約需 NT$18,000\n總成本 57,644 + 18,000 = 75,644\n比直接買豪經 (84,037) 省 NT$8,393" }
   ],
 
   milesValue: [
@@ -56,6 +56,24 @@ const PLAN = {
     { label:"升商務艙",       value:"NT$2–4",    unit:"每哩 ⭐",     color:"blue" },
     { label:"恢復哩程成本",   value:"NT$0.32",   unit:"最便宜取得",  color:"amber" }
   ],
+
+  // ── 哩程分析：是否值得補哩程？ ─────────────────────────────
+  worthItAnalysis: {
+    title: "值得花 NT$18,000 補 19,000 哩嗎？",
+    directPE: 84037,
+    upgradePath: {
+      ticket: 57644,
+      buyMiles: 18000,
+      total: 75644
+    },
+    savings: 8393,
+    conclusion: "✅ 值得！省下 NT$8,393，且比長榮豪經 (79,983) 還便宜 NT$4,339，又是直飛。",
+    points: [
+      "省錢：比直接買豪經省 8.3k，比長榮便宜 4.3k",
+      "舒適：來回 26 小時都能坐豪經艙，休息品質大增",
+      "效率：華航直飛省下轉機 5–7 小時，適合 5 天短行程"
+    ]
+  },
 
   // ── LGW ↔ KEF easyJet（阿聯酋哩程兌換）──────────────────
   easyjet: {
@@ -185,11 +203,11 @@ const PLAN = {
     },
     london: {
       label:"倫敦方案", emoji:"🇬🇧", route:"台北 → 倫敦 → 冰島",
-      cashSpend:57622, anneCashSpend:40771,
+      cashSpend:57644, anneCashSpend:40771,
       emiratesMiles:23446, emiratesLeft:5154,
       ciStatus:"25,000（去程升艙）",
       icelandPath:"LHR → LGW → KEF",
-      tpeLhr: { ticket:57622, miles:31256, ci:"直飛 ~13h", br:"轉曼谷 ~18–20h" },
+      tpeLhr: { ticket:57644, miles:31256, ci:"直飛 ~13h", br:"轉曼谷 ~18–20h" },
       lgwKef: { miles:10234, note:"10/30 最省班次" },
       kefLgw: { miles:13212, note:"11/3 最省班次" },
       icelandDays:"5–7",
@@ -197,7 +215,8 @@ const PLAN = {
         "重視長途飛行舒適度（升艙才睡得著）",
         "想讓兩個哩程帳戶都發揮最大效益",
         "想順遊倫敦（博物館・美食・建築）",
-        "華航直飛省 5–7 小時，哩程充裕去程升艙即可"
+        "華航直飛省 5–7 小時，哩程充裕去程升艙即可",
+        "✅ 補哩程升艙比直接買豪經省 NT$8,393"
       ]
     }
   },
@@ -205,7 +224,7 @@ const PLAN = {
   compareRows: [
     { label:"機票現金支出",
       seoul: { text:"NT$33,632 ✅", sub:"轉機 1 次・25h 45m", color:"emerald" },
-      london:{ text:"NT$57,622",    color:"red" } },
+      london:{ text:"NT$57,644",    color:"red" } },
     { label:"阿聯酋哩程",
       seoul: { text:"22,000 哩 + NT$1,013 ✅", sub:"TPE↔ICN 來回・剩 6,600 哩", color:"emerald" },
       london:{ text:"23,446 哩 ✅", sub:"LGW↔KEF 來回・剩 5,154 哩", color:"blue" } },
