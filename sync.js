@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
   set('easyjet-out-miles',      fmt(best.out.miles));
   set('easyjet-ret-miles',      fmt(best.ret.miles));
 
+  // ── 倫敦方案：Alan / Anne 機票金額 ─────────────────────
+  const lon = P.plans.london;
+  set('london-anne-cash', `NT$${fmt(lon.anneCashSpend)} <span class="text-xs font-normal opacity-80">CI 直購</span>`);
+
   // ── 升艙基礎票價（多處共用）─────────────────────────────
   const price = P.ciBaseTicket.price;
   document.querySelectorAll('.base-ticket-price')

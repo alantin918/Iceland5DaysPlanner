@@ -185,7 +185,7 @@ const PLAN = {
     },
     london: {
       label:"倫敦方案", emoji:"🇬🇧", route:"台北 → 倫敦 → 冰島",
-      cashSpend:57622,
+      cashSpend:57622, anneCashSpend:40771,
       emiratesMiles:23446, emiratesLeft:5154,
       ciStatus:"25,000（去程升艙）",
       icelandPath:"LHR → LGW → KEF",
