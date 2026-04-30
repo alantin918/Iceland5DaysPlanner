@@ -68,29 +68,29 @@
     <nav class="sticky top-0 z-30 bg-slate-100 border-b border-slate-200 shadow-sm">
         <div class="max-w-5xl mx-auto px-4 py-2">
             <div class="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
-                <button onclick="switchTab('itinerary')" id="tab-itinerary"
-                    class="tab-btn active flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🗺️</span><span>冰島行程</span>
-                </button>
                 <button onclick="switchTab('compare')" id="tab-compare"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
+                    class="tab-btn active flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>⚖️</span><span>路線決策</span>
                 </button>
                 <button onclick="switchTab('tpe-uk')" id="tab-tpe-uk"
                     class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>✈️</span><span>台北→英國</span>
                 </button>
-                <button onclick="switchTab('uk-iceland')" id="tab-uk-iceland"
+                <button onclick="switchTab('ticket')" id="tab-ticket"
                     class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🇮🇸</span><span>英國→冰島</span>
+                    <span>🎫</span><span>購票規劃</span>
                 </button>
                 <button onclick="switchTab('version')" id="tab-version"
                     class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>📋</span><span>行程版本</span>
                 </button>
-                <button onclick="switchTab('ticket')" id="tab-ticket"
+                <button onclick="switchTab('uk-iceland')" id="tab-uk-iceland"
                     class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🎫</span><span>購票規劃</span>
+                    <span>🇮🇸</span><span>英國→冰島</span>
+                </button>
+                <button onclick="switchTab('itinerary')" id="tab-itinerary"
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
+                    <span>🗺️</span><span>冰島行程</span>
                 </button>
             </div>
         </div>
@@ -99,7 +99,7 @@
     <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
 
         <!-- ═══════════════════════════════ TAB 1：冰島行程 ═══════════════════════════════ -->
-        <div id="section-itinerary" class="section-content active space-y-6 sm:space-y-8">
+        <div id="section-itinerary" class="section-content space-y-6 sm:space-y-8">
 
             <!-- 行程概覽 -->
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
@@ -347,9 +347,14 @@
                         <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-2.5 text-xs text-sky-700 dark:text-sky-400">直飛省時，單程升艙立即可行；來回升艙需補購哩程</div>
                     </div>
                 </div>
-                <!-- 已確認 -->
-                <div class="border-t border-gray-100 dark:border-slate-700 bg-emerald-50 dark:bg-emerald-900/30 p-3 sm:p-4">
-                    <p class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300"><span class="font-bold">✅ 已確認：</span>選擇華航 CI 直飛，去程以 25,000 哩升豪華經濟艙，回程經濟艙。</p>
+                <!-- 狀態 -->
+                <div class="border-t border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row">
+                    <div class="flex-1 bg-emerald-50 dark:bg-emerald-900/30 p-3 sm:p-4">
+                        <p class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300"><span class="font-bold">✅ 已確認：</span>選擇華航 CI 直飛 T 艙 NT$57,622</p>
+                    </div>
+                    <div class="flex-1 bg-amber-50 dark:bg-amber-900/30 p-3 sm:p-4 border-t sm:border-t-0 sm:border-l border-gray-100 dark:border-slate-700">
+                        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-300"><span class="font-bold">⏳ 評估中：</span>去程單程升艙 vs 去回均升艙</p>
+                    </div>
                 </div>
             </div>
 
@@ -406,9 +411,8 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
 
-                    <!-- 方案 A：豪經單程（已選） -->
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-sky-400 shadow-sm overflow-hidden card-hover relative">
-                        <div class="absolute top-0 right-0 bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">已選擇</div>
+                    <!-- 方案 A：豪經單程 -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-sky-400 shadow-sm overflow-hidden card-hover">
                         <div class="bg-sky-50 dark:bg-sky-900/30 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="text-xs font-bold bg-sky-100 text-sky-700 dark:text-sky-400 px-2.5 py-1 rounded-full">方案 A ✅ 立即可行</span>
@@ -423,18 +427,18 @@
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">31,256 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙後剩餘</span><span class="font-bold text-emerald-600">6,256 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-semibold text-sky-600">豪華經濟艙 ✅</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-semibold text-gray-500 dark:text-slate-400">經濟艙</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-semibold text-orange-500">經濟艙 ⚠️</span></div>
                             <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-3 text-xs text-sky-700 dark:text-sky-400 mt-2">
-                                31,256 哩充裕，去程直飛 13h 躺平最值得
+                                31,256 哩充裕，立即可行，去程直飛 13h 躺平最值得
                             </div>
                         </div>
                     </div>
 
-                    <!-- 方案 B：豪經來回（需補購哩程） -->
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-red-300 shadow-sm overflow-hidden card-hover opacity-80">
-                        <div class="bg-red-50 dark:bg-red-900/30 p-4 sm:p-5">
+                    <!-- 方案 B：豪經來回（評估中） -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-amber-400 shadow-sm overflow-hidden card-hover">
+                        <div class="bg-amber-50 dark:bg-amber-900/30 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-bold bg-red-100 text-red-700 dark:text-red-400 px-2.5 py-1 rounded-full">方案 B ❌ 差 18,744 哩</span>
+                                <span class="text-xs font-bold bg-amber-100 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-full">方案 B 📊 評估中・差 18,744 哩</span>
                                 <span class="text-xl">🛫🛬</span>
                             </div>
                             <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">升艙豪經・來回</h3>
@@ -442,11 +446,15 @@
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">買 T 艙機票</span><span class="font-bold base-ticket-price">NT$57,622</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（來回）</span><span class="font-bold text-red-600">50,000 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（來回）</span><span class="font-bold text-amber-600">50,000 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">31,256 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">18,744 哩</span></div>
-                            <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 text-xs text-gray-500 dark:text-slate-400 mt-2 space-y-1">
-                                <p>差距較大，需補購哩程或改搭長榮（長榮僅差 188 哩即可達標）</p>
+                            <div class="flex justify-between text-sm"><span class="text-amber-600 font-semibold">還差</span><span class="font-bold text-amber-600">18,744 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-semibold text-emerald-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-semibold text-emerald-600">豪華經濟艙 ✅</span></div>
+                            <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 mt-2 space-y-1">
+                                <p class="font-bold">補購 18,744 哩選項：</p>
+                                <p>① 華航官網直購哩程（費用評估中）</p>
+                                <p>② 刷卡消費累積（時程較長）</p>
                             </div>
                         </div>
                     </div>
@@ -1295,7 +1303,7 @@
         </div>
 
         <!-- ═══════════════════════════════ TAB 2：路線決策（首爾 vs 倫敦）══════════════════ -->
-        <div id="section-compare" class="section-content space-y-6 sm:space-y-8">
+        <div id="section-compare" class="section-content active space-y-6 sm:space-y-8">
 
             <!-- 決策說明 -->
             <div class="bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 sm:p-5 text-white text-center">
@@ -1564,51 +1572,51 @@
                     <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0">A</div>
                     <div>
                         <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100">Alan 的方案</h2>
-                        <p class="text-sm text-gray-500 dark:text-slate-400">哩程升艙版本・長榮 vs 華航 升艙對比</p>
+                        <p class="text-sm text-gray-500 dark:text-slate-400">哩程升艙版本・華航 CI 升艙方案評估（航空公司已確認）</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- 長榮 Alan（備選） -->
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-green-300 shadow-sm overflow-hidden card-hover opacity-80">
-                        <div class="bg-green-50 dark:bg-green-900/30 p-4 sm:p-5">
-                            <span class="text-xs font-bold bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 px-2.5 py-1 rounded-full">長榮航空 BR（備選）</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">Q 艙 + 哩程升豪經來回</h3>
-                            <p class="text-xs text-gray-500 dark:text-slate-400">TPE → BKK → LHR・轉機曼谷</p>
-                        </div>
-                        <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">機票（Q 艙）</span><span class="font-bold">NT$56,254</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-amber-600">約 18–20 小時（轉曼谷）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程</span><span class="font-bold text-green-600">50,000 哩（來回）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">49,812 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">188 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
-                            <div class="bg-green-50 dark:bg-green-900/30 rounded-xl p-3 text-xs text-green-700 dark:text-green-300 mt-2">
-                                <p class="font-bold">補 188 哩方式：</p>
-                                <p>官網直購 200 哩 ≈ NT$100–200，幾乎可忽略</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 華航 Alan（已選） -->
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-sky-400 shadow-sm overflow-hidden card-hover relative">
-                        <div class="absolute top-0 right-0 bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">Alan 首選</div>
+                    <!-- 方案 A：華航 CI 單程升艙 -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-sky-400 shadow-sm overflow-hidden card-hover">
                         <div class="bg-sky-50 dark:bg-sky-900/30 p-4 sm:p-5">
-                            <span class="text-xs font-bold bg-sky-100 text-sky-700 dark:text-sky-400 px-2.5 py-1 rounded-full">中華航空 CI</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">T 艙 + 哩程升豪經單程</h3>
+                            <span class="text-xs font-bold bg-sky-100 text-sky-700 dark:text-sky-400 px-2.5 py-1 rounded-full">方案 A ✅ 立即可行</span>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">T 艙 + 去程升豪華經濟</h3>
                             <p class="text-xs text-gray-500 dark:text-slate-400">TPE → LHR 直飛・約 13 小時</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">機票（T 艙）</span><span class="font-bold">NT$57,622</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-blue-600">約 13 小時 ✅ 直飛</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程</span><span class="font-bold text-blue-600">25,000 哩（單程）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-sky-600">約 13 小時 ✅ 直飛</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程</span><span class="font-bold text-sky-600">25,000 哩（單程）</span></div>
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">31,256 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">使用後剩餘</span><span class="font-bold">6,256 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-blue-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">使用後剩餘</span><span class="font-bold text-emerald-600">6,256 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-sky-600">豪華經濟艙 ✅</span></div>
                             <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-bold text-orange-500">經濟艙 ⚠️</span></div>
-                            <div class="bg-orange-50 dark:bg-orange-900/30 rounded-xl p-3 text-xs text-orange-700 dark:text-orange-300 mt-2">
-                                直飛省 5–7 小時，但回程仍是經濟艙，整體升艙效益不如長榮
+                            <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-3 text-xs text-sky-700 dark:text-sky-400 mt-2">
+                                31,256 哩充裕，立即可行，去程 13h 直飛躺平最值得
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 方案 B：華航 CI 來回升艙（評估中） -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-amber-400 shadow-sm overflow-hidden card-hover">
+                        <div class="bg-amber-50 dark:bg-amber-900/30 p-4 sm:p-5">
+                            <span class="text-xs font-bold bg-amber-100 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-full">方案 B 📊 評估中</span>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">T 艙 + 去回均升豪華經濟</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">TPE → LHR 直飛・約 13 小時</p>
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-2.5">
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">機票（T 艙）</span><span class="font-bold">NT$57,622</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-sky-600">約 13 小時 ✅ 直飛</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（來回）</span><span class="font-bold text-amber-600">50,000 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">31,256 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-amber-600 font-semibold">還差</span><span class="font-bold text-amber-600">18,744 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-emerald-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-bold text-emerald-600">豪華經濟艙 ✅</span></div>
+                            <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 mt-2 space-y-1">
+                                <p class="font-bold">補購 18,744 哩選項：</p>
+                                <p>① 華航官網直購哩程（費用評估中）</p>
+                                <p>② 刷卡消費累積（時程較長）</p>
                             </div>
                         </div>
                     </div>
@@ -1617,52 +1625,52 @@
                 <!-- Alan 比較表 -->
                 <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                     <div class="bg-gradient-to-r from-slate-700 to-gray-800 p-4 text-white">
-                        <h3 class="font-black text-sm sm:text-base">Alan 長榮 vs 華航 對比</h3>
+                        <h3 class="font-black text-sm sm:text-base">華航 CI・升艙方案對比</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs sm:text-sm">
                             <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-400 dark:text-slate-500 uppercase">
                                 <tr>
                                     <th class="px-3 sm:px-4 py-3 text-left">比較項目</th>
-                                    <th class="px-3 sm:px-4 py-3 text-center text-green-600">長榮 BR</th>
-                                    <th class="px-3 sm:px-4 py-3 text-center text-blue-600">華航 CI</th>
+                                    <th class="px-3 sm:px-4 py-3 text-center text-sky-600">方案 A・單程升艙</th>
+                                    <th class="px-3 sm:px-4 py-3 text-center text-amber-600">方案 B・來回升艙</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                     <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">機票現金</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">NT$56,254 ✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold">NT$57,622</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold">NT$57,622</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">使用哩程帳戶</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center">長榮 49,812 哩</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center">華航 31,256 哩</td>
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">所需升艙哩程</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-sky-600">25,000 哩 ✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold">50,000 哩</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">飛行時間</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-amber-600 font-bold">18–20h（轉曼谷）</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-blue-600 font-bold">13h（直飛）✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">目前哩程</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center">31,256 哩</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center">31,256 哩</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">哩程狀態</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center text-emerald-600 font-bold">充裕（剩 6,256）✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center text-amber-600 font-bold">差 18,744 哩 ⚠️</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                     <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">去程艙位</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-green-600">豪華經濟 ✅</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">豪華經濟 ✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-sky-600">豪華經濟 ✅</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">豪華經濟 ✅</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                     <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">回程艙位</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-green-600">豪華經濟 ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-orange-500">經濟艙 ⚠️</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">豪華經濟 ✅</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">哩程缺口</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-red-500">差 188 哩（≈NT$100）</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-emerald-600">充裕（剩 6,256 哩）</td>
-                                </tr>
-                                <tr class="bg-sky-50 dark:bg-sky-900/30">
+                                <tr class="bg-slate-50 dark:bg-slate-800/50">
                                     <td class="px-3 sm:px-4 py-3 font-black text-gray-800 dark:text-slate-100">結論</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-gray-500 dark:text-slate-400 text-xs">轉曼谷 18–20h，來回升艙差 188 哩</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-black text-sky-700 dark:text-sky-400 text-sm">⭐ 已選<br><span class="text-xs font-normal">直飛 13h，哩程充裕，去程升艙</span></td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-black text-sky-700 dark:text-sky-400 text-sm">✅ 立即可行<br><span class="text-xs font-normal">哩程充裕，無需補購</span></td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-black text-amber-700 dark:text-amber-400 text-sm">📊 評估中<br><span class="text-xs font-normal">需補購 18,744 哩</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1796,7 +1804,7 @@
     <!-- Footer -->
     <footer class="bg-slate-800 text-gray-400 dark:text-slate-500 py-8 mt-4">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <p class="text-gray-300 font-medium mb-2 text-sm sm:text-base">冰島之旅全規劃 × 長榮 & 阿聯酋哩程</p>
+            <p class="text-gray-300 font-medium mb-2 text-sm sm:text-base">冰島之旅全規劃 × 華航 & 阿聯酋哩程</p>
             <p class="text-xs max-w-xl mx-auto">哩程數值以查詢當下為準，機票價格與所需哩程隨時可能異動，實際請以各航空官方網站為準。</p>
         </div>
     </footer>
