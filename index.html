@@ -1725,13 +1725,13 @@
         function switchVersion(v) {
             document.querySelectorAll('.version-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.version-btn').forEach(el => {
-                el.classList.remove('bg-white dark:bg-slate-800', 'text-gray-800 dark:text-slate-100', 'shadow');
-                el.classList.add('text-gray-500 dark:text-slate-400');
+                el.classList.remove('bg-white', 'dark:bg-slate-800', 'text-gray-800', 'dark:text-slate-100', 'shadow');
+                el.classList.add('text-gray-500', 'dark:text-slate-400');
             });
             document.getElementById('version-' + v).classList.remove('hidden');
             var btn = document.getElementById('vbtn-' + v);
-            btn.classList.remove('text-gray-500 dark:text-slate-400');
-            btn.classList.add('bg-white dark:bg-slate-800', 'text-gray-800 dark:text-slate-100', 'shadow');
+            btn.classList.remove('text-gray-500', 'dark:text-slate-400');
+            btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-gray-800', 'dark:text-slate-100', 'shadow');
         }
 
         function switchTab(tab) {
