@@ -6,7 +6,7 @@
 const PLAN = {
 
   // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
-  lastUpdated: "2026-04-30 14:03 (Asia/Taipei)",
+  lastUpdated: "2026-04-30 15:10 (Asia/Taipei)",
 
   // ── 哩程帳戶 ──────────────────────────────────────────────
 
@@ -18,8 +18,15 @@ const PLAN = {
     sources: [
       { label: "台新銀行",      short: "台新", points: 6874,  miles: 8112,  color: "red" },
       { label: "星展銀行",      short: "星展", points: 11866, miles: 23700, color: "blue" },
-      { label: "國泰世華 CUBE", short: "CUB", points: 5655,  miles: 15000, color: "purple" },
+      { label: "國泰世華 CUBE", short: "CUB",  points: 5655,  miles: 15000, color: "purple" },
       { label: "恢復過期哩程",  short: "補",   points: null,  miles: 3000,  cost: "$30 USD", color: "amber" }
+    ],
+    // 華航 Dynasty Flyer 31,256 哩來源（已確認：各卡轉換哩數相加 = 31,256）
+    ciSources: [
+      { label: "台新銀行",      short: "台新", points: 6874,  rate: "11pt→14mi",    miles: 8736,  color: "red" },
+      { label: "星展銀行",      short: "星展", points: 11866, rate: "90pt→100mi",   miles: 13100, color: "blue" },
+      { label: "國泰世華 CUBE", short: "CUB",  points: 5655,  rate: "840pt→1000mi", miles: 6000,  color: "purple" },
+      { label: "玉山銀行",      short: "玉山", points: 3837,  rate: "200pt→180mi",  miles: 3420,  color: "green" }
     ]
   },
 
