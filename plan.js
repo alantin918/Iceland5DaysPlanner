@@ -6,13 +6,13 @@
 const PLAN = {
 
   // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
-  lastUpdated: "2026-04-30 17:55 (Asia/Taipei)",
+  lastUpdated: "2026-04-30 17:38 (Asia/Taipei)",
 
   // ── 哩程帳戶 ──────────────────────────────────────────────
 
   miles: {
     eva: { total: 49812, target: 50000, gap: 188, progress: 99.6 },
-    ci:  { total: 31256, target25k: 25000, gap25k: 0, target50k: 50000, gap50k: 18744, progress25k: 100, progress50k: 62.5 },
+    ci:  { total: 34283, target25k: 25000, gap25k: 0, target50k: 50000, gap50k: 15717, progress25k: 100, progress50k: 68.6 },
     emirates: { total: 28600 },
 
     sources: [
@@ -21,12 +21,13 @@ const PLAN = {
       { label: "國泰世華 CUBE", short: "CUB",  points: 5655,  miles: 15000, color: "purple" },
       { label: "恢復過期哩程",  short: "補",   points: null,  miles: 3000,  cost: "$30 USD", color: "amber" }
     ],
-    // 華航 Dynasty Flyer 31,256 哩來源（已確認：各卡轉換哩數相加 = 31,256）
+    // 華航 Dynasty Flyer 34,283 哩來源（信用卡轉換 31,256 + 帳戶現有 3,027）
     ciSources: [
       { label: "台新銀行",      short: "台新", points: 6874,  rate: "11pt→14mi",    miles: 8736,  color: "red" },
       { label: "星展銀行",      short: "星展", points: 11866, rate: "90pt→100mi",   miles: 13100, color: "blue" },
       { label: "國泰世華 CUBE", short: "CUB",  points: 5655,  rate: "840pt→1000mi", miles: 6000,  color: "purple" },
-      { label: "玉山銀行",      short: "玉山", points: 3837,  rate: "200pt→180mi",  miles: 3420,  color: "green" }
+      { label: "玉山銀行",      short: "玉山", points: 3837,  rate: "200pt→180mi",  miles: 3420,  color: "green" },
+      { label: "帳戶現有",      short: "現有", points: null,  rate: "—",            miles: 3027,  color: "orange" }
     ]
   },
 
@@ -44,10 +45,10 @@ const PLAN = {
   baseTicket: { code: "Q", price: 56254, pePrice: 79983 },
   ciBaseTicket: { code: "T", price: 57644, pePrice: 84037 },
   ciUpgrades: [
-    { id:"A", label:"升艙豪經・單程", tag:"方案 A ✅ 立即可行",  miles:25000, feasible:true,  remaining:6256, color:"emerald",
-      note:"31,256 哩充裕，去程 13h 直飛最舒適" },
-    { id:"B", label:"升艙豪經・來回", tag:"方案 B ❌ 差 18,744 哩", miles:50000, feasible:false, gap:18744, color:"red",
-      note:"補購 19,000 哩約需 NT$18,000\n總成本 57,644 + 18,000 = 75,644\n比直接買豪經 (84,037) 省 NT$8,393" }
+    { id:"A", label:"升艙豪經・單程", tag:"方案 A ✅ 立即可行",  miles:25000, feasible:true,  remaining:9283, color:"emerald",
+      note:"34,283 哩充裕，去程 13h 直飛最舒適" },
+    { id:"B", label:"升艙豪經・來回", tag:"方案 B ❌ 差 15,717 哩", miles:50000, feasible:false, gap:15717, color:"red",
+      note:"補購 16,000 哩約需 NT$15,600\n總成本 57,644 + 15,600 = 73,244\n比直接買豪經 (84,037) 省 NT$10,793" }
   ],
 
   milesValue: [
@@ -62,7 +63,7 @@ const PLAN = {
     title: "華航倫敦機票：三種方案終極比拼",
     options: [
       { name: "方案 A：單程升等 (回程豪經)", ticket: 48786, buyMiles: 0, total: 48786, desc: "去程一般經濟 / 回程用現有哩程升豪經", tag: "極致 CP 值" },
-      { name: "方案 B：雙程升等 (來回豪經)", ticket: 57644, buyMiles: 18000, total: 75644, desc: "買可升等艙 / 補 1.8 萬哩程升等", tag: "舒適划算" },
+      { name: "方案 B：雙程升等 (來回豪經)", ticket: 57644, buyMiles: 15600, total: 73244, desc: "買可升等艙 / 補 1.6 萬哩程升等", tag: "舒適划算" },
       { name: "方案 C：直接買豪經", ticket: 84037, buyMiles: 0, total: 84037, desc: "直接花錢買來回豪華經濟艙", tag: "最貴" }
     ],
     savingsText: "方案 A 比 方案 B 省下 NT$26,858",
