@@ -72,9 +72,9 @@
                     class="tab-btn active flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>⚖️</span><span>路線決策</span>
                 </button>
-                <button onclick="switchTab('tpe-uk')" id="tab-tpe-uk"
+                <button onclick="switchTab('miles')" id="tab-miles"
                     class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>✈️</span><span>台北→英國</span>
+                    <span>🧮</span><span>哩程規劃</span>
                 </button>
                 <button onclick="switchTab('ticket')" id="tab-ticket"
                     class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
@@ -86,15 +86,7 @@
                 </button>
                 <button onclick="switchTab('uk-itinerary')" id="tab-uk-itinerary"
                     class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🇬🇧</span><span>英國行程</span>
-                </button>
-                <button onclick="switchTab('uk-iceland')" id="tab-uk-iceland"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🇮🇸</span><span>英國→冰島</span>
-                </button>
-                <button onclick="switchTab('itinerary')" id="tab-itinerary"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
-                    <span>🗺️</span><span>冰島行程</span>
+                    <span>🗺️</span><span>英國 & 冰島行程</span>
                 </button>
             </div>
         </div>
@@ -102,265 +94,8 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
 
-        <!-- ═══════════════════════════════ TAB 1：冰島行程 ═══════════════════════════════ -->
-        <div id="section-itinerary" class="section-content space-y-6 sm:space-y-8">
-
-            <!-- 行程概覽 -->
-            <div class="grid grid-cols-3 gap-3 sm:gap-4">
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
-                    <p class="text-2xl sm:text-3xl font-black text-emerald-600">5</p>
-                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">天數</p>
-                </div>
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
-                    <p class="text-2xl sm:text-3xl font-black text-blue-600">4</p>
-                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">晚固定飯店</p>
-                </div>
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
-                    <p class="text-2xl sm:text-3xl font-black text-purple-600">2</p>
-                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">頂級溫泉</p>
-                </div>
-            </div>
-
-            <!-- 行程卡片 -->
-            <div class="space-y-4 sm:space-y-5">
-
-                <!-- Day 1 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
-                    <div class="flex items-center gap-4 bg-gradient-to-r from-blue-600 to-indigo-600 p-4 sm:p-5 text-white">
-                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">01</span>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 1</p>
-                            <h3 class="text-lg sm:text-xl font-black">抵達與藍色療癒</h3>
-                        </div>
-                        <span class="text-2xl sm:text-3xl">♨️</span>
-                    </div>
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場取車</p><p class="text-xs text-gray-500 dark:text-slate-400">抵達後辦理租車</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Blue Lagoon 藍湖溫泉</p><p class="text-xs text-gray-500 dark:text-slate-400">離機場 20 分鐘</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">夜</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">極光狩獵</p><p class="text-xs text-gray-500 dark:text-slate-400">極光船 / 極光小巴</p></div>
-                            </div>
-                        </div>
-                        <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-400 flex items-center gap-2">
-                            🕐 總車程約 1 小時・入住雷克雅維克（連住 4 晚）
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 2 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
-                    <div class="flex items-center gap-4 bg-gradient-to-r from-amber-500 to-orange-500 p-4 sm:p-5 text-white">
-                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">02</span>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 2</p>
-                            <h3 class="text-lg sm:text-xl font-black">黃金圈精華</h3>
-                        </div>
-                        <span class="text-2xl sm:text-3xl">🌋</span>
-                    </div>
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">辛格韋德利 Þingvellir</p><p class="text-xs text-gray-500 dark:text-slate-400">歐亞與美洲板塊交界</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">蓋錫爾間歇泉 Geysir</p><p class="text-xs text-gray-500 dark:text-slate-400">熱水柱噴發奇景</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黃金瀑布 Gullfoss</p><p class="text-xs text-gray-500 dark:text-slate-400">觀景台好走不費力</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">番茄溫室餐廳 Friðheimar</p><p class="text-xs text-gray-500 dark:text-slate-400">黃金圈最療癒一餐</p></div>
-                            </div>
-                        </div>
-                        <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 flex items-center gap-2">
-                            🕐 總車程約 3.5 小時・傍晚返回雷克雅維克
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
-                    <div class="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-teal-600 p-4 sm:p-5 text-white">
-                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">03</span>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 3</p>
-                            <h3 class="text-lg sm:text-xl font-black">斯奈山半島・冰島縮影</h3>
-                        </div>
-                        <span class="text-2xl sm:text-3xl">🏔️</span>
-                    </div>
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">教堂山 Kirkjufell</p><p class="text-xs text-gray-500 dark:text-slate-400">《冰與火之歌》箭頭山</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黑教堂 Búðakirkja</p><p class="text-xs text-gray-500 dark:text-slate-400">荒野中的極簡教堂</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">阿爾納斯塔皮</p><p class="text-xs text-gray-500 dark:text-slate-400">漁村 × 海蝕洞地形</p></div>
-                            </div>
-                        </div>
-                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 text-xs text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
-                            🕐 總車程約 4.5 小時・本行程最遠的一天，風景最值得
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 4 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
-                    <div class="flex items-center gap-4 bg-gradient-to-r from-violet-600 to-purple-600 p-4 sm:p-5 text-white">
-                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">04</span>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 4</p>
-                            <h3 class="text-lg sm:text-xl font-black">市區漫步 × Sky Lagoon</h3>
-                        </div>
-                        <span class="text-2xl sm:text-3xl">🌊</span>
-                    </div>
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">哈爾格林姆教堂</p><p class="text-xs text-gray-500 dark:text-slate-400">頂樓俯瞰市區彩色屋頂</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Harpa 音樂廳</p><p class="text-xs text-gray-500 dark:text-slate-400">玻璃光影建築・免費入內</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Laugavegur 購物街</p><p class="text-xs text-gray-500 dark:text-slate-400">冰島設計品・手工咖啡</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Sky Lagoon 天空之潟</p><p class="text-xs text-gray-500 dark:text-slate-400">無邊際溫泉 × 大西洋海景</p></div>
-                            </div>
-                        </div>
-                        <div class="bg-violet-50 dark:bg-violet-900/30 rounded-xl p-3 text-xs text-violet-700 dark:text-violet-300 flex items-center gap-2">
-                            🕐 幾乎免開車・行程最放鬆的一天
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 5 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
-                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-600 to-gray-700 p-4 sm:p-5 text-white">
-                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">05</span>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 5</p>
-                            <h3 class="text-lg sm:text-xl font-black">最後採買・啟程</h3>
-                        </div>
-                        <span class="text-2xl sm:text-3xl">🎁</span>
-                    </div>
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">市區最後採買</p><p class="text-xs text-gray-500 dark:text-slate-400">Omnom 巧克力・66°North 保暖衣</p></div>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場還車離開</p><p class="text-xs text-gray-500 dark:text-slate-400">市區→機場約 45 分鐘</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 行程亮點 -->
-            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-5 sm:p-8 border border-gray-100 dark:border-slate-700">
-                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-5 text-center">為什麼選這個行程？</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🏨</div>
-                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">免搬行李</h3>
-                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">4 晚住同一間，市區當基地每天放射狀出遊</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🚗</div>
-                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">開車時間短</h3>
-                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">除斯奈山外每天車程都在 3.5 小時以內</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">♨️</div>
-                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">雙頂級溫泉</h3>
-                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">Blue Lagoon + Sky Lagoon，冰島最頂級兩個溫泉</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ═══════════════════════════════ TAB 2：台北→英國 ═══════════════════════════════ -->
-        <div id="section-tpe-uk" class="section-content space-y-6 sm:space-y-8">
-
-            <!-- ✈️ 台北→倫敦 航空公司選擇比較 -->
-            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
-                <div class="bg-gradient-to-r from-slate-700 to-slate-900 p-4 sm:p-5 text-white">
-                    <h2 class="text-lg sm:text-xl font-black">✈️ 台北 → 倫敦 航空公司比較</h2>
-                    <p class="text-xs opacity-70 mt-1">已選華航 CI 直飛，下方為兩家詳細對比與哩程方案</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
-                    <!-- 長榮 -->
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="w-8 h-8 bg-emerald-100 text-emerald-700 dark:text-emerald-400 rounded-full flex items-center justify-center text-sm font-black">BR</span>
-                            <div>
-                                <p class="font-black text-gray-800 dark:text-slate-100">長榮航空</p>
-                                <p class="text-xs text-gray-400 dark:text-slate-500">BR67/BR68・TPE→BKK→LHR</p>
-                            </div>
-                        </div>
-                        <div class="space-y-1.5 text-sm">
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">Q 艙 NT$56,254</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-emerald-600">49,812 哩 ✅</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪華經濟</span><span class="font-bold">25,000 哩 ✅</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪華經濟</span><span class="font-bold text-amber-600">50,000 哩（差 188）⚡</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold">18–20h（曼谷轉機）</span></div>
-                        </div>
-                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-2.5 text-xs text-emerald-700 dark:text-emerald-400">哩程幾乎滿足來回升艙，差 188 哩即達標</div>
-                    </div>
-                    <!-- 華航 -->
-                    <div class="p-4 sm:p-5 space-y-3">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="w-8 h-8 bg-sky-100 text-sky-700 dark:text-sky-400 rounded-full flex items-center justify-center text-sm font-black">CI</span>
-                            <div>
-                                <p class="font-black text-gray-800 dark:text-slate-100">中華航空</p>
-                                <p class="text-xs text-gray-400 dark:text-slate-500">CI82/CI81・TPE→LHR 直飛</p>
-                            </div>
-                        </div>
-                        <div class="space-y-1.5 text-sm">
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">T 艙 NT$57,622</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-sky-600">31,256 哩 ✅</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪華經濟</span><span class="font-bold text-emerald-600">25,000 哩 ✅ 充裕</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪華經濟</span><span class="font-bold text-red-500">50,000 哩（差 18,744）❌</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-emerald-600">約 13h 直飛 ✅</span></div>
-                        </div>
-                        <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-2.5 text-xs text-sky-700 dark:text-sky-400">直飛省時，單程升艙立即可行；來回升艙需補購哩程</div>
-                    </div>
-                </div>
-                <!-- 狀態 -->
-                <div class="border-t border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row">
-                    <div class="flex-1 bg-emerald-50 dark:bg-emerald-900/30 p-3 sm:p-4">
-                        <p class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300"><span class="font-bold">✅ 已確認：</span>選擇華航 CI 直飛 T 艙 NT$57,622</p>
-                    </div>
-                    <div class="flex-1 bg-amber-50 dark:bg-amber-900/30 p-3 sm:p-4 border-t sm:border-t-0 sm:border-l border-gray-100 dark:border-slate-700">
-                        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-300"><span class="font-bold">⏳ 評估中：</span>去程單程升艙 vs 去回均升艙</p>
-                    </div>
-                </div>
-            </div>
+        <!-- ═══════════════════════════════ TAB：哩程規劃 ═══════════════════════════════ -->
+        <div id="section-miles" class="section-content space-y-6 sm:space-y-8">
 
             <!-- 華航哩程帳戶 -->
             <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
@@ -491,10 +226,13 @@
                 </div>
             </div>
 
-        </div>
 
-        <!-- ═══════════════════════════════ TAB 3：英國→冰島 ═══════════════════════════════ -->
-        <div id="section-uk-iceland" class="section-content space-y-6 sm:space-y-8">
+            <!-- 分隔線 -->
+            <div class="flex items-center gap-3 py-2">
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
+                <span class="text-gray-300 dark:text-slate-500 text-lg font-bold">🇮🇸 英國 → 冰島</span>
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
+            </div>
 
             <!-- 概覽 -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -980,7 +718,7 @@
 
         </div>
 
-        <!-- ═══════════════════════════════ TAB 4：行程版本 ═══════════════════════════════ -->
+        <!-- ═══════════════════════════════ TAB：行程版本 ═══════════════════════════════ -->
         <div id="section-version" class="section-content space-y-6 sm:space-y-8">
 
             <!-- 已確認航班 -->
@@ -1403,6 +1141,144 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 分隔線 -->
+            <div class="flex items-center gap-3 py-2">
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
+                <span class="text-gray-300 dark:text-slate-500 text-lg font-bold">🇮🇸 冰島行程</span>
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
+            </div>
+
+            <!-- 行程概覽 -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
+                    <p class="text-2xl sm:text-3xl font-black text-emerald-600">5</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">天數</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
+                    <p class="text-2xl sm:text-3xl font-black text-blue-600">4</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">晚固定飯店</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
+                    <p class="text-2xl sm:text-3xl font-black text-purple-600">2</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">頂級溫泉</p>
+                </div>
+            </div>
+
+            <!-- 行程卡片 -->
+            <div class="space-y-4 sm:space-y-5">
+
+                <!-- Day 1 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-blue-600 to-indigo-600 p-4 sm:p-5 text-white">
+                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">01</span>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 1</p>
+                            <h3 class="text-lg sm:text-xl font-black">抵達與藍色療癒</h3>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">♨️</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場取車</p><p class="text-xs text-gray-500 dark:text-slate-400">抵達後辦理租車</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Blue Lagoon 藍湖溫泉</p><p class="text-xs text-gray-500 dark:text-slate-400">離機場 20 分鐘</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">夜</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">極光狩獵</p><p class="text-xs text-gray-500 dark:text-slate-400">極光船 / 極光小巴</p></div></div>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-400 flex items-center gap-2">🕐 總車程約 1 小時・入住雷克雅維克（連住 4 晚）</div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-amber-500 to-orange-500 p-4 sm:p-5 text-white">
+                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">02</span>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 2</p>
+                            <h3 class="text-lg sm:text-xl font-black">黃金圈精華</h3>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">🌋</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">辛格韋德利 Þingvellir</p><p class="text-xs text-gray-500 dark:text-slate-400">歐亞與美洲板塊交界</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">蓋錫爾間歇泉 Geysir</p><p class="text-xs text-gray-500 dark:text-slate-400">熱水柱噴發奇景</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黃金瀑布 Gullfoss</p><p class="text-xs text-gray-500 dark:text-slate-400">觀景台好走不費力</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">番茄溫室餐廳 Friðheimar</p><p class="text-xs text-gray-500 dark:text-slate-400">黃金圈最療癒一餐</p></div></div>
+                        </div>
+                        <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 flex items-center gap-2">🕐 總車程約 3.5 小時・傍晚返回雷克雅維克</div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-teal-600 p-4 sm:p-5 text-white">
+                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">03</span>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 3</p>
+                            <h3 class="text-lg sm:text-xl font-black">斯奈山半島・冰島縮影</h3>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">🏔️</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">教堂山 Kirkjufell</p><p class="text-xs text-gray-500 dark:text-slate-400">《冰與火之歌》箭頭山</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黑教堂 Búðakirkja</p><p class="text-xs text-gray-500 dark:text-slate-400">荒野中的極簡教堂</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">阿爾納斯塔皮</p><p class="text-xs text-gray-500 dark:text-slate-400">漁村 × 海蝕洞地形</p></div></div>
+                        </div>
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 text-xs text-emerald-700 dark:text-emerald-400 flex items-center gap-2">🕐 總車程約 4.5 小時・本行程最遠的一天，風景最值得</div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-violet-600 to-purple-600 p-4 sm:p-5 text-white">
+                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">04</span>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 4</p>
+                            <h3 class="text-lg sm:text-xl font-black">市區漫步 × Sky Lagoon</h3>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">🌊</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">哈爾格林姆教堂</p><p class="text-xs text-gray-500 dark:text-slate-400">頂樓俯瞰市區彩色屋頂</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Harpa 音樂廳</p><p class="text-xs text-gray-500 dark:text-slate-400">玻璃光影建築・免費入內</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Laugavegur 購物街</p><p class="text-xs text-gray-500 dark:text-slate-400">冰島設計品・手工咖啡</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Sky Lagoon 天空之潟</p><p class="text-xs text-gray-500 dark:text-slate-400">無邊際溫泉 × 大西洋海景</p></div></div>
+                        </div>
+                        <div class="bg-violet-50 dark:bg-violet-900/30 rounded-xl p-3 text-xs text-violet-700 dark:text-violet-300 flex items-center gap-2">🕐 幾乎免開車・行程最放鬆的一天</div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
+                    <div class="flex items-center gap-4 bg-gradient-to-r from-slate-600 to-gray-700 p-4 sm:p-5 text-white">
+                        <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">05</span>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-0.5">Day 5</p>
+                            <h3 class="text-lg sm:text-xl font-black">最後採買・啟程</h3>
+                        </div>
+                        <span class="text-2xl sm:text-3xl">🎁</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">市區最後採買</p><p class="text-xs text-gray-500 dark:text-slate-400">Omnom 巧克力・66°North 保暖衣</p></div></div>
+                            <div class="flex items-start gap-2.5"><span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場還車離開</p><p class="text-xs text-gray-500 dark:text-slate-400">市區→機場約 45 分鐘</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 行程亮點 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-5 sm:p-8 border border-gray-100 dark:border-slate-700">
+                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-5 text-center">為什麼選這個行程？</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="text-center"><div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🏨</div><h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">免搬行李</h3><p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">4 晚住同一間，市區當基地每天放射狀出遊</p></div>
+                    <div class="text-center"><div class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🚗</div><h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">開車時間短</h3><p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">除斯奈山外每天車程都在 3.5 小時以內</p></div>
+                    <div class="text-center"><div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">♨️</div><h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">雙頂級溫泉</h3><p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">Blue Lagoon + Sky Lagoon，冰島最頂級兩個溫泉</p></div>
+                </div>
+            </div>
+
         </div>
 
 <div id="section-compare" class="section-content active space-y-6 sm:space-y-8">
@@ -1629,6 +1505,61 @@
                         <li class="flex gap-2 items-start"><span class="flex-shrink-0 font-bold">✦</span><span>想順遊倫敦（博物館・美食・建築）</span></li>
                         <li class="flex gap-2 items-start"><span class="flex-shrink-0 font-bold">✦</span><span>華航直飛省 5–7 小時，哩程充裕去程升艙即可</span></li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- ✈️ 台北→倫敦 航空公司選擇比較 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-700 to-slate-900 p-4 sm:p-5 text-white">
+                    <h2 class="text-lg sm:text-xl font-black">✈️ 台北 → 倫敦 航空公司比較</h2>
+                    <p class="text-xs opacity-70 mt-1">已選華航 CI 直飛，下方為兩家詳細對比與哩程方案</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                    <!-- 長榮 -->
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 bg-emerald-100 text-emerald-700 dark:text-emerald-400 rounded-full flex items-center justify-center text-sm font-black">BR</span>
+                            <div>
+                                <p class="font-black text-gray-800 dark:text-slate-100">長榮航空</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500">BR67/BR68・TPE→BKK→LHR</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">Q 艙 NT$56,254</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-emerald-600">49,812 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪華經濟</span><span class="font-bold">25,000 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪華經濟</span><span class="font-bold text-amber-600">50,000 哩（差 188）⚡</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold">18–20h（曼谷轉機）</span></div>
+                        </div>
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-2.5 text-xs text-emerald-700 dark:text-emerald-400">哩程幾乎滿足來回升艙，差 188 哩即達標</div>
+                    </div>
+                    <!-- 華航 -->
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 bg-sky-100 text-sky-700 dark:text-sky-400 rounded-full flex items-center justify-center text-sm font-black">CI</span>
+                            <div>
+                                <p class="font-black text-gray-800 dark:text-slate-100">中華航空</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500">CI82/CI81・TPE→LHR 直飛</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">T 艙 NT$57,622</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-sky-600">31,256 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪華經濟</span><span class="font-bold text-emerald-600">25,000 哩 ✅ 充裕</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪華經濟</span><span class="font-bold text-red-500">50,000 哩（差 18,744）❌</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-emerald-600">約 13h 直飛 ✅</span></div>
+                        </div>
+                        <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-2.5 text-xs text-sky-700 dark:text-sky-400">直飛省時，單程升艙立即可行；來回升艙需補購哩程</div>
+                    </div>
+                </div>
+                <!-- 狀態 -->
+                <div class="border-t border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row">
+                    <div class="flex-1 bg-emerald-50 dark:bg-emerald-900/30 p-3 sm:p-4">
+                        <p class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300"><span class="font-bold">✅ 已確認：</span>選擇華航 CI 直飛 T 艙 NT$57,622</p>
+                    </div>
+                    <div class="flex-1 bg-amber-50 dark:bg-amber-900/30 p-3 sm:p-4 border-t sm:border-t-0 sm:border-l border-gray-100 dark:border-slate-700">
+                        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-300"><span class="font-bold">⏳ 評估中：</span>去程單程升艙 vs 去回均升艙</p>
+                    </div>
                 </div>
             </div>
 
