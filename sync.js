@@ -53,4 +53,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const price = P.baseTicket.price;
   document.querySelectorAll('.base-ticket-price')
     .forEach(el => { el.textContent = 'NT$' + fmt(price); });
+
+  // ── 暗黑模式切換邏輯 ─────────────────────────────────────
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const darkIcon = document.getElementById('theme-toggle-dark-icon');
+  const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+  if (themeToggleBtn) {
+    // 初始狀態圖示
+    if (document.documentElement.classList.contains('dark')) {
+      lightIcon.classList.remove('hidden');
+    } else {
+      darkIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.theme = 'dark';
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        localStorage.theme = 'light';
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+      }
+    });
+  }
 });

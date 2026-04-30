@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; }
+        body { font-family: 'Noto Sans TC', sans-serif; }
         .hero-bg {
             background-image: linear-gradient(135deg, rgba(8,15,40,0.72) 0%, rgba(30,58,80,0.82) 100%),
                 url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1920&q=80');
@@ -18,30 +18,48 @@
         }
         .tab-btn { transition: all .2s; }
         .tab-btn.active { background-color: #fff; color: #0f172a; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+        html.dark .tab-btn.active { background-color: #1e293b; color: #f8fafc; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
         .section-content { display: none; }
-        .section-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-content.active { display: block; animation: fadeIn 0.3s ease-out forwards; }
         .card-hover { transition: box-shadow .2s, transform .2s; }
         .card-hover:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); transform: translateY(-2px); }
+        html.dark .card-hover:hover { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
     </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
 
     <!-- Hero -->
     <header class="hero-bg py-16 px-4 text-white text-center">
         <div class="max-w-3xl mx-auto">
-            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-sm text-emerald-300 font-medium mb-6">
+            <span class="inline-flex items-center gap-2 bg-white dark:bg-slate-800/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-sm text-emerald-300 font-medium mb-6">
                 ✈ 台北 → 倫敦 → 雷克雅維克 完整規劃
             </span>
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tight drop-shadow-xl leading-tight">
                 冰島之旅<br class="sm:hidden">全規劃
             </h1>
             <p class="text-base sm:text-xl font-light text-blue-100 max-w-2xl mx-auto mb-8">
-                長榮哩程升艙策略 × 阿聯酋哩程 × easyJet<br>
+                長榮／華航哩程升艙策略 × 阿聯酋哩程 × easyJet<br>
                 <span class="font-bold text-white">5 天 4 夜 以雷克雅維克為基地</span>
             </p>
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
-                <span class="bg-emerald-500/30 border border-emerald-400/40 rounded-full px-3 py-1.5">49,812 長榮哩程</span>
-                <span class="bg-amber-500/30 border border-amber-400/40 rounded-full px-3 py-1.5">28,600 阿聯酋哩程</span>
+                <span class="bg-emerald-50 dark:bg-emerald-900/300/30 border border-emerald-400/40 rounded-full px-3 py-1.5">49,812 長榮哩程</span>
+                <span class="bg-sky-50 dark:bg-sky-900/300/30 border border-sky-400/40 rounded-full px-3 py-1.5">31,256 華航哩程</span>
+                <span class="bg-amber-50 dark:bg-amber-900/300/30 border border-amber-400/40 rounded-full px-3 py-1.5">28,600 阿聯酋哩程</span>
                 <span class="bg-purple-500/30 border border-purple-400/40 rounded-full px-3 py-1.5">4 晚住同一間飯店</span>
             </div>
         </div>
@@ -52,27 +70,27 @@
         <div class="max-w-5xl mx-auto px-4 py-2">
             <div class="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
                 <button onclick="switchTab('itinerary')" id="tab-itinerary"
-                    class="tab-btn active flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn active flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>🗺️</span><span>冰島行程</span>
                 </button>
                 <button onclick="switchTab('tpe-uk')" id="tab-tpe-uk"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>✈️</span><span>台北→英國</span>
                 </button>
                 <button onclick="switchTab('uk-iceland')" id="tab-uk-iceland"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>🇮🇸</span><span>英國→冰島</span>
                 </button>
                 <button onclick="switchTab('version')" id="tab-version"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>📋</span><span>行程版本</span>
                 </button>
                 <button onclick="switchTab('compare')" id="tab-compare"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>🔀</span><span>方案比較</span>
                 </button>
                 <button onclick="switchTab('ticket')" id="tab-ticket"
-                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 whitespace-nowrap">
+                    class="tab-btn flex-shrink-0 flex items-center gap-1.5 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>👥</span><span>購票規劃</span>
                 </button>
             </div>
@@ -86,17 +104,17 @@
 
             <!-- 行程概覽 -->
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
-                <div class="bg-white rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-emerald-600">5</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">天數</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">天數</p>
                 </div>
-                <div class="bg-white rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-blue-600">4</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">晚固定飯店</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">晚固定飯店</p>
                 </div>
-                <div class="bg-white rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-purple-600">2</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">頂級溫泉</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">頂級溫泉</p>
                 </div>
             </div>
 
@@ -104,7 +122,7 @@
             <div class="space-y-4 sm:space-y-5">
 
                 <!-- Day 1 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-blue-600 to-indigo-600 p-4 sm:p-5 text-white">
                         <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">01</span>
                         <div class="flex-1">
@@ -117,25 +135,25 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800">KEF 機場取車</p><p class="text-xs text-gray-500">抵達後辦理租車</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場取車</p><p class="text-xs text-gray-500 dark:text-slate-400">抵達後辦理租車</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800">Blue Lagoon 藍湖溫泉</p><p class="text-xs text-gray-500">離機場 20 分鐘</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Blue Lagoon 藍湖溫泉</p><p class="text-xs text-gray-500 dark:text-slate-400">離機場 20 分鐘</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">夜</span>
-                                <div><p class="font-bold text-sm text-gray-800">極光狩獵</p><p class="text-xs text-gray-500">極光船 / 極光小巴</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">極光狩獵</p><p class="text-xs text-gray-500 dark:text-slate-400">極光船 / 極光小巴</p></div>
                             </div>
                         </div>
-                        <div class="bg-blue-50 rounded-xl p-3 text-xs text-blue-700 flex items-center gap-2">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-400 flex items-center gap-2">
                             🕐 總車程約 1 小時・入住雷克雅維克（連住 4 晚）
                         </div>
                     </div>
                 </div>
 
                 <!-- Day 2 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-amber-500 to-orange-500 p-4 sm:p-5 text-white">
                         <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">02</span>
                         <div class="flex-1">
@@ -148,29 +166,29 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800">辛格韋德利 Þingvellir</p><p class="text-xs text-gray-500">歐亞與美洲板塊交界</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">辛格韋德利 Þingvellir</p><p class="text-xs text-gray-500 dark:text-slate-400">歐亞與美洲板塊交界</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800">蓋錫爾間歇泉 Geysir</p><p class="text-xs text-gray-500">熱水柱噴發奇景</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">蓋錫爾間歇泉 Geysir</p><p class="text-xs text-gray-500 dark:text-slate-400">熱水柱噴發奇景</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800">黃金瀑布 Gullfoss</p><p class="text-xs text-gray-500">觀景台好走不費力</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黃金瀑布 Gullfoss</p><p class="text-xs text-gray-500 dark:text-slate-400">觀景台好走不費力</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                                <div><p class="font-bold text-sm text-gray-800">番茄溫室餐廳 Friðheimar</p><p class="text-xs text-gray-500">黃金圈最療癒一餐</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">番茄溫室餐廳 Friðheimar</p><p class="text-xs text-gray-500 dark:text-slate-400">黃金圈最療癒一餐</p></div>
                             </div>
                         </div>
-                        <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-700 flex items-center gap-2">
+                        <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 flex items-center gap-2">
                             🕐 總車程約 3.5 小時・傍晚返回雷克雅維克
                         </div>
                     </div>
                 </div>
 
                 <!-- Day 3 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-teal-600 p-4 sm:p-5 text-white">
                         <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">03</span>
                         <div class="flex-1">
@@ -183,25 +201,25 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800">教堂山 Kirkjufell</p><p class="text-xs text-gray-500">《冰與火之歌》箭頭山</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">教堂山 Kirkjufell</p><p class="text-xs text-gray-500 dark:text-slate-400">《冰與火之歌》箭頭山</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800">黑教堂 Búðakirkja</p><p class="text-xs text-gray-500">荒野中的極簡教堂</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">黑教堂 Búðakirkja</p><p class="text-xs text-gray-500 dark:text-slate-400">荒野中的極簡教堂</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800">阿爾納斯塔皮</p><p class="text-xs text-gray-500">漁村 × 海蝕洞地形</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">阿爾納斯塔皮</p><p class="text-xs text-gray-500 dark:text-slate-400">漁村 × 海蝕洞地形</p></div>
                             </div>
                         </div>
-                        <div class="bg-emerald-50 rounded-xl p-3 text-xs text-emerald-700 flex items-center gap-2">
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 text-xs text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
                             🕐 總車程約 4.5 小時・本行程最遠的一天，風景最值得
                         </div>
                     </div>
                 </div>
 
                 <!-- Day 4 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-violet-600 to-purple-600 p-4 sm:p-5 text-white">
                         <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">04</span>
                         <div class="flex-1">
@@ -214,19 +232,19 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800">哈爾格林姆教堂</p><p class="text-xs text-gray-500">頂樓俯瞰市區彩色屋頂</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">哈爾格林姆教堂</p><p class="text-xs text-gray-500 dark:text-slate-400">頂樓俯瞰市區彩色屋頂</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800">Harpa 音樂廳</p><p class="text-xs text-gray-500">玻璃光影建築・免費入內</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Harpa 音樂廳</p><p class="text-xs text-gray-500 dark:text-slate-400">玻璃光影建築・免費入內</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                <div><p class="font-bold text-sm text-gray-800">Laugavegur 購物街</p><p class="text-xs text-gray-500">冰島設計品・手工咖啡</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Laugavegur 購物街</p><p class="text-xs text-gray-500 dark:text-slate-400">冰島設計品・手工咖啡</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
                                 <span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                                <div><p class="font-bold text-sm text-gray-800">Sky Lagoon 天空之潟</p><p class="text-xs text-gray-500">無邊際溫泉 × 大西洋海景</p></div>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">Sky Lagoon 天空之潟</p><p class="text-xs text-gray-500 dark:text-slate-400">無邊際溫泉 × 大西洋海景</p></div>
                             </div>
                         </div>
                         <div class="bg-violet-50 rounded-xl p-3 text-xs text-violet-700 flex items-center gap-2">
@@ -236,7 +254,7 @@
                 </div>
 
                 <!-- Day 5 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden card-hover">
                     <div class="flex items-center gap-4 bg-gradient-to-r from-slate-600 to-gray-700 p-4 sm:p-5 text-white">
                         <span class="text-3xl sm:text-4xl font-black opacity-20 hidden sm:block">05</span>
                         <div class="flex-1">
@@ -248,12 +266,12 @@
                     <div class="p-4 sm:p-5 space-y-3">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                <div><p class="font-bold text-sm text-gray-800">市區最後採買</p><p class="text-xs text-gray-500">Omnom 巧克力・66°North 保暖衣</p></div>
+                                <span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">市區最後採買</p><p class="text-xs text-gray-500 dark:text-slate-400">Omnom 巧克力・66°North 保暖衣</p></div>
                             </div>
                             <div class="flex items-start gap-2.5">
-                                <span class="w-6 h-6 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                <div><p class="font-bold text-sm text-gray-800">KEF 機場還車離開</p><p class="text-xs text-gray-500">市區→機場約 45 分鐘</p></div>
+                                <span class="w-6 h-6 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+                                <div><p class="font-bold text-sm text-gray-800 dark:text-slate-100">KEF 機場還車離開</p><p class="text-xs text-gray-500 dark:text-slate-400">市區→機場約 45 分鐘</p></div>
                             </div>
                         </div>
                     </div>
@@ -261,23 +279,23 @@
             </div>
 
             <!-- 行程亮點 -->
-            <div class="bg-white rounded-2xl shadow-sm p-5 sm:p-8 border border-gray-100">
-                <h2 class="text-xl sm:text-2xl font-black text-gray-800 mb-5 text-center">為什麼選這個行程？</h2>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-5 sm:p-8 border border-gray-100 dark:border-slate-700">
+                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-5 text-center">為什麼選這個行程？</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     <div class="text-center">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🏨</div>
-                        <h3 class="font-bold text-gray-800 mb-1 text-sm sm:text-base">免搬行李</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">4 晚住同一間，市區當基地每天放射狀出遊</p>
+                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">免搬行李</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">4 晚住同一間，市區當基地每天放射狀出遊</p>
                     </div>
                     <div class="text-center">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">🚗</div>
-                        <h3 class="font-bold text-gray-800 mb-1 text-sm sm:text-base">開車時間短</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">除斯奈山外每天車程都在 3.5 小時以內</p>
+                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">開車時間短</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">除斯奈山外每天車程都在 3.5 小時以內</p>
                     </div>
                     <div class="text-center">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">♨️</div>
-                        <h3 class="font-bold text-gray-800 mb-1 text-sm sm:text-base">雙頂級溫泉</h3>
-                        <p class="text-xs sm:text-sm text-gray-500">Blue Lagoon + Sky Lagoon，冰島最頂級兩個溫泉</p>
+                        <h3 class="font-bold text-gray-800 dark:text-slate-100 mb-1 text-sm sm:text-base">雙頂級溫泉</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400">Blue Lagoon + Sky Lagoon，冰島最頂級兩個溫泉</p>
                     </div>
                 </div>
             </div>
@@ -286,8 +304,58 @@
         <!-- ═══════════════════════════════ TAB 2：台北→英國 ═══════════════════════════════ -->
         <div id="section-tpe-uk" class="section-content space-y-6 sm:space-y-8">
 
-            <!-- 哩程來源 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <!-- ✈️ 台北→倫敦 航空公司選擇比較 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-700 to-slate-900 p-4 sm:p-5 text-white">
+                    <h2 class="text-lg sm:text-xl font-black">✈️ 台北 → 倫敦 航空公司選擇</h2>
+                    <p class="text-xs opacity-70 mt-1">兩家各有優缺，確定後更新哩程方案</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                    <!-- 長榮 -->
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 bg-emerald-100 text-emerald-700 dark:text-emerald-400 rounded-full flex items-center justify-center text-sm font-black">BR</span>
+                            <div>
+                                <p class="font-black text-gray-800 dark:text-slate-100">長榮航空</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500">BR67/BR68・TPE→BKK→LHR</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">Q 艙 NT$56,254</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-emerald-600">49,812 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪經</span><span class="font-bold">25,000 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪經</span><span class="font-bold text-amber-600">50,000 哩（差 188）⚡</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold">18–20h（曼谷轉機）</span></div>
+                        </div>
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-2.5 text-xs text-emerald-700 dark:text-emerald-400">哩程幾乎滿足來回升艙，差 188 哩即達標</div>
+                    </div>
+                    <!-- 華航 -->
+                    <div class="p-4 sm:p-5 space-y-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 bg-sky-100 text-sky-700 dark:text-sky-400 rounded-full flex items-center justify-center text-sm font-black">CI</span>
+                            <div>
+                                <p class="font-black text-gray-800 dark:text-slate-100">中華航空</p>
+                                <p class="text-xs text-gray-400 dark:text-slate-500">CI82/CI81・TPE→LHR 直飛</p>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 text-sm">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">底票票種</span><span class="font-bold">T 艙 NT$57,622</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">哩程帳戶</span><span class="font-bold text-sky-600">31,256 哩 ✅</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">單程升豪經</span><span class="font-bold text-emerald-600">25,000 哩 ✅ 充裕</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">來回升豪經</span><span class="font-bold text-red-500">50,000 哩（差 18,744）❌</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-emerald-600">約 13h 直飛 ✅</span></div>
+                        </div>
+                        <div class="bg-sky-50 dark:bg-sky-900/30 rounded-xl p-2.5 text-xs text-sky-700 dark:text-sky-400">直飛省時，單程升艙立即可行；來回升艙需補購哩程</div>
+                    </div>
+                </div>
+                <!-- 決策提示 -->
+                <div class="border-t border-gray-100 dark:border-slate-700 bg-amber-50 dark:bg-amber-900/30 p-3 sm:p-4">
+                    <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-300"><span class="font-bold">⏳ 待決定：</span>選長榮還是華航？單程還是來回升艙？確定後可更新下方哩程詳細資料。</p>
+                </div>
+            </div>
+
+            <!-- 哩程來源（長榮，待決定後可更新） -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="bg-gradient-to-r from-emerald-500 to-teal-500 p-5 sm:p-6 text-white">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-3 mb-4">
                         <div>
@@ -300,51 +368,51 @@
                             <p id="eva-miles-gap" class="text-xs opacity-70 mt-0.5">距目標僅差 188 哩</p>
                         </div>
                     </div>
-                    <div class="w-full bg-white/25 rounded-full h-3">
-                        <div class="eva-progress-bar bg-white rounded-full h-3" style="width: 99.6%"></div>
+                    <div class="w-full bg-white dark:bg-slate-800/25 rounded-full h-3">
+                        <div class="eva-progress-bar bg-white dark:bg-slate-800 rounded-full h-3" style="width: 99.6%"></div>
                     </div>
                     <p id="eva-miles-percent" class="text-xs mt-2 opacity-70">99.6% 完成</p>
                 </div>
 
                 <!-- 哩程明細 -->
                 <div class="divide-y divide-gray-100">
-                    <div class="grid grid-cols-3 bg-gray-50 px-4 sm:px-6 py-3 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <div class="grid grid-cols-3 bg-gray-50 dark:bg-slate-800/50 px-4 sm:px-6 py-3 text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">
                         <span>來源</span><span class="text-center">點數</span><span class="text-right">長榮哩程</span>
                     </div>
-                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50">
+                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:bg-slate-800/50">
                         <div class="flex items-center gap-2">
                             <span class="w-7 h-7 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">台新</span>
                             <span class="text-sm font-medium text-gray-700 hidden sm:inline">台新銀行</span>
                         </div>
-                        <span class="text-center text-sm text-gray-600">6,874</span>
-                        <span class="text-right font-bold text-gray-800">8,112 哩</span>
+                        <span class="text-center text-sm text-gray-600 dark:text-slate-300">6,874</span>
+                        <span class="text-right font-bold text-gray-800 dark:text-slate-100">8,112 哩</span>
                     </div>
-                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50">
+                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:bg-slate-800/50">
                         <div class="flex items-center gap-2">
                             <span class="w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">星展</span>
                             <span class="text-sm font-medium text-gray-700 hidden sm:inline">星展銀行</span>
                         </div>
-                        <span class="text-center text-sm text-gray-600">11,866</span>
-                        <span class="text-right font-bold text-gray-800">23,700 哩</span>
+                        <span class="text-center text-sm text-gray-600 dark:text-slate-300">11,866</span>
+                        <span class="text-right font-bold text-gray-800 dark:text-slate-100">23,700 哩</span>
                     </div>
-                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50">
+                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:bg-slate-800/50">
                         <div class="flex items-center gap-2">
                             <span class="w-7 h-7 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">CUB</span>
                             <span class="text-sm font-medium text-gray-700 hidden sm:inline">國泰世華 CUBE</span>
                         </div>
-                        <span class="text-center text-sm text-gray-600">5,655</span>
-                        <span class="text-right font-bold text-gray-800">15,000 哩</span>
+                        <span class="text-center text-sm text-gray-600 dark:text-slate-300">5,655</span>
+                        <span class="text-right font-bold text-gray-800 dark:text-slate-100">15,000 哩</span>
                     </div>
-                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50">
+                    <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:bg-slate-800/50">
                         <div class="flex items-center gap-2">
                             <span class="w-7 h-7 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">補</span>
                             <span class="text-sm font-medium text-gray-700 hidden sm:inline">恢復過期哩程</span>
                         </div>
-                        <span class="text-center text-sm text-gray-600">— ($30 USD)</span>
+                        <span class="text-center text-sm text-gray-600 dark:text-slate-300">— ($30 USD)</span>
                         <span class="text-right font-bold text-amber-600">3,000 哩</span>
                     </div>
-                    <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-emerald-50">
-                        <span class="font-black text-gray-800 col-span-2">合計</span>
+                    <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-emerald-50 dark:bg-emerald-900/30">
+                        <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">合計</span>
                         <span class="text-right font-black text-emerald-600 text-lg sm:text-xl">49,812 哩</span>
                     </div>
                 </div>
@@ -352,49 +420,49 @@
 
             <!-- 升艙方案 -->
             <div>
-                <h2 class="text-xl sm:text-2xl font-black text-gray-800 mb-2 text-center">哩程升艙方案</h2>
-                <p class="text-center text-sm text-gray-500 mb-6">台北 ↔ 倫敦・長榮航空・Q 艙為基礎</p>
+                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-2 text-center">哩程升艙方案</h2>
+                <p class="text-center text-sm text-gray-500 dark:text-slate-400 mb-6">台北 ↔ 倫敦・長榮航空・Q 艙為基礎</p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
 
                     <!-- 方案 A：豪經單程 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-emerald-400 shadow-sm overflow-hidden card-hover">
-                        <div class="bg-emerald-50 p-4 sm:p-5">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-emerald-400 shadow-sm overflow-hidden card-hover">
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-bold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">方案 A ✅ 立即可行</span>
+                                <span class="text-xs font-bold bg-emerald-100 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full">方案 A ✅ 立即可行</span>
                                 <span class="text-xl">🛫</span>
                             </div>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">升艙豪經・單程</h3>
-                            <p class="text-xs text-gray-500">去程享豪華，回程搭經濟</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">升艙豪經・單程</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">去程享豪華，回程搭經濟</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程（單程）</span><span class="font-bold text-emerald-600">25,000 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">使用後剩餘</span><span class="font-bold">24,812 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">回程</span><span class="font-semibold text-gray-500">經濟艙</span></div>
-                            <div class="bg-emerald-50 rounded-xl p-3 text-xs text-emerald-700 mt-2">
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（單程）</span><span class="font-bold text-emerald-600">25,000 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">使用後剩餘</span><span class="font-bold">24,812 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程</span><span class="font-semibold text-gray-500 dark:text-slate-400">經濟艙</span></div>
+                            <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 text-xs text-emerald-700 dark:text-emerald-400 mt-2">
                                 49,812 哩充裕，去程 13 小時躺平飛最值得
                             </div>
                         </div>
                     </div>
 
                     <!-- 方案 B：豪經來回 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-amber-400 shadow-sm overflow-hidden card-hover relative">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-amber-400 shadow-sm overflow-hidden card-hover relative">
                         <div class="absolute top-0 right-0 bg-amber-400 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">最推薦</div>
-                        <div class="bg-amber-50 p-4 sm:p-5">
+                        <div class="bg-amber-50 dark:bg-amber-900/30 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-bold bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full">方案 B ⚡ 差 188 哩</span>
+                                <span class="text-xs font-bold bg-amber-100 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-full">方案 B ⚡ 差 188 哩</span>
                                 <span class="text-xl">🛫🛬</span>
                             </div>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">升艙豪經・來回</h3>
-                            <p class="text-xs text-gray-500">去回都坐豪華經濟艙</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">升艙豪經・來回</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">去回都坐豪華經濟艙</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程（來回）</span><span class="font-bold text-amber-600">50,000 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">目前哩程</span><span class="font-bold">49,812 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（來回）</span><span class="font-bold text-amber-600">50,000 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">49,812 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">188 哩</span></div>
-                            <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-700 mt-2 space-y-1">
+                            <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 mt-2 space-y-1">
                                 <p class="font-bold">補齊 188 哩方式：</p>
                                 <p>① 長榮官網直接購買 200 哩 ≈ NT$100–200</p>
                                 <p>② 少量刷卡消費即可累積</p>
@@ -403,40 +471,40 @@
                     </div>
 
                     <!-- 方案 C：商務單程 Q艙 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-blue-300 shadow-sm overflow-hidden card-hover opacity-80">
-                        <div class="bg-blue-50 p-4 sm:p-5">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-blue-300 shadow-sm overflow-hidden card-hover opacity-80">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full">方案 C ❌ 差 20,188 哩</span>
+                                <span class="text-xs font-bold bg-blue-100 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded-full">方案 C ❌ 差 20,188 哩</span>
                                 <span class="text-xl">👑</span>
                             </div>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">升艙商務艙・單程（Q艙）</h3>
-                            <p class="text-xs text-gray-500">皇璽桂冠艙・完全平躺</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">升艙商務艙・單程（Q艙）</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">皇璽桂冠艙・完全平躺</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程（單程）</span><span class="font-bold text-blue-600">70,000 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">目前哩程</span><span class="font-bold">49,812 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">買 Q 艙機票</span><span class="font-bold">NT$56,254</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（單程）</span><span class="font-bold text-blue-600">70,000 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">49,812 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">20,188 哩</span></div>
-                            <div class="bg-gray-50 rounded-xl p-3 text-xs text-gray-500 mt-2">
+                            <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 text-xs text-gray-500 dark:text-slate-400 mt-2">
                                 差距較大，建議繼續累積哩程後再考慮
                             </div>
                         </div>
                     </div>
 
                     <!-- 方案 D：商務單程 BY艙 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-indigo-300 shadow-sm overflow-hidden card-hover opacity-80">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-indigo-300 shadow-sm overflow-hidden card-hover opacity-80">
                         <div class="bg-indigo-50 p-4 sm:p-5">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full">方案 D ❌ 差 8,688 哩</span>
                                 <span class="text-xl">👑</span>
                             </div>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">升艙商務艙・單程（BY艙）</h3>
-                            <p class="text-xs text-gray-500">皇璽桂冠艙・BY 艙升艙哩程較少</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">升艙商務艙・單程（BY艙）</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">皇璽桂冠艙・BY 艙升艙哩程較少</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">BY 艙票價</span><span class="font-bold text-gray-400">需另行查詢</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程（單程）</span><span class="font-bold text-indigo-600">58,500 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">目前哩程</span><span class="font-bold">49,812 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">BY 艙票價</span><span class="font-bold text-gray-400 dark:text-slate-500">需另行查詢</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程（單程）</span><span class="font-bold text-indigo-600">58,500 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">49,812 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">8,688 哩</span></div>
                             <div class="bg-indigo-50 rounded-xl p-3 text-xs text-indigo-700 mt-2">
                                 比 Q 艙升商務少需 11,500 哩，可查詢 BY 艙票價後評估
@@ -448,25 +516,25 @@
             </div>
 
             <!-- 每哩價值 -->
-            <div class="bg-white rounded-2xl shadow-sm p-5 sm:p-6 border border-gray-100">
-                <h3 class="font-black text-gray-800 mb-4 text-center text-base sm:text-lg">每哩價值比較</h3>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-5 sm:p-6 border border-gray-100 dark:border-slate-700">
+                <h3 class="font-black text-gray-800 dark:text-slate-100 mb-4 text-center text-base sm:text-lg">每哩價值比較</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div class="bg-gray-50 rounded-xl p-3 sm:p-4 text-center">
-                        <p class="text-xs text-gray-500 mb-1">換經濟艙</p>
-                        <p class="text-lg sm:text-xl font-black text-gray-400">NT$0.5–1</p>
-                        <p class="text-xs text-gray-400">每哩</p>
+                    <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 sm:p-4 text-center">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 mb-1">換經濟艙</p>
+                        <p class="text-lg sm:text-xl font-black text-gray-400 dark:text-slate-500">NT$0.5–1</p>
+                        <p class="text-xs text-gray-400 dark:text-slate-500">每哩</p>
                     </div>
-                    <div class="bg-emerald-50 rounded-xl p-3 sm:p-4 text-center border border-emerald-100">
+                    <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 sm:p-4 text-center border border-emerald-100 dark:border-emerald-800/50">
                         <p class="text-xs text-emerald-600 mb-1">升豪華經濟艙</p>
                         <p class="text-lg sm:text-xl font-black text-emerald-600">NT$1–2</p>
                         <p class="text-xs text-emerald-500">每哩 ✅</p>
                     </div>
-                    <div class="bg-blue-50 rounded-xl p-3 sm:p-4 text-center border border-blue-100">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 sm:p-4 text-center border border-blue-100 dark:border-blue-800/50">
                         <p class="text-xs text-blue-600 mb-1">升商務艙</p>
                         <p class="text-lg sm:text-xl font-black text-blue-600">NT$2–4</p>
                         <p class="text-xs text-blue-500">每哩 ⭐</p>
                     </div>
-                    <div class="bg-amber-50 rounded-xl p-3 sm:p-4 text-center border border-amber-100">
+                    <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 sm:p-4 text-center border border-amber-100 dark:border-amber-800/50">
                         <p class="text-xs text-amber-600 mb-1">恢復哩程成本</p>
                         <p class="text-lg sm:text-xl font-black text-amber-600">NT$0.32</p>
                         <p class="text-xs text-amber-500">最便宜取得</p>
@@ -481,21 +549,21 @@
 
             <!-- 概覽 -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p id="emirates-total" class="text-2xl sm:text-3xl font-black text-orange-500">28,600</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">阿聯酋哩程</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">阿聯酋哩程</p>
                 </div>
-                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-blue-500">3h15m</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">LGW → KEF</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">LGW → KEF</p>
                 </div>
-                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-emerald-500">23,446</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">最佳來回哩程</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">最佳來回哩程</p>
                 </div>
-                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100 card-hover">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 text-center shadow-sm border border-gray-100 dark:border-slate-700 card-hover">
                     <p class="text-2xl sm:text-3xl font-black text-purple-500">5,154</p>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">最佳組合剩餘</p>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-1">最佳組合剩餘</p>
                 </div>
             </div>
 
@@ -510,7 +578,7 @@
                     <p class="text-sm opacity-90 mb-5">5 天 4 夜・最省哩程方案</p>
 
                     <div class="space-y-3">
-                        <div class="bg-white/15 backdrop-blur rounded-xl p-3 sm:p-4 flex items-center gap-3">
+                        <div class="bg-white dark:bg-slate-800/15 backdrop-blur rounded-xl p-3 sm:p-4 flex items-center gap-3">
                             <span class="text-2xl">🛫</span>
                             <div class="flex-1">
                                 <p class="font-bold text-sm sm:text-base">10/30 (五) LGW → KEF</p>
@@ -522,7 +590,7 @@
                             </div>
                         </div>
                         <div class="text-center text-xs opacity-70">冰島 4 晚（10/30–11/3）</div>
-                        <div class="bg-white/15 backdrop-blur rounded-xl p-3 sm:p-4 flex items-center gap-3">
+                        <div class="bg-white dark:bg-slate-800/15 backdrop-blur rounded-xl p-3 sm:p-4 flex items-center gap-3">
                             <span class="text-2xl">🛬</span>
                             <div class="flex-1">
                                 <p class="font-bold text-sm sm:text-base">11/3 (一) KEF → LGW</p>
@@ -536,11 +604,11 @@
                     </div>
 
                     <div class="mt-5 grid grid-cols-2 gap-3 text-center">
-                        <div class="bg-white/20 backdrop-blur rounded-xl p-3">
+                        <div class="bg-white dark:bg-slate-800/20 backdrop-blur rounded-xl p-3">
                             <p class="text-xs opacity-80 mb-1">合計使用</p>
                             <p class="text-xl sm:text-2xl font-black">23,446 哩</p>
                         </div>
-                        <div class="bg-white/20 backdrop-blur rounded-xl p-3">
+                        <div class="bg-white dark:bg-slate-800/20 backdrop-blur rounded-xl p-3">
                             <p class="text-xs opacity-80 mb-1">剩餘哩程</p>
                             <p class="text-xl sm:text-2xl font-black">5,154 哩</p>
                         </div>
@@ -549,7 +617,7 @@
             </div>
 
             <!-- 機場選擇對比 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 p-4 sm:p-5 text-white">
                     <span class="text-2xl sm:text-3xl">🏛️</span>
                     <div>
@@ -560,12 +628,12 @@
                 <div class="p-4 sm:p-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <!-- LGW -->
-                        <div class="border-2 border-emerald-300 rounded-xl p-4 bg-emerald-50/50">
+                        <div class="border-2 border-emerald-300 rounded-xl p-4 bg-emerald-50 dark:bg-emerald-900/30/50">
                             <div class="flex items-center justify-between mb-3">
-                                <h4 class="font-black text-gray-800">LGW 蓋特威克 ⭐</h4>
-                                <span class="text-xs bg-emerald-200 text-emerald-800 px-2 py-1 rounded-full font-bold">推薦</span>
+                                <h4 class="font-black text-gray-800 dark:text-slate-100">LGW 蓋特威克 ⭐</h4>
+                                <span class="text-xs bg-emerald-200 text-emerald-800 dark:text-emerald-300 px-2 py-1 rounded-full font-bold">推薦</span>
                             </div>
-                            <ul class="space-y-1.5 text-sm text-gray-600">
+                            <ul class="space-y-1.5 text-sm text-gray-600 dark:text-slate-300">
                                 <li class="flex justify-between"><span>距 LHR</span><span class="font-bold">~64 km</span></li>
                                 <li class="flex justify-between"><span>巴士交通</span><span class="font-bold">~75 分鐘</span></li>
                                 <li class="flex justify-between"><span>運營季節</span><span class="font-bold text-amber-600">10–4 月</span></li>
@@ -573,12 +641,12 @@
                             </ul>
                         </div>
                         <!-- LTN -->
-                        <div class="border border-gray-200 rounded-xl p-4">
+                        <div class="border border-gray-200 dark:border-slate-600 rounded-xl p-4">
                             <div class="flex items-center justify-between mb-3">
-                                <h4 class="font-black text-gray-800">LTN 盧頓</h4>
-                                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full font-bold">備選</span>
+                                <h4 class="font-black text-gray-800 dark:text-slate-100">LTN 盧頓</h4>
+                                <span class="text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 px-2 py-1 rounded-full font-bold">備選</span>
                             </div>
-                            <ul class="space-y-1.5 text-sm text-gray-600">
+                            <ul class="space-y-1.5 text-sm text-gray-600 dark:text-slate-300">
                                 <li class="flex justify-between"><span>距 LHR</span><span class="font-bold">~58 km</span></li>
                                 <li class="flex justify-between"><span>巴士交通</span><span class="font-bold">~55 分鐘</span></li>
                                 <li class="flex justify-between"><span>運營季節</span><span class="font-bold text-emerald-600">較全年</span></li>
@@ -586,7 +654,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="mt-4 bg-blue-50 border border-blue-100 rounded-xl p-3 text-xs sm:text-sm text-blue-800">
+                    <div class="mt-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50 rounded-xl p-3 text-xs sm:text-sm text-blue-800 dark:text-blue-300">
                         <p class="font-bold mb-1">💡 季節提醒</p>
                         <p>LGW 採「冬春季營運」（10–4 月），夏季（5–9 月）<span class="font-bold">完全停飛</span>。LTN 為夏季首選；秋冬出發兩者皆可，LGW 班次更多。</p>
                     </div>
@@ -594,35 +662,35 @@
             </div>
 
             <!-- LHR → LGW 轉機 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6">
-                <h3 class="font-black text-gray-800 mb-4 flex items-center gap-2">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-4 sm:p-6">
+                <h3 class="font-black text-gray-800 dark:text-slate-100 mb-4 flex items-center gap-2">
                     <span class="text-xl">🚌</span>
                     <span>LHR → LGW 轉機交通</span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="bg-gray-50 rounded-xl p-3 text-center">
-                        <p class="text-xs text-gray-400 mb-1">National Express 巴士</p>
+                    <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 text-center">
+                        <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">National Express 巴士</p>
                         <p class="font-bold text-sm">~75 分鐘</p>
-                        <p class="text-xs text-gray-500">£10–16</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400">£10–16</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-3 text-center">
-                        <p class="text-xs text-gray-400 mb-1">Uber / Taxi</p>
+                    <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 text-center">
+                        <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">Uber / Taxi</p>
                         <p class="font-bold text-sm">~50 分鐘</p>
-                        <p class="text-xs text-gray-500">£60–100</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400">£60–100</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-3 text-center">
-                        <p class="text-xs text-gray-400 mb-1">地鐵+火車</p>
+                    <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-3 text-center">
+                        <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">地鐵+火車</p>
                         <p class="font-bold text-sm">~2 小時</p>
-                        <p class="text-xs text-gray-500">£15–20</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400">£15–20</p>
                     </div>
                 </div>
-                <div class="mt-3 text-xs text-gray-500 text-center">
+                <div class="mt-3 text-xs text-gray-500 dark:text-slate-400 text-center">
                     建議預留 <span class="font-bold text-gray-700">3 小時以上</span> 緩衝時間（含過海關、領行李、轉機場）
                 </div>
             </div>
 
             <!-- LGW → KEF 去程班次 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 p-4 sm:p-5 text-white">
                     <span class="text-2xl sm:text-3xl">🛫</span>
                     <div>
@@ -632,7 +700,7 @@
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
-                        <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+                        <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-500 dark:text-slate-400 uppercase">
                             <tr>
                                 <th class="px-3 sm:px-4 py-2.5 text-left">日期</th>
                                 <th class="px-3 sm:px-4 py-2.5 text-left">時間</th>
@@ -641,29 +709,29 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">10/28 (三)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">13:55–17:15</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">13:55–17:15</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">20,278</td>
-                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500">8,322</td>
+                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500 dark:text-slate-400">8,322</td>
                             </tr>
-                            <tr class="hover:bg-emerald-50 bg-emerald-50/40">
-                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700">10/30 (五) ⭐</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">15:00–18:20</td>
+                            <tr class="hover:bg-emerald-50 dark:bg-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/30/40">
+                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700 dark:text-emerald-400">10/30 (五) ⭐</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">15:00–18:20</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-emerald-600">10,234</td>
-                                <td class="px-3 sm:px-4 py-3 text-right font-bold text-emerald-700">18,366</td>
+                                <td class="px-3 sm:px-4 py-3 text-right font-bold text-emerald-700 dark:text-emerald-400">18,366</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">10/31 (六)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">14:24–17:45</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">14:24–17:45</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold text-red-500">24,166</td>
-                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500">4,434</td>
+                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500 dark:text-slate-400">4,434</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/1 (日)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">07:00–10:30</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">07:00–10:30</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">11,044</td>
-                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500">17,556</td>
+                                <td class="px-3 sm:px-4 py-3 text-right text-gray-500 dark:text-slate-400">17,556</td>
                             </tr>
                         </tbody>
                     </table>
@@ -671,7 +739,7 @@
             </div>
 
             <!-- KEF → LGW 回程班次 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="flex items-center gap-3 bg-gradient-to-r from-rose-500 to-pink-500 p-4 sm:p-5 text-white">
                     <span class="text-2xl sm:text-3xl">🛬</span>
                     <div>
@@ -681,7 +749,7 @@
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
-                        <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+                        <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-500 dark:text-slate-400 uppercase">
                             <tr>
                                 <th class="px-3 sm:px-4 py-2.5 text-left">日期</th>
                                 <th class="px-3 sm:px-4 py-2.5 text-left">時間</th>
@@ -689,64 +757,64 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/1 (日)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">11:20–14:30</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">11:20–14:30</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">23,235</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/2 (一)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">12:00–15:10</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">12:00–15:10</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">18,517</td>
                             </tr>
-                            <tr class="hover:bg-emerald-50 bg-emerald-50/40">
-                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700">11/3 (二) ⭐</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">12:20–15:30</td>
+                            <tr class="hover:bg-emerald-50 dark:bg-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/30/40">
+                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700 dark:text-emerald-400">11/3 (二) ⭐</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">12:20–15:30</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-emerald-600">13,212</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/4 (三)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">18:05–21:15</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">18:05–21:15</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold text-red-500">27,583</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/5 (四)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">18:05–21:15</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">18:05–21:15</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">14,245</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/6 (五)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">19:15–22:25</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">19:15–22:25</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">14,908</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/7 (六)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">18:35–21:45</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">18:35–21:45</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">15,718</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/8 (日)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">11:20–14:30</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">11:20–14:30</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">20,066</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/9 (一)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">12:00–15:10</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">12:00–15:10</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">15,645</td>
                             </tr>
-                            <tr class="hover:bg-emerald-50 bg-emerald-50/40">
-                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700">11/10 (二) ⭐</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">12:20–15:30</td>
+                            <tr class="hover:bg-emerald-50 dark:bg-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/30/40">
+                                <td class="px-3 sm:px-4 py-3 font-bold text-emerald-700 dark:text-emerald-400">11/10 (二) ⭐</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">12:20–15:30</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-emerald-600">10,633</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/11 (三)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">18:05–21:15</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">18:05–21:15</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">12,844</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-3 sm:px-4 py-3 font-medium">11/12 (四)</td>
-                                <td class="px-3 sm:px-4 py-3 text-gray-600">18:05–21:15</td>
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300">18:05–21:15</td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-bold">11,739</td>
                             </tr>
                         </tbody>
@@ -755,14 +823,14 @@
             </div>
 
             <!-- 其他可行組合 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="bg-gradient-to-r from-violet-500 to-purple-500 p-4 sm:p-5 text-white">
                     <h3 class="text-lg sm:text-xl font-black">所有可行組合（28,600 哩內）</h3>
                     <p class="text-xs opacity-80 mt-1">不同停留天數的去回程哩程組合</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs sm:text-sm">
-                        <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+                        <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-500 dark:text-slate-400 uppercase">
                             <tr>
                                 <th class="px-2 sm:px-3 py-2.5 text-left">去程</th>
                                 <th class="px-2 sm:px-3 py-2.5 text-left">回程</th>
@@ -772,77 +840,77 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr class="hover:bg-emerald-50 bg-emerald-50/60 font-bold">
-                                <td class="px-2 sm:px-3 py-2.5 text-emerald-700">10/30 ⭐</td>
-                                <td class="px-2 sm:px-3 py-2.5 text-emerald-700">11/3 ⭐</td>
+                            <tr class="hover:bg-emerald-50 dark:bg-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/30/60 font-bold">
+                                <td class="px-2 sm:px-3 py-2.5 text-emerald-700 dark:text-emerald-400">10/30 ⭐</td>
+                                <td class="px-2 sm:px-3 py-2.5 text-emerald-700 dark:text-emerald-400">11/3 ⭐</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right text-emerald-600">23,446</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right text-emerald-600">5,154</td>
-                                <td class="px-2 sm:px-3 py-2.5 text-center text-emerald-700">4 晚 ✓</td>
+                                <td class="px-2 sm:px-3 py-2.5 text-center text-emerald-700 dark:text-emerald-400">4 晚 ✓</td>
                             </tr>
-                            <tr class="hover:bg-amber-50 bg-amber-50/60">
+                            <tr class="hover:bg-amber-50 dark:bg-amber-900/30 bg-amber-50 dark:bg-amber-900/30/60">
                                 <td class="px-2 sm:px-3 py-2.5">11/1</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/5</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">25,289</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">3,311</td>
-                                <td class="px-2 sm:px-3 py-2.5 text-center text-amber-700 font-bold">4 晚 ✓</td>
+                                <td class="px-2 sm:px-3 py-2.5 text-center text-amber-700 dark:text-amber-400 font-bold">4 晚 ✓</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/5</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">24,479</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">4,121</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">6 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/6</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">25,142</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">3,458</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">7 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/7</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">25,952</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">2,648</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">8 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/9</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">25,879</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">2,721</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">10 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/10</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">20,867</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right text-emerald-600 font-bold">7,733</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">11 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/11</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">23,078</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">5,522</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">12 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">10/30</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/12</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">21,973</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">6,627</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">13 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">11/1</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/6</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">25,952</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">2,648</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-center">5 晚</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
                                 <td class="px-2 sm:px-3 py-2.5">11/1</td>
                                 <td class="px-2 sm:px-3 py-2.5">11/10</td>
                                 <td class="px-2 sm:px-3 py-2.5 text-right">21,677</td>
@@ -852,13 +920,13 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="p-3 sm:p-4 bg-gray-50 text-xs text-gray-500 border-t border-gray-100">
+                <div class="p-3 sm:p-4 bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-500 dark:text-slate-400 border-t border-gray-100 dark:border-slate-700">
                     ⚠️ 10/28 與 10/31 出發的所有組合皆超出 28,600 哩，故不列入
                 </div>
             </div>
 
             <!-- 阿聯酋哩程說明 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="flex items-center gap-3 bg-gradient-to-r from-red-600 to-rose-600 p-4 sm:p-5 text-white">
                     <span class="text-2xl sm:text-3xl">🌙</span>
                     <div>
@@ -867,30 +935,30 @@
                     </div>
                 </div>
                 <div class="p-4 sm:p-6 space-y-4">
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-sm text-blue-800 dark:text-blue-300">
                         <p class="font-bold mb-1">✅ 動態定價兌換</p>
                         <p>阿聯酋 Skywards <span class="font-bold">已與 easyJet 合作</span>，可用哩程兌換機票。哩程數依當下票價浮動，沒有固定哩程表。</p>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="bg-gray-50 rounded-xl p-4 text-center">
-                            <p class="text-xs text-gray-400 mb-1">最低起兌</p>
-                            <p class="text-xl font-black text-gray-800">7,500 哩</p>
-                            <p class="text-xs text-gray-500 mt-1">單程</p>
+                        <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">最低起兌</p>
+                            <p class="text-xl font-black text-gray-800 dark:text-slate-100">7,500 哩</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">單程</p>
                         </div>
-                        <div class="bg-gray-50 rounded-xl p-4 text-center">
-                            <p class="text-xs text-gray-400 mb-1">每哩價值</p>
-                            <p class="text-xl font-black text-gray-800">~0.5p</p>
-                            <p class="text-xs text-gray-500 mt-1">易捷航空兌換</p>
+                        <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">每哩價值</p>
+                            <p class="text-xl font-black text-gray-800 dark:text-slate-100">~0.5p</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">易捷航空兌換</p>
                         </div>
-                        <div class="bg-gray-50 rounded-xl p-4 text-center">
-                            <p class="text-xs text-gray-400 mb-1">需另付</p>
-                            <p class="text-xl font-black text-gray-800">行李 + 稅</p>
-                            <p class="text-xs text-gray-500 mt-1">£20–50</p>
+                        <div class="bg-gray-50 dark:bg-slate-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 dark:text-slate-500 mb-1">需另付</p>
+                            <p class="text-xl font-black text-gray-800 dark:text-slate-100">行李 + 稅</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">£20–50</p>
                         </div>
                     </div>
 
-                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+                    <div class="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4 text-sm text-amber-800 dark:text-amber-300">
                         <p class="font-bold mb-1">⚠️ 重要提醒</p>
                         <ul class="space-y-1 text-xs sm:text-sm">
                             <li>• 兌換後<span class="font-bold">不可更改、不可退款</span></li>
@@ -903,14 +971,14 @@
             </div>
 
             <!-- 整體行程串聯 -->
-            <div class="bg-white rounded-2xl shadow-sm p-5 sm:p-6 border border-gray-100">
-                <h3 class="font-black text-gray-800 mb-5 text-base sm:text-lg text-center">完整行程串聯</h3>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-5 sm:p-6 border border-gray-100 dark:border-slate-700">
+                <h3 class="font-black text-gray-800 dark:text-slate-100 mb-5 text-base sm:text-lg text-center">完整行程串聯</h3>
                 <div class="space-y-3">
-                    <div class="flex items-center gap-3 p-3 sm:p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                    <div class="flex items-center gap-3 p-3 sm:p-4 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl border border-emerald-100 dark:border-emerald-800/50">
                         <span class="text-xl sm:text-2xl flex-shrink-0">🇹🇼</span>
                         <div class="flex-1 min-w-0">
-                            <p class="font-bold text-sm text-gray-800">台北 → 倫敦</p>
-                            <p class="text-xs text-gray-500">長榮 Q 艙 + 49,812 哩升豪華經濟艙</p>
+                            <p class="font-bold text-sm text-gray-800 dark:text-slate-100">台北 → 倫敦</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">長榮 Q 艙 + 49,812 哩升豪華經濟艙</p>
                         </div>
                         <span class="text-xs font-bold text-emerald-600 flex-shrink-0">NT$56,254</span>
                     </div>
@@ -920,8 +988,8 @@
                     <div class="flex items-center gap-3 p-3 sm:p-4 bg-purple-50 rounded-xl border border-purple-100">
                         <span class="text-xl sm:text-2xl flex-shrink-0">🚌</span>
                         <div class="flex-1 min-w-0">
-                            <p class="font-bold text-sm text-gray-800">LHR → LGW 轉機</p>
-                            <p class="text-xs text-gray-500">National Express 巴士・約 75 分鐘</p>
+                            <p class="font-bold text-sm text-gray-800 dark:text-slate-100">LHR → LGW 轉機</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">National Express 巴士・約 75 分鐘</p>
                         </div>
                         <span class="text-xs font-bold text-purple-600 flex-shrink-0">£10–16</span>
                     </div>
@@ -931,19 +999,19 @@
                     <div class="flex items-center gap-3 p-3 sm:p-4 bg-orange-50 rounded-xl border border-orange-100">
                         <span class="text-xl sm:text-2xl flex-shrink-0">🇬🇧</span>
                         <div class="flex-1 min-w-0">
-                            <p class="font-bold text-sm text-gray-800">10/30 LGW → KEF</p>
-                            <p class="text-xs text-gray-500">easyJet・15:00–18:20・阿聯酋哩程兌換</p>
+                            <p class="font-bold text-sm text-gray-800 dark:text-slate-100">10/30 LGW → KEF</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">easyJet・15:00–18:20・阿聯酋哩程兌換</p>
                         </div>
                         <span class="text-xs font-bold text-orange-600 flex-shrink-0">10,234 哩</span>
                     </div>
                     <div class="flex justify-center">
                         <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
-                    <div class="flex items-center gap-3 p-3 sm:p-4 bg-blue-50 rounded-xl border border-blue-100">
+                    <div class="flex items-center gap-3 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800/50">
                         <span class="text-xl sm:text-2xl flex-shrink-0">🇮🇸</span>
                         <div class="flex-1 min-w-0">
-                            <p class="font-bold text-sm text-gray-800">冰島 5 天 4 夜（10/30–11/3）</p>
-                            <p class="text-xs text-gray-500">雷克雅維克為基地・黃金圈・斯奈山半島</p>
+                            <p class="font-bold text-sm text-gray-800 dark:text-slate-100">冰島 5 天 4 夜（10/30–11/3）</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地・黃金圈・斯奈山半島</p>
                         </div>
                         <span class="text-xs font-bold text-blue-600 flex-shrink-0">See 行程</span>
                     </div>
@@ -953,8 +1021,8 @@
                     <div class="flex items-center gap-3 p-3 sm:p-4 bg-rose-50 rounded-xl border border-rose-100">
                         <span class="text-xl sm:text-2xl flex-shrink-0">🛬</span>
                         <div class="flex-1 min-w-0">
-                            <p class="font-bold text-sm text-gray-800">11/3 KEF → LGW</p>
-                            <p class="text-xs text-gray-500">easyJet・12:20–15:30・阿聯酋哩程兌換</p>
+                            <p class="font-bold text-sm text-gray-800 dark:text-slate-100">11/3 KEF → LGW</p>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">easyJet・12:20–15:30・阿聯酋哩程兌換</p>
                         </div>
                         <span class="text-xs font-bold text-rose-600 flex-shrink-0">13,212 哩</span>
                     </div>
@@ -968,51 +1036,51 @@
 
             <!-- 航空公司比較 -->
             <div>
-                <h2 class="text-xl sm:text-2xl font-black text-gray-800 mb-2 text-center">台北 → 倫敦 航班比較</h2>
-                <p class="text-center text-sm text-gray-500 mb-5">同樣 10/28 出發，兩家航空差異一覽</p>
+                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-2 text-center">台北 → 倫敦 航班比較</h2>
+                <p class="text-center text-sm text-gray-500 dark:text-slate-400 mb-5">同樣 10/28 出發，兩家航空差異一覽</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                     <!-- BR 長榮 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-green-400 shadow-sm overflow-hidden card-hover">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-green-400 shadow-sm overflow-hidden card-hover">
                         <div class="bg-green-50 p-4 sm:p-5 flex items-center justify-between">
                             <div>
                                 <p class="text-xs font-bold text-green-700 uppercase tracking-wider">長榮航空</p>
-                                <h3 class="text-xl font-black text-gray-800">BR67 / BR68</h3>
+                                <h3 class="text-xl font-black text-gray-800 dark:text-slate-100">BR67 / BR68</h3>
                             </div>
                             <span class="text-3xl">🟢</span>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5 text-sm">
-                            <div class="flex justify-between"><span class="text-gray-500">路線</span><span class="font-bold">TPE → <span class="text-amber-600">BKK</span> → LHR</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">飛行方式</span><span class="font-bold text-amber-600">⚠️ 曼谷轉機</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">總計時間</span><span class="font-bold">約 18–20 小時</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">曼谷停留</span><span class="font-bold">約 2–3 小時</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">班次</span><span class="font-bold text-emerald-600">每日一班</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">10/28 (三) 出發</span><span class="font-bold text-emerald-600">✓ 可搭</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">10/29 抵 LHR</span><span class="font-bold">約上午 11:00</span></div>
-                            <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-700 mt-1">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">路線</span><span class="font-bold">TPE → <span class="text-amber-600">BKK</span> → LHR</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行方式</span><span class="font-bold text-amber-600">⚠️ 曼谷轉機</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">總計時間</span><span class="font-bold">約 18–20 小時</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">曼谷停留</span><span class="font-bold">約 2–3 小時</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">班次</span><span class="font-bold text-emerald-600">每日一班</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">10/28 (三) 出發</span><span class="font-bold text-emerald-600">✓ 可搭</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">10/29 抵 LHR</span><span class="font-bold">約上午 11:00</span></div>
+                            <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 mt-1">
                                 抵達較晚，5天版僅剩半天倫敦時間
                             </div>
                         </div>
                     </div>
 
                     <!-- CI 華航 -->
-                    <div class="bg-white rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover">
-                        <div class="bg-blue-50 p-4 sm:p-5 flex items-center justify-between">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 sm:p-5 flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wider">中華航空</p>
-                                <h3 class="text-xl font-black text-gray-800">CI82 / CI81</h3>
+                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">中華航空</p>
+                                <h3 class="text-xl font-black text-gray-800 dark:text-slate-100">CI82 / CI81</h3>
                             </div>
                             <span class="text-3xl">🔵</span>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5 text-sm">
-                            <div class="flex justify-between"><span class="text-gray-500">路線</span><span class="font-bold text-blue-600">TPE → LHR 直飛</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">飛行方式</span><span class="font-bold text-blue-600">✅ 直飛，省 5–7 小時</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">飛行時間</span><span class="font-bold">約 13 小時</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">比長榮</span><span class="font-bold text-blue-600">快 5–7 小時</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">班次</span><span class="font-bold">週一/二/三/五/六</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">10/28 (三) 出發</span><span class="font-bold text-emerald-600">✓ 可搭（週三）</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">10/29 抵 LHR</span><span class="font-bold">約清晨 06:00</span></div>
-                            <div class="bg-blue-50 rounded-xl p-3 text-xs text-blue-700 mt-1">
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">路線</span><span class="font-bold text-blue-600">TPE → LHR 直飛</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行方式</span><span class="font-bold text-blue-600">✅ 直飛，省 5–7 小時</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold">約 13 小時</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">比長榮</span><span class="font-bold text-blue-600">快 5–7 小時</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">班次</span><span class="font-bold">週一/二/三/五/六</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">10/28 (三) 出發</span><span class="font-bold text-emerald-600">✓ 可搭（週三）</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500 dark:text-slate-400">10/29 抵 LHR</span><span class="font-bold">約清晨 06:00</span></div>
+                            <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-400 mt-1">
                                 抵達最早，5天版仍有幾乎整天倫敦時間
                             </div>
                         </div>
@@ -1023,12 +1091,12 @@
                 <div class="mt-4 bg-slate-800 rounded-2xl p-4 sm:p-5 text-white">
                     <p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-3">關鍵差異：10/29 倫敦抵達時間</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="bg-white/10 rounded-xl p-3 text-sm">
+                        <div class="bg-white dark:bg-slate-800/10 rounded-xl p-3 text-sm">
                             <p class="font-bold text-green-300 mb-1">長榮 BR · 約 11:00 抵達</p>
                             <p class="text-gray-300 text-xs">5天版：倫敦僅剩半天</p>
                             <p class="text-gray-300 text-xs">6/7天版：倫敦共約 2 天</p>
                         </div>
-                        <div class="bg-white/10 rounded-xl p-3 text-sm">
+                        <div class="bg-white dark:bg-slate-800/10 rounded-xl p-3 text-sm">
                             <p class="font-bold text-blue-300 mb-1">華航 CI · 約 06:00 抵達</p>
                             <p class="text-gray-300 text-xs">5天版：倫敦幾乎整天</p>
                             <p class="text-gray-300 text-xs">6/7天版：倫敦共約 2.5 天</p>
@@ -1039,18 +1107,18 @@
 
             <!-- 三版本選擇器 -->
             <div>
-                <h2 class="text-xl sm:text-2xl font-black text-gray-800 mb-4 text-center">三版本行程規劃</h2>
-                <div class="flex gap-2 bg-gray-100 rounded-2xl p-1.5 mb-6">
+                <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100 mb-4 text-center">三版本行程規劃</h2>
+                <div class="flex gap-2 bg-gray-100 dark:bg-slate-800 rounded-2xl p-1.5 mb-6">
                     <button id="vbtn-5" onclick="switchVersion('5')"
-                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-gray-800 shadow">
+                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 shadow">
                         5天版
                     </button>
                     <button id="vbtn-6" onclick="switchVersion('6')"
-                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500">
+                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500 dark:text-slate-400">
                         6天版
                     </button>
                     <button id="vbtn-7" onclick="switchVersion('7')"
-                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500">
+                        class="version-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-500 dark:text-slate-400">
                         7天版
                     </button>
                 </div>
@@ -1061,15 +1129,15 @@
                         <p class="text-xs opacity-80 uppercase tracking-wider mb-1">5天版 · 最省哩程</p>
                         <h3 class="text-xl font-black mb-3">冰島 10/30 – 11/3（5天4夜）</h3>
                         <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">easyJet哩程</p>
                                 <p class="text-xl font-black">23,446</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">剩餘哩程</p>
                                 <p class="text-xl font-black">5,154</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">倫敦自由</p>
                                 <p class="text-xl font-black">1 天</p>
                             </div>
@@ -1077,31 +1145,31 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- BR v5 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-green-400"></span>
                                 <p class="text-xs font-bold text-green-700 uppercase tracking-wider">長榮 BR 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
                                 <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-amber-600 font-medium">倫敦僅剩半天（LHR→LGW 巴士）</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
                             </div>
                         </div>
                         <!-- CI v5 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-blue-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wider">華航 CI 方案</p>
+                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
                                 <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-blue-600 font-medium">幾乎整天倫敦自由（LHR→LGW 巴士）</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">10/30 (五) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 15:00–18:20</p><p class="text-xs text-emerald-600 font-bold">10,234 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">10/30–11/3 冰島 5天4夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/3 (二) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 12:20–15:30</p><p class="text-xs text-emerald-600 font-bold">13,212 哩</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -1113,15 +1181,15 @@
                         <p class="text-xs opacity-80 uppercase tracking-wider mb-1">6天版 · 多一天冰島</p>
                         <h3 class="text-xl font-black mb-3">冰島 11/1 – 11/6（6天5夜）</h3>
                         <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">easyJet哩程</p>
                                 <p class="text-xl font-black">25,952</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">剩餘哩程</p>
                                 <p class="text-xl font-black">2,648</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">倫敦自由</p>
                                 <p class="text-xl font-black">2 天</p>
                             </div>
@@ -1129,31 +1197,31 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- BR v6 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-green-400"></span>
                                 <p class="text-xs font-bold text-green-700 uppercase tracking-wider">長榮 BR 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500">倫敦 10/29 下午 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 下午 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
                             </div>
                         </div>
                         <!-- CI v6 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-blue-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wider">華航 CI 方案</p>
+                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500">倫敦 10/29 整天 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 整天 + 10/30 全天 + 10/31 全天</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-blue-600 font-bold">11,044 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/6 冰島 6天5夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/6 (五) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 19:15–22:25</p><p class="text-xs text-blue-600 font-bold">14,908 哩</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -1165,15 +1233,15 @@
                         <p class="text-xs opacity-80 uppercase tracking-wider mb-1">7天版 · 最長冰島行程</p>
                         <h3 class="text-xl font-black mb-3">冰島 11/1 – 11/7（7天6夜）</h3>
                         <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">easyJet哩程</p>
                                 <p class="text-xl font-black">26,762</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">剩餘哩程</p>
                                 <p class="text-xl font-black">1,838</p>
                             </div>
-                            <div class="bg-white/20 rounded-xl p-2">
+                            <div class="bg-white dark:bg-slate-800/20 rounded-xl p-2">
                                 <p class="text-xs opacity-80">倫敦自由</p>
                                 <p class="text-xl font-black">2 天</p>
                             </div>
@@ -1181,31 +1249,31 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- BR v7 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-green-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-green-400"></span>
                                 <p class="text-xs font-bold text-green-700 uppercase tracking-wider">長榮 BR 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500">倫敦 10/29 下午 + 10/30 + 10/31</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">BR67 · TPE→BKK→LHR · 約 23:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~11:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 下午 + 10/30 + 10/31</p><p class="text-xs text-amber-600 font-medium">約 2 天倫敦時間</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
                             </div>
                         </div>
                         <!-- CI v7 -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="bg-blue-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 flex items-center gap-2 border-b border-gray-100 dark:border-slate-700">
                                 <span class="w-3 h-3 rounded-full bg-blue-400"></span>
-                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wider">華航 CI 方案</p>
+                                <p class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">華航 CI 方案</p>
                             </div>
                             <div class="p-4 space-y-3 text-sm">
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500">倫敦 10/29 整天 + 10/30 + 10/31</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500">雷克雅維克為基地</p></div></div>
-                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇹🇼</span><div><p class="font-bold">10/28 (三) 台北出發</p><p class="text-xs text-gray-500 dark:text-slate-400">CI82 · TPE→LHR 直飛 · 約 19:10</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇬🇧</span><div><p class="font-bold">10/29 (四) 抵倫敦 ~06:00</p><p class="text-xs text-gray-500 dark:text-slate-400">倫敦 10/29 整天 + 10/30 + 10/31</p><p class="text-xs text-blue-600 font-medium">約 2.5 天倫敦時間</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛫</span><div><p class="font-bold">11/1 (日) LGW → KEF</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 07:00–10:30</p><p class="text-xs text-violet-600 font-bold">11,044 哩</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🇮🇸</span><div><p class="font-bold">11/1–11/7 冰島 7天6夜</p><p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p></div></div>
+                                <div class="flex gap-3 items-start"><span class="text-base mt-0.5 flex-shrink-0">🛬</span><div><p class="font-bold">11/7 (六) KEF → LGW</p><p class="text-xs text-gray-500 dark:text-slate-400">easyJet · 18:35–21:45</p><p class="text-xs text-violet-600 font-bold">15,718 哩</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -1213,14 +1281,14 @@
             </div>
 
             <!-- 三版本 × 兩航空 總覽表 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="bg-gradient-to-r from-slate-700 to-gray-800 p-4 sm:p-5 text-white">
                     <h3 class="text-lg sm:text-xl font-black">三版本 × 兩航空 總覽</h3>
                     <p class="text-xs opacity-70 mt-1">10/28 台北出發 · easyJet 用阿聯酋哩程兌換</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs sm:text-sm">
-                        <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                        <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-400 dark:text-slate-500 uppercase">
                             <tr>
                                 <th class="px-3 sm:px-4 py-3 text-left">版本</th>
                                 <th class="px-3 sm:px-4 py-3 text-center">冰島期間</th>
@@ -1231,34 +1299,34 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr class="bg-emerald-50/60 hover:bg-emerald-50">
-                                <td class="px-3 sm:px-4 py-3 font-black text-emerald-700">5天版 ⭐</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">5天4夜<br><span class="text-gray-400 text-xs">10/30–11/3</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">10,234</span><br><span class="text-gray-400 text-xs">10/30 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">13,212</span><br><span class="text-gray-400 text-xs">11/3 KEF→LGW</span></td>
+                            <tr class="bg-emerald-50 dark:bg-emerald-900/30/60 hover:bg-emerald-50 dark:bg-emerald-900/30">
+                                <td class="px-3 sm:px-4 py-3 font-black text-emerald-700 dark:text-emerald-400">5天版 ⭐</td>
+                                <td class="px-3 sm:px-4 py-3 text-center">5天4夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">10/30–11/3</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">10,234</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">10/30 LGW→KEF</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-emerald-600">13,212</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/3 KEF→LGW</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-emerald-600">23,446</td>
                                 <td class="px-3 sm:px-4 py-3 text-center text-xs">半天 / 整天</td>
                             </tr>
-                            <tr class="hover:bg-blue-50/30">
-                                <td class="px-3 sm:px-4 py-3 font-black text-blue-700">6天版</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">6天5夜<br><span class="text-gray-400 text-xs">11/1–11/6</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">11,044</span><br><span class="text-gray-400 text-xs">11/1 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">14,908</span><br><span class="text-gray-400 text-xs">11/6 KEF→LGW</span></td>
+                            <tr class="hover:bg-blue-50 dark:bg-blue-900/30/30">
+                                <td class="px-3 sm:px-4 py-3 font-black text-blue-700 dark:text-blue-400">6天版</td>
+                                <td class="px-3 sm:px-4 py-3 text-center">6天5夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1–11/6</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">11,044</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1 LGW→KEF</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-blue-600">14,908</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/6 KEF→LGW</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-blue-600">25,952</td>
                                 <td class="px-3 sm:px-4 py-3 text-center text-xs">2天 / 2.5天</td>
                             </tr>
                             <tr class="hover:bg-violet-50/30">
                                 <td class="px-3 sm:px-4 py-3 font-black text-violet-700">7天版</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">7天6夜<br><span class="text-gray-400 text-xs">11/1–11/7</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">11,044</span><br><span class="text-gray-400 text-xs">11/1 LGW→KEF</span></td>
-                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">15,718</span><br><span class="text-gray-400 text-xs">11/7 KEF→LGW</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center">7天6夜<br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1–11/7</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">11,044</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/1 LGW→KEF</span></td>
+                                <td class="px-3 sm:px-4 py-3 text-center"><span class="font-bold text-violet-600">15,718</span><br><span class="text-gray-400 dark:text-slate-500 text-xs">11/7 KEF→LGW</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-right font-black text-violet-600">26,762</td>
                                 <td class="px-3 sm:px-4 py-3 text-center text-xs">2天 / 2.5天</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="p-3 sm:p-4 bg-gray-50 border-t border-gray-100 text-xs text-gray-500 space-y-1">
+                <div class="p-3 sm:p-4 bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 text-xs text-gray-500 dark:text-slate-400 space-y-1">
                     <p>※ 兩家航空 10/28 均可出發，easyJet 哩程數兩種方案完全相同</p>
                     <p>※ 長榮 BR 10/29 約 11:00 抵倫敦；華航 CI 10/29 約 06:00 抵倫敦，CI 多約半天倫敦時間</p>
                     <p>※ 台北→倫敦：長榮 Q 艙搭配 49,812 哩升豪華經濟艙（詳見「台北→英國」分頁）</p>
@@ -1328,48 +1396,48 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                 <!-- 首爾路線 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="bg-amber-50 px-4 sm:px-5 py-3 border-b border-amber-100 flex items-center gap-2">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                    <div class="bg-amber-50 dark:bg-amber-900/30 px-4 sm:px-5 py-3 border-b border-amber-100 dark:border-amber-800/50 flex items-center gap-2">
                         <span class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0"></span>
-                        <h3 class="font-black text-amber-800">首爾方案 完整路線</h3>
+                        <h3 class="font-black text-amber-800 dark:text-amber-300">首爾方案 完整路線</h3>
                     </div>
                     <div class="p-4 sm:p-5 space-y-3.5 text-sm">
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇹🇼</span>
                             <div>
-                                <p class="font-bold text-gray-800">台北 (TPE) ↔ 首爾 (ICN)《來回》</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">台北 (TPE) ↔ 首爾 (ICN)《來回》</p>
                                 <p id="seoul-ticket-route" class="text-xs text-emerald-600 font-bold">阿聯酋哩 22,000 哩 + NT$1,013（來回）✅</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇰🇷</span>
                             <div>
-                                <p class="font-bold text-gray-800">首爾 自由行</p>
-                                <p class="text-xs text-gray-500">彈性天數，韓食・購物・文化</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">首爾 自由行</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">彈性天數，韓食・購物・文化</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">✈️</span>
                             <div>
-                                <p class="font-bold text-gray-800">ICN → 雷克雅維克 (KEF)</p>
-                                <p class="text-xs text-gray-500">另行購票（現金票或其他哩程）</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">ICN → 雷克雅維克 (KEF)</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">另行購票（現金票或其他哩程）</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇮🇸</span>
                             <div>
-                                <p class="font-bold text-gray-800">冰島 5–7 天</p>
-                                <p class="text-xs text-gray-500">雷克雅維克為基地</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">冰島 5–7 天</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🔄</span>
                             <div>
-                                <p class="font-bold text-gray-800">KEF → ICN → TPE（回程）</p>
-                                <p class="text-xs text-gray-500">KEF→ICN 含在另購票內・ICN→TPE 含在阿聯酋來回哩程內</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">KEF → ICN → TPE（回程）</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">KEF→ICN 含在另購票內・ICN→TPE 含在阿聯酋來回哩程內</p>
                             </div>
                         </div>
-                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800 space-y-1">
+                        <div class="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 text-xs text-emerald-800 dark:text-emerald-300 space-y-1">
                             <p class="font-bold">✅ 阿聯酋哩用途：TPE ↔ ICN 來回</p>
                             <p>現有 28,600 哩 → 僅需 22,000 哩，<span class="font-bold">剩餘 6,600 哩</span></p>
                             <p>另需支付現金附加費 <span class="font-bold">NT$1,013</span>（來回）</p>
@@ -1378,58 +1446,58 @@
                 </div>
 
                 <!-- 倫敦路線 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="bg-blue-50 px-4 sm:px-5 py-3 border-b border-blue-100 flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></span>
-                        <h3 class="font-black text-blue-800">倫敦方案 完整路線（5天版）</h3>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 px-4 sm:px-5 py-3 border-b border-blue-100 dark:border-blue-800/50 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-blue-50 dark:bg-blue-900/300 flex-shrink-0"></span>
+                        <h3 class="font-black text-blue-800 dark:text-blue-300">倫敦方案 完整路線（5天版）</h3>
                     </div>
                     <div class="p-4 sm:p-5 space-y-3.5 text-sm">
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇹🇼</span>
                             <div>
-                                <p class="font-bold text-gray-800">台北 (TPE) → 倫敦 (LHR)</p>
-                                <p class="text-xs text-gray-500">Q 艙底票 NT$56,254</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">台北 (TPE) → 倫敦 (LHR)</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">Q 艙底票 NT$56,254</p>
                                 <p class="text-xs font-bold text-emerald-600">+ 49,812 長榮哩程升豪華經濟艙</p>
-                                <p class="text-xs text-gray-500">CI 直飛 ~13h / BR 轉曼谷 ~18–20h</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">CI 直飛 ~13h / BR 轉曼谷 ~18–20h</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇬🇧</span>
                             <div>
-                                <p class="font-bold text-gray-800">倫敦 自由行 1 天</p>
-                                <p class="text-xs text-gray-500">（6/7 天版可達 2–2.5 天）</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">倫敦 自由行 1 天</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">（6/7 天版可達 2–2.5 天）</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🚌</span>
                             <div>
-                                <p class="font-bold text-gray-800">LHR → LGW（巴士）</p>
-                                <p class="text-xs text-gray-500">National Express，約 75 分鐘・£10–16</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">LHR → LGW（巴士）</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">National Express，約 75 分鐘・£10–16</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">✈️</span>
                             <div>
-                                <p class="font-bold text-gray-800">LGW → KEF（easyJet）</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">LGW → KEF（easyJet）</p>
                                 <p class="text-xs font-bold text-blue-600">10,234 阿聯酋哩程（10/30 最省班次）</p>
-                                <p class="text-xs text-gray-500">飛行約 3h 20m</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">飛行約 3h 20m</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🇮🇸</span>
                             <div>
-                                <p class="font-bold text-gray-800">冰島 5–7 天</p>
-                                <p class="text-xs text-gray-500">雷克雅維克為基地</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">冰島 5–7 天</p>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">雷克雅維克為基地</p>
                             </div>
                         </div>
                         <div class="flex gap-3 items-start">
                             <span class="text-lg flex-shrink-0 mt-0.5">🔄</span>
                             <div>
-                                <p class="font-bold text-gray-800">KEF → LGW → LHR → TPE</p>
+                                <p class="font-bold text-gray-800 dark:text-slate-100">KEF → LGW → LHR → TPE</p>
                                 <p class="text-xs font-bold text-blue-600">13,212 阿聯酋哩程（11/3 最省班次）</p>
                             </div>
                         </div>
-                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-800 space-y-1">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl p-3 text-xs text-blue-800 dark:text-blue-300 space-y-1">
                             <p class="font-bold">✅ 哩程有餘</p>
                             <p>阿聯酋剩 <span class="font-bold">5,154 哩</span> 備用</p>
                             <p>長榮哩程升艙，長途飛行更舒適</p>
@@ -1439,53 +1507,53 @@
             </div>
 
             <!-- 比較總表 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                 <div class="bg-gradient-to-r from-slate-700 to-gray-800 p-4 sm:p-5 text-white">
                     <h3 class="text-lg sm:text-xl font-black">各項比較一覽</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs sm:text-sm">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-50 dark:bg-slate-800/50">
                             <tr>
-                                <th class="px-3 sm:px-4 py-3 text-left text-gray-500 font-bold w-1/3">比較項目</th>
+                                <th class="px-3 sm:px-4 py-3 text-left text-gray-500 dark:text-slate-400 font-bold w-1/3">比較項目</th>
                                 <th class="px-3 sm:px-4 py-3 text-center text-amber-600 font-black">首爾方案 🇰🇷</th>
                                 <th class="px-3 sm:px-4 py-3 text-center text-blue-600 font-black">倫敦方案 🇬🇧</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">機票現金支出</td>
-                                <td id="seoul-ticket-compare" class="px-3 sm:px-4 py-3 text-center font-black text-emerald-600">NT$33,632 ✅<br><span class="text-xs font-normal text-gray-500">轉機 1 次・25h 45m</span></td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">機票現金支出</td>
+                                <td id="seoul-ticket-compare" class="px-3 sm:px-4 py-3 text-center font-black text-emerald-600">NT$33,632 ✅<br><span class="text-xs font-normal text-gray-500 dark:text-slate-400">轉機 1 次・25h 45m</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-red-500">NT$56,254</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">阿聯酋哩程</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-emerald-600 font-bold">22,000 哩 + NT$1,013 ✅<br><span class="text-xs font-normal text-gray-500">來回・剩 6,600 哩</span></td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">阿聯酋哩程</td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-emerald-600 font-bold">22,000 哩 + NT$1,013 ✅<br><span class="text-xs font-normal text-gray-500 dark:text-slate-400">來回・剩 6,600 哩</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">23,446（剩 5,154）✅</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">長榮 49,812 哩</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-gray-400">保留（未用）</td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">長榮 49,812 哩</td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-gray-400 dark:text-slate-500">保留（未用）</td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">升艙全用上 ✅</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">長途飛行艙位</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-gray-500">經濟艙（ICN→CPH 11h）</td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">長途飛行艙位</td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-gray-500 dark:text-slate-400">經濟艙（ICN→CPH 11h）</td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">豪華經濟 / 商務艙 ✅</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">首爾→冰島飛行</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">ICN→KEF（另購票）<br><span class="text-gray-400 text-xs">非阿聯酋哩程</span></td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">首爾→冰島飛行</td>
+                                <td class="px-3 sm:px-4 py-3 text-center">ICN→KEF（另購票）<br><span class="text-gray-400 dark:text-slate-500 text-xs">非阿聯酋哩程</span></td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">LGW→KEF（阿聯酋哩）<br><span class="text-xs">約 3h 20m ✅</span></td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">中途城市</td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">中途城市</td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold">首爾</td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold">倫敦</td>
                             </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">哩程整體效益</td>
-                                <td class="px-3 sm:px-4 py-3 text-center text-gray-400">長榮哩程閒置</td>
+                            <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">哩程整體效益</td>
+                                <td class="px-3 sm:px-4 py-3 text-center text-gray-400 dark:text-slate-500">長榮哩程閒置</td>
                                 <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">兩帳戶全用 ✅</td>
                             </tr>
                         </tbody>
@@ -1495,7 +1563,7 @@
 
             <!-- 選誰的理由 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 sm:p-5">
+                <div class="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 sm:p-5">
                     <h3 class="font-black text-amber-900 mb-3 flex items-center gap-2 text-base">
                         <span>🇰🇷</span><span>選首爾方案，如果你…</span>
                     </h3>
@@ -1506,7 +1574,7 @@
                         <li class="flex gap-2 items-start"><span class="flex-shrink-0 font-bold">✦</span><span>長榮 49,812 哩之後另有用途（留著）</span></li>
                     </ul>
                 </div>
-                <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 sm:p-5">
+                <div class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-2xl p-4 sm:p-5">
                     <h3 class="font-black text-blue-900 mb-3 flex items-center gap-2 text-base">
                         <span>🇬🇧</span><span>選倫敦方案，如果你…</span>
                     </h3>
@@ -1529,28 +1597,28 @@
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0">A</div>
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black text-gray-800">Alan 的方案</h2>
-                        <p class="text-sm text-gray-500">哩程升艙版本・長榮 vs 華航 升艙對比</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100">Alan 的方案</h2>
+                        <p class="text-sm text-gray-500 dark:text-slate-400">哩程升艙版本・長榮 vs 華航 升艙對比</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- 長榮 Alan -->
-                    <div class="bg-white rounded-2xl border-t-4 border-green-400 shadow-sm overflow-hidden card-hover relative">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-green-400 shadow-sm overflow-hidden card-hover relative">
                         <div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">Alan 首選</div>
                         <div class="bg-green-50 p-4 sm:p-5">
                             <span class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">長榮航空 BR</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">Q 艙 + 哩程升豪經來回</h3>
-                            <p class="text-xs text-gray-500">TPE → BKK → LHR・轉機曼谷</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">Q 艙 + 哩程升豪經來回</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">TPE → BKK → LHR・轉機曼谷</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">機票（Q 艙）</span><span class="font-bold">NT$56,254</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">飛行時間</span><span class="font-bold text-amber-600">約 18–20 小時（轉曼谷）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程</span><span class="font-bold text-green-600">50,000 哩（來回）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">目前哩程</span><span class="font-bold">49,812 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">機票（Q 艙）</span><span class="font-bold">NT$56,254</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-amber-600">約 18–20 小時（轉曼谷）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程</span><span class="font-bold text-green-600">50,000 哩（來回）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">49,812 哩</span></div>
                             <div class="flex justify-between text-sm"><span class="text-red-500 font-semibold">還差</span><span class="font-bold text-red-500">188 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">去程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">回程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-bold text-green-600">豪華經濟艙 ✅</span></div>
                             <div class="bg-green-50 rounded-xl p-3 text-xs text-green-700 mt-2">
                                 <p class="font-bold">補 188 哩方式：</p>
                                 <p>官網直購 200 哩 ≈ NT$100–200，幾乎可忽略</p>
@@ -1559,20 +1627,20 @@
                     </div>
 
                     <!-- 華航 Alan -->
-                    <div class="bg-white rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover">
-                        <div class="bg-blue-50 p-4 sm:p-5">
-                            <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full">中華航空 CI</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">T 艙 + 哩程升豪經單程</h3>
-                            <p class="text-xs text-gray-500">TPE → LHR 直飛・約 13 小時</p>
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 sm:p-5">
+                            <span class="text-xs font-bold bg-blue-100 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded-full">中華航空 CI</span>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">T 艙 + 哩程升豪經單程</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">TPE → LHR 直飛・約 13 小時</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">機票（T 艙）</span><span class="font-bold">NT$57,622</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">飛行時間</span><span class="font-bold text-blue-600">約 13 小時 ✅ 直飛</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">升艙哩程</span><span class="font-bold text-blue-600">25,000 哩（單程）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">目前哩程</span><span class="font-bold">31,256 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">使用後剩餘</span><span class="font-bold">6,256 哩</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">去程艙位</span><span class="font-bold text-blue-600">豪華經濟艙 ✅</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">回程艙位</span><span class="font-bold text-orange-500">經濟艙 ⚠️</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">機票（T 艙）</span><span class="font-bold">NT$57,622</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行時間</span><span class="font-bold text-blue-600">約 13 小時 ✅ 直飛</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">升艙哩程</span><span class="font-bold text-blue-600">25,000 哩（單程）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">目前哩程</span><span class="font-bold">31,256 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">使用後剩餘</span><span class="font-bold">6,256 哩</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">去程艙位</span><span class="font-bold text-blue-600">豪華經濟艙 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回程艙位</span><span class="font-bold text-orange-500">經濟艙 ⚠️</span></div>
                             <div class="bg-orange-50 rounded-xl p-3 text-xs text-orange-700 mt-2">
                                 直飛省 5–7 小時，但回程仍是經濟艙，整體升艙效益不如長榮
                             </div>
@@ -1581,13 +1649,13 @@
                 </div>
 
                 <!-- Alan 比較表 -->
-                <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                     <div class="bg-gradient-to-r from-slate-700 to-gray-800 p-4 text-white">
                         <h3 class="font-black text-sm sm:text-base">Alan 長榮 vs 華航 對比</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs sm:text-sm">
-                            <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                            <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-400 dark:text-slate-500 uppercase">
                                 <tr>
                                     <th class="px-3 sm:px-4 py-3 text-left">比較項目</th>
                                     <th class="px-3 sm:px-4 py-3 text-center text-green-600">長榮 BR</th>
@@ -1595,40 +1663,40 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">機票現金</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">機票現金</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">NT$56,254 ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold">NT$57,622</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">使用哩程帳戶</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">使用哩程帳戶</td>
                                     <td class="px-3 sm:px-4 py-3 text-center">長榮 49,812 哩</td>
                                     <td class="px-3 sm:px-4 py-3 text-center">華航 31,256 哩</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">飛行時間</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">飛行時間</td>
                                     <td class="px-3 sm:px-4 py-3 text-center text-amber-600 font-bold">18–20h（轉曼谷）</td>
                                     <td class="px-3 sm:px-4 py-3 text-center text-blue-600 font-bold">13h（直飛）✅</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">去程艙位</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">去程艙位</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-green-600">豪華經濟 ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">豪華經濟 ✅</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">回程艙位</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">回程艙位</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-green-600">豪華經濟 ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-orange-500">經濟艙 ⚠️</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">哩程缺口</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">哩程缺口</td>
                                     <td class="px-3 sm:px-4 py-3 text-center text-red-500">差 188 哩（≈NT$100）</td>
                                     <td class="px-3 sm:px-4 py-3 text-center text-emerald-600">充裕（剩 6,256 哩）</td>
                                 </tr>
-                                <tr class="bg-emerald-50">
-                                    <td class="px-3 sm:px-4 py-3 font-black text-gray-800">結論</td>
+                                <tr class="bg-emerald-50 dark:bg-emerald-900/30">
+                                    <td class="px-3 sm:px-4 py-3 font-black text-gray-800 dark:text-slate-100">結論</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-black text-green-700 text-sm">⭐ 推薦<br><span class="text-xs font-normal">來回均豪經，補哩程成本極低</span></td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-gray-500 text-xs">直飛快，但僅去程升艙</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center text-gray-500 dark:text-slate-400 text-xs">直飛快，但僅去程升艙</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1638,9 +1706,9 @@
 
             <!-- 分隔線 -->
             <div class="flex items-center gap-3">
-                <div class="flex-1 border-t-2 border-dashed border-gray-200"></div>
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
                 <span class="text-gray-300 text-xl">✦</span>
-                <div class="flex-1 border-t-2 border-dashed border-gray-200"></div>
+                <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
             </div>
 
             <!-- Anne 的方案 -->
@@ -1648,48 +1716,48 @@
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 bg-rose-500 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0">An</div>
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black text-gray-800">Anne 的方案</h2>
-                        <p class="text-sm text-gray-500">直購機票・不換哩程・純現金購票</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-slate-100">Anne 的方案</h2>
+                        <p class="text-sm text-gray-500 dark:text-slate-400">直購機票・不換哩程・純現金購票</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- 華航直購 Anne -->
-                    <div class="bg-white rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover relative">
-                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">可與 Alan 同行</div>
-                        <div class="bg-blue-50 p-4 sm:p-5">
-                            <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full">中華航空 CI・直購</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">NT$40,771</h3>
-                            <p class="text-xs text-gray-500">10/30 (五) 出發 – 11/9 (一) 回台・共 10 天</p>
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-blue-400 shadow-sm overflow-hidden card-hover relative">
+                        <div class="absolute top-0 right-0 bg-blue-50 dark:bg-blue-900/300 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">可與 Alan 同行</div>
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 sm:p-5">
+                            <span class="text-xs font-bold bg-blue-100 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded-full">中華航空 CI・直購</span>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">NT$40,771</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">10/30 (五) 出發 – 11/9 (一) 回台・共 10 天</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">出發日</span><span class="font-bold text-blue-600">10/30 (五)</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">回台日</span><span class="font-bold">11/9 (一)</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">旅遊天數</span><span class="font-bold">10 天</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">艙等</span><span class="font-bold">經濟艙（直購）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">飛行方式</span><span class="font-bold text-blue-600">TPE → LHR 直飛 ✅</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">哩程使用</span><span class="font-bold text-gray-400">不換哩程</span></div>
-                            <div class="bg-blue-50 rounded-xl p-3 text-xs text-blue-700 mt-2">
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">出發日</span><span class="font-bold text-blue-600">10/30 (五)</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回台日</span><span class="font-bold">11/9 (一)</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">旅遊天數</span><span class="font-bold">10 天</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">艙等</span><span class="font-bold">經濟艙（直購）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行方式</span><span class="font-bold text-blue-600">TPE → LHR 直飛 ✅</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">哩程使用</span><span class="font-bold text-gray-400 dark:text-slate-500">不換哩程</span></div>
+                            <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-400 mt-2">
                                 10/30 與 Alan 從冰島出發相同日期，可一起搭 easyJet 去冰島
                             </div>
                         </div>
                     </div>
 
                     <!-- 長榮直購 Anne -->
-                    <div class="bg-white rounded-2xl border-t-4 border-green-300 shadow-sm overflow-hidden card-hover opacity-80">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border-t-4 border-green-300 shadow-sm overflow-hidden card-hover opacity-80">
                         <div class="bg-green-50 p-4 sm:p-5">
                             <span class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">長榮航空 BR・直購</span>
-                            <h3 class="text-base sm:text-lg font-black text-gray-800 mt-2">NT$39,454</h3>
-                            <p class="text-xs text-gray-500">11/6 (五) 出發 – 11/17 (二) 回台・共 12 天</p>
+                            <h3 class="text-base sm:text-lg font-black text-gray-800 dark:text-slate-100 mt-2">NT$39,454</h3>
+                            <p class="text-xs text-gray-500 dark:text-slate-400">11/6 (五) 出發 – 11/17 (二) 回台・共 12 天</p>
                         </div>
                         <div class="p-4 sm:p-5 space-y-2.5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">出發日</span><span class="font-bold text-orange-500">11/6 (五)</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">回台日</span><span class="font-bold">11/17 (二)</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">旅遊天數</span><span class="font-bold text-green-600">12 天（較長）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">艙等</span><span class="font-bold">經濟艙（直購）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">飛行方式</span><span class="font-bold text-amber-600">TPE → BKK → LHR（轉曼谷）</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-500">哩程使用</span><span class="font-bold text-gray-400">不換哩程</span></div>
-                            <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-700 mt-2">
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">出發日</span><span class="font-bold text-orange-500">11/6 (五)</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">回台日</span><span class="font-bold">11/17 (二)</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">旅遊天數</span><span class="font-bold text-green-600">12 天（較長）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">艙等</span><span class="font-bold">經濟艙（直購）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">飛行方式</span><span class="font-bold text-amber-600">TPE → BKK → LHR（轉曼谷）</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-gray-500 dark:text-slate-400">哩程使用</span><span class="font-bold text-gray-400 dark:text-slate-500">不換哩程</span></div>
+                            <div class="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 text-xs text-amber-700 dark:text-amber-400 mt-2">
                                 11/6 出發，比 Alan (10/28) 晚 9 天，行程無法重疊
                             </div>
                         </div>
@@ -1697,13 +1765,13 @@
                 </div>
 
                 <!-- Anne 比較表 -->
-                <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="mt-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                     <div class="bg-gradient-to-r from-rose-500 to-pink-500 p-4 text-white">
                         <h3 class="font-black text-sm sm:text-base">Anne 華航 vs 長榮 對比</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs sm:text-sm">
-                            <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                            <thead class="bg-gray-50 dark:bg-slate-800/50 text-xs text-gray-400 dark:text-slate-500 uppercase">
                                 <tr>
                                     <th class="px-3 sm:px-4 py-3 text-left">比較項目</th>
                                     <th class="px-3 sm:px-4 py-3 text-center text-blue-600">華航 CI</th>
@@ -1711,45 +1779,45 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">機票價格</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">機票價格</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold">NT$40,771</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">NT$39,454 ✅</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">出發日</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">出發日</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">10/30 (五) ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-orange-500">11/6 (五) ⚠️</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">回台日</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">回台日</td>
                                     <td class="px-3 sm:px-4 py-3 text-center">11/9 (一)</td>
                                     <td class="px-3 sm:px-4 py-3 text-center">11/17 (二)</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">旅遊天數</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">旅遊天數</td>
                                     <td class="px-3 sm:px-4 py-3 text-center">10 天</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-green-600">12 天 ✅</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">飛行方式</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">飛行方式</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-blue-600">直飛 13h ✅</td>
                                     <td class="px-3 sm:px-4 py-3 text-center text-amber-600">轉曼谷 18–20h</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-3 sm:px-4 py-3 text-gray-600 font-medium">與 Alan 同行</td>
+                                <tr class="hover:bg-gray-50 dark:bg-slate-800/50">
+                                    <td class="px-3 sm:px-4 py-3 text-gray-600 dark:text-slate-300 font-medium">與 Alan 同行</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-emerald-600">✅ 可同行</td>
                                     <td class="px-3 sm:px-4 py-3 text-center font-bold text-red-500">❌ 日期不同</td>
                                 </tr>
-                                <tr class="bg-blue-50">
-                                    <td class="px-3 sm:px-4 py-3 font-black text-gray-800">建議</td>
-                                    <td class="px-3 sm:px-4 py-3 text-center font-black text-blue-700 text-sm">⭐ 推薦<br><span class="text-xs font-normal">可與 Alan 同行，直飛舒適</span></td>
-                                    <td class="px-3 sm:px-4 py-3 text-center text-gray-500 text-xs">便宜 NT$1,317<br>但行程無法重疊</td>
+                                <tr class="bg-blue-50 dark:bg-blue-900/30">
+                                    <td class="px-3 sm:px-4 py-3 font-black text-gray-800 dark:text-slate-100">建議</td>
+                                    <td class="px-3 sm:px-4 py-3 text-center font-black text-blue-700 dark:text-blue-400 text-sm">⭐ 推薦<br><span class="text-xs font-normal">可與 Alan 同行，直飛舒適</span></td>
+                                    <td class="px-3 sm:px-4 py-3 text-center text-gray-500 dark:text-slate-400 text-xs">便宜 NT$1,317<br>但行程無法重疊</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="p-3 bg-gray-50 border-t border-gray-100 text-xs text-gray-500">
+                    <div class="p-3 bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 text-xs text-gray-500 dark:text-slate-400">
                         ※ 兩個方案均為經濟艙直購，不使用哩程升艙 ※ 差價 NT$1,317，建議以「能否同行」為主要考量
                     </div>
                 </div>
@@ -1760,7 +1828,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 text-gray-400 py-8 mt-4">
+    <footer class="bg-slate-800 text-gray-400 dark:text-slate-500 py-8 mt-4">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-gray-300 font-medium mb-2 text-sm sm:text-base">冰島之旅全規劃 × 長榮 & 阿聯酋哩程</p>
             <p class="text-xs max-w-xl mx-auto">哩程數值以查詢當下為準，機票價格與所需哩程隨時可能異動，實際請以各航空官方網站為準。</p>
@@ -1773,13 +1841,13 @@
         function switchVersion(v) {
             document.querySelectorAll('.version-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.version-btn').forEach(el => {
-                el.classList.remove('bg-white', 'text-gray-800', 'shadow');
-                el.classList.add('text-gray-500');
+                el.classList.remove('bg-white dark:bg-slate-800', 'text-gray-800 dark:text-slate-100', 'shadow');
+                el.classList.add('text-gray-500 dark:text-slate-400');
             });
             document.getElementById('version-' + v).classList.remove('hidden');
             var btn = document.getElementById('vbtn-' + v);
-            btn.classList.remove('text-gray-500');
-            btn.classList.add('bg-white', 'text-gray-800', 'shadow');
+            btn.classList.remove('text-gray-500 dark:text-slate-400');
+            btn.classList.add('bg-white dark:bg-slate-800', 'text-gray-800 dark:text-slate-100', 'shadow');
         }
 
         function switchTab(tab) {
@@ -1796,5 +1864,11 @@
         }
     </script>
 
+
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 flex items-center justify-center text-xl z-50 hover:scale-110 transition-transform">
+        <span id="theme-toggle-dark-icon" class="hidden">🌙</span>
+        <span id="theme-toggle-light-icon" class="hidden">☀️</span>
+    </button>
 </body>
 </html>

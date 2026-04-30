@@ -8,7 +8,9 @@ const PLAN = {
   // ── 哩程帳戶 ──────────────────────────────────────────────
   miles: {
     eva: { total: 49812, target: 50000, gap: 188, progress: 99.6 },
+    ci:  { total: 31256, target25k: 25000, gap25k: 0, target50k: 50000, gap50k: 18744, progress25k: 100, progress50k: 62.5 },
     emirates: { total: 28600 },
+
     sources: [
       { label: "台新銀行",      short: "台新", points: 6874,  miles: 8112,  color: "red" },
       { label: "星展銀行",      short: "星展", points: 11866, miles: 23700, color: "blue" },
@@ -29,6 +31,14 @@ const PLAN = {
       note:"比 Q 艙升商務少需 11,500 哩，可查詢 BY 艙票價後評估" }
   ],
   baseTicket: { code: "Q", price: 56254 },
+  ciBaseTicket: { code: "T", price: 57622 },
+  ciUpgrades: [
+    { id:"A", label:"升艙豪經・單程", tag:"方案 A ✅ 立即可行",  miles:25000, feasible:true,  remaining:6256, color:"emerald",
+      note:"31,256 哩充裕，去程 13h 直飛最舒適" },
+    { id:"B", label:"升艙豪經・來回", tag:"方案 B ❌ 差 18,744 哩", miles:50000, feasible:false, gap:18744, color:"red",
+      note:"需補購哩程或改搭長榮（長榮差 188 哩即可達標）" }
+  ],
+
   milesValue: [
     { label:"換經濟艙",       value:"NT$0.5–1",  unit:"每哩",        color:"gray" },
     { label:"升豪華經濟艙",   value:"NT$1–2",    unit:"每哩 ✅",     color:"emerald", highlight:true },
