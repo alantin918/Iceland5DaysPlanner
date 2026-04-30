@@ -72,25 +72,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 class="font-black text-lg text-emerald-900 dark:text-emerald-300">${wa.title}</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                    <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-4 border border-white dark:border-slate-700">
-                        <p class="text-xs text-gray-500 mb-2 uppercase tracking-wider font-bold">方案對比</p>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between"><span>直接購豪經 (CI)</span><span class="font-bold">NT$${fmt(wa.directPE)}</span></div>
-                            <div class="flex justify-between text-emerald-600 dark:text-emerald-400 font-bold"><span>哩程升艙總成本</span><span>NT$${fmt(wa.upgradePath.total)}</span></div>
-                            <div class="pt-2 border-t border-emerald-100 dark:border-emerald-800 flex justify-between font-black text-lg">
-                                <span>省下金額</span><span class="text-emerald-500">NT$${fmt(wa.savings)}</span>
-                            </div>
+                <div class="space-y-3">
+                    ${wa.options.map((opt, i) => `
+                    <div class="bg-white/70 dark:bg-slate-800/70 rounded-xl p-3 border ${i === 0 ? 'border-emerald-400 dark:border-emerald-500 shadow-sm' : 'border-white dark:border-slate-700'}">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-gray-800 dark:text-slate-100 text-sm">${opt.name}</span>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded-full ${i === 0 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400' : (i === 1 ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-400' : 'bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-slate-400')}">${opt.tag}</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-slate-400 mb-1">
+                            <span>${opt.desc}</span>
+                        </div>
+                        <div class="flex justify-between items-end mt-2 pt-2 border-t border-gray-100 dark:border-slate-700">
+                            <span class="text-xs text-gray-500">總成本</span>
+                            <span class="font-black ${i === 0 ? 'text-emerald-600 dark:text-emerald-400 text-lg' : 'text-gray-800 dark:text-slate-200'}">NT$${fmt(opt.total)}</span>
                         </div>
                     </div>
-                    <div class="p-4 bg-emerald-500 text-white rounded-xl shadow-md">
-                        <p class="font-black text-lg mb-1">結論：${wa.conclusion.split('！')[0]}！</p>
-                        <p class="text-sm opacity-90">${wa.conclusion.split('！')[1]}</p>
+                    `).join('')}
+                    <div class="text-center pt-1 text-sm font-bold text-emerald-700 dark:text-emerald-400">
+                        ${wa.savingsText}
                     </div>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-sm font-bold text-emerald-800 dark:text-emerald-400">關鍵點分析：</p>
-                    <ul class="space-y-3 text-sm text-emerald-900/80 dark:text-emerald-300/80">
+                    <div class="p-4 bg-emerald-500 text-white rounded-xl shadow-md">
+                        <p class="font-black text-lg mb-1">結論：${wa.conclusion.split('！')[0]}！</p>
+                        <p class="text-sm opacity-90">${wa.conclusion.split('！')[1] || ''}</p>
+                    </div>
+                    <ul class="space-y-3 text-sm text-emerald-900/80 dark:text-emerald-300/80 mt-2">
                         ${pointsHtml}
                     </ul>
                 </div>
