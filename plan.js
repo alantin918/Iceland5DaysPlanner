@@ -5,7 +5,11 @@
 
 const PLAN = {
 
+  // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
+  lastUpdated: "2026-04-30 14:03 (Asia/Taipei)",
+
   // ── 哩程帳戶 ──────────────────────────────────────────────
+
   miles: {
     eva: { total: 49812, target: 50000, gap: 188, progress: 99.6 },
     ci:  { total: 31256, target25k: 25000, gap25k: 0, target50k: 50000, gap50k: 18744, progress25k: 100, progress50k: 62.5 },

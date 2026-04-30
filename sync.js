@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (el) el.innerHTML = html;
   };
 
-  // ── 首爾方案：機票資料（3 個顯示位置）────────────────────
+  // ── 版本資訊：最後更新時間 ──────────────────────────────────
+  set('last-updated-time', P.lastUpdated || '—');
+
+
   const t = P.plans.seoul.ticket;
   set('seoul-ticket-hero',
       `NT$${fmt(t.price)}`);
