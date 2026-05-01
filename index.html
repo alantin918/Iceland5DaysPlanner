@@ -28,6 +28,45 @@
         .card-hover { transition: box-shadow .2s, transform .2s; }
         .card-hover:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); transform: translateY(-2px); }
         html.dark .card-hover:hover { box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+
+        /* ── 🐾 吉依卡娃主題 ───────────────────────────────── */
+        html.chiikawa body {
+            background: linear-gradient(160deg, #fce7f3 0%, #ede9fe 60%, #e0f2fe 100%) !important;
+            background-attachment: fixed !important;
+        }
+        html.chiikawa .hero-bg {
+            background-image: linear-gradient(135deg, rgba(236,72,153,0.88) 0%, rgba(168,85,247,0.85) 55%, rgba(99,102,241,0.82) 100%) !important;
+        }
+        html.chiikawa nav {
+            background-color: #fdf2f8 !important;
+            border-bottom-color: #fbcfe8 !important;
+        }
+        html.chiikawa .tab-btn.active {
+            background-color: #f472b6 !important;
+            color: #fff !important;
+            box-shadow: 0 2px 12px rgba(244,114,182,.5) !important;
+        }
+        html.chiikawa .bg-gradient-to-r,
+        html.chiikawa .bg-gradient-to-br {
+            background-image: linear-gradient(to right, #f472b6, #c084fc) !important;
+        }
+        html.chiikawa .bg-slate-800 {
+            background-color: #6b21a8 !important;
+        }
+        html.chiikawa footer {
+            background-color: #4a044e !important;
+            color: #f5d0fe !important;
+        }
+        html.chiikawa footer p { color: #e9d5ff !important; }
+        html.chiikawa .card-hover:hover {
+            box-shadow: 0 12px 32px rgba(244,114,182,.3) !important;
+        }
+        #chiikawa-toggle { transition: transform .2s, box-shadow .2s; }
+        html.chiikawa #chiikawa-toggle {
+            background: linear-gradient(135deg, #f9a8d4, #d8b4fe) !important;
+            border-color: #f0abfc !important;
+            box-shadow: 0 4px 16px rgba(244,114,182,.45) !important;
+        }
     </style>
 
     <script>
@@ -38,6 +77,9 @@
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
+        }
+        if (localStorage.chiikawa === '1') {
+            document.documentElement.classList.add('chiikawa');
         }
     </script>
 </head>
@@ -1917,6 +1959,11 @@
         }
     </script>
 
+
+    <!-- Chiikawa Theme Toggle -->
+    <button id="chiikawa-toggle" title="吉依卡娃模式 🐾" class="fixed bottom-22 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 flex items-center justify-center text-xl z-50 hover:scale-110" style="bottom: 80px;">
+        🐾
+    </button>
 
     <!-- Dark Mode Toggle -->
     <button id="theme-toggle" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 flex items-center justify-center text-xl z-50 hover:scale-110 transition-transform">

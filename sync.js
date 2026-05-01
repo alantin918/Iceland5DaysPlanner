@@ -277,6 +277,19 @@ document.addEventListener('DOMContentLoaded', () => {
     `);
   }
 
+  // ── 🐾 吉依卡娃主題切換邏輯 ─────────────────────────────────
+  const chiikawaToggleBtn = document.getElementById('chiikawa-toggle');
+  if (chiikawaToggleBtn) {
+    chiikawaToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('chiikawa');
+      if (document.documentElement.classList.contains('chiikawa')) {
+        localStorage.chiikawa = '1';
+      } else {
+        localStorage.removeItem('chiikawa');
+      }
+    });
+  }
+
   // ── 暗黑模式切換邏輯 ─────────────────────────────────────
   const themeToggleBtn = document.getElementById('theme-toggle');
   const darkIcon = document.getElementById('theme-toggle-dark-icon');
