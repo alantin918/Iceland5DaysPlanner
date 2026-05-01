@@ -92,6 +92,91 @@
         /* 照片牆 hover 效果 */
         .photo-cell img { transition: transform .35s ease; }
         .photo-cell:hover img { transform: scale(1.08); }
+
+        /* ── 吉伊卡娃：無論 dark class 在不在，全部強制亮色 ── */
+        /* 1. color-scheme 鎖定為亮色（瀏覽器層級） */
+        html.chiikawa,
+        html.chiikawa.dark {
+            color-scheme: light !important;
+        }
+        /* 2. body 背景與文字 */
+        html.chiikawa body,
+        html.chiikawa.dark body {
+            background: linear-gradient(160deg,#fce7f3 0%,#ede9fe 60%,#e0f2fe 100%) !important;
+            background-attachment: fixed !important;
+            color: #1e1b4b !important;
+        }
+        /* 3. 卡片白底（dark:bg-slate-* 全數蓋掉） */
+        html.chiikawa [class*="dark:bg-slate-8"],
+        html.chiikawa [class*="dark:bg-slate-9"],
+        html.chiikawa.dark [class*="dark:bg-slate-8"],
+        html.chiikawa.dark [class*="dark:bg-slate-9"] {
+            background-color: #ffffff !important;
+        }
+        html.chiikawa [class*="dark:bg-slate-7"],
+        html.chiikawa.dark [class*="dark:bg-slate-7"] {
+            background-color: #fdf2f8 !important;
+        }
+        /* 4. 所有彩色 dark: 背景一律換淺色 */
+        html.chiikawa [class*="dark:bg-emerald-"],
+        html.chiikawa.dark [class*="dark:bg-emerald-"] { background-color: #f0fff8 !important; }
+        html.chiikawa [class*="dark:bg-sky-"],
+        html.chiikawa.dark [class*="dark:bg-sky-"]     { background-color: #f0f9ff !important; }
+        html.chiikawa [class*="dark:bg-blue-"],
+        html.chiikawa.dark [class*="dark:bg-blue-"]    { background-color: #eff6ff !important; }
+        html.chiikawa [class*="dark:bg-violet-"],
+        html.chiikawa.dark [class*="dark:bg-violet-"]  { background-color: #fdf4ff !important; }
+        html.chiikawa [class*="dark:bg-purple-"],
+        html.chiikawa.dark [class*="dark:bg-purple-"]  { background-color: #fdf4ff !important; }
+        html.chiikawa [class*="dark:bg-amber-"],
+        html.chiikawa.dark [class*="dark:bg-amber-"]   { background-color: #fffbeb !important; }
+        html.chiikawa [class*="dark:bg-rose-"],
+        html.chiikawa.dark [class*="dark:bg-rose-"]    { background-color: #fff1f2 !important; }
+        html.chiikawa [class*="dark:bg-pink-"],
+        html.chiikawa.dark [class*="dark:bg-pink-"]    { background-color: #fdf2f8 !important; }
+        html.chiikawa [class*="dark:bg-green-"],
+        html.chiikawa.dark [class*="dark:bg-green-"]   { background-color: #f0fdf4 !important; }
+        html.chiikawa [class*="dark:bg-teal-"],
+        html.chiikawa.dark [class*="dark:bg-teal-"]    { background-color: #f0fdfa !important; }
+        html.chiikawa [class*="dark:bg-indigo-"],
+        html.chiikawa.dark [class*="dark:bg-indigo-"]  { background-color: #eef2ff !important; }
+        html.chiikawa [class*="dark:bg-orange-"],
+        html.chiikawa.dark [class*="dark:bg-orange-"]  { background-color: #fff7ed !important; }
+        /* 5. 文字顏色 */
+        html.chiikawa [class*="dark:text-slate-"],
+        html.chiikawa.dark [class*="dark:text-slate-"] { color: #1e1b4b !important; }
+        html.chiikawa [class*="dark:text-gray-"],
+        html.chiikawa.dark [class*="dark:text-gray-"]  { color: #6b21a8 !important; }
+        html.chiikawa [class*="dark:text-emerald-"],
+        html.chiikawa.dark [class*="dark:text-emerald-"]{ color: #059669 !important; }
+        html.chiikawa [class*="dark:text-sky-"],
+        html.chiikawa.dark [class*="dark:text-sky-"]   { color: #0284c7 !important; }
+        html.chiikawa [class*="dark:text-blue-"],
+        html.chiikawa.dark [class*="dark:text-blue-"]  { color: #2563eb !important; }
+        html.chiikawa [class*="dark:text-violet-"],
+        html.chiikawa.dark [class*="dark:text-violet-"]{ color: #7c3aed !important; }
+        html.chiikawa [class*="dark:text-purple-"],
+        html.chiikawa.dark [class*="dark:text-purple-"]{ color: #9333ea !important; }
+        html.chiikawa [class*="dark:text-amber-"],
+        html.chiikawa.dark [class*="dark:text-amber-"] { color: #d97706 !important; }
+        html.chiikawa [class*="dark:text-rose-"],
+        html.chiikawa.dark [class*="dark:text-rose-"]  { color: #e11d48 !important; }
+        html.chiikawa [class*="dark:text-pink-"],
+        html.chiikawa.dark [class*="dark:text-pink-"]  { color: #db2777 !important; }
+        html.chiikawa [class*="dark:text-green-"],
+        html.chiikawa.dark [class*="dark:text-green-"] { color: #16a34a !important; }
+        html.chiikawa [class*="dark:text-teal-"],
+        html.chiikawa.dark [class*="dark:text-teal-"]  { color: #0d9488 !important; }
+        /* 6. 邊框與分隔線 */
+        html.chiikawa [class*="dark:border-"],
+        html.chiikawa.dark [class*="dark:border-"] { border-color: #f0abfc !important; }
+        html.chiikawa [class*="dark:divide-"] > * + *,
+        html.chiikawa.dark [class*="dark:divide-"] > * + * { border-color: #fce7f3 !important; }
+        /* 7. 深色獨立 class（不用 dark: prefix） */
+        html.chiikawa .bg-slate-800,
+        html.chiikawa.dark .bg-slate-800,
+        html.chiikawa .bg-slate-900,
+        html.chiikawa.dark .bg-slate-900 { background-color: #6b21a8 !important; }
     </style>
 
     <script>
@@ -105,6 +190,8 @@
         }
         if (localStorage.chiikawa === '1') {
             document.documentElement.classList.add('chiikawa');
+            // 吉伊卡娃模式強制亮色（防閃爍）
+            document.documentElement.classList.remove('dark');
         }
     </script>
 </head>
@@ -130,41 +217,16 @@
             </div>
 
             <!-- 🐾 吉伊卡娃模式專屬 banner（chiikawa 才顯示） -->
-            <div class="cw-hero-banner justify-center items-center gap-4 mt-6 text-white/90">
-                <!-- Chiikawa -->
-                <svg width="54" height="58" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-1 drop-shadow-lg">
-                    <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-                    <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-                    <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-                    <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-                    <circle cx="32" cy="44" r="2" fill="white"/>
-                    <circle cx="52" cy="44" r="2" fill="white"/>
-                    <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
-                    <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-                    <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-                </svg>
-                <span class="text-sm font-bold tracking-wider opacity-80">ちいかわと一緒に旅行！</span>
-                <!-- Hachiware -->
-                <svg width="54" height="58" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-2 drop-shadow-lg">
-                    <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-                    <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-                    <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-                    <path d="M35 32 L40 41 L45 32" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-                    <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-                    <circle cx="32" cy="44" r="2" fill="white"/>
-                    <circle cx="52" cy="44" r="2" fill="white"/>
-                    <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
-                    <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-                    <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-                </svg>
+            <div class="cw-hero-banner justify-center items-center gap-3 mt-6">
+                <img src="images/chiikawa/chiikawa.png" alt="ちいかわ"
+                     class="w-16 h-16 object-contain cw-anim-1 drop-shadow-xl">
+                <div class="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 border border-white/30">
+                    <p class="text-white text-sm font-bold tracking-wide">🐾 ちいかわと一緒に旅行！</p>
+                </div>
+                <div class="bg-white rounded-2xl p-1.5 shadow-lg cw-anim-2">
+                    <img src="images/chiikawa/hachiware.jpg" alt="ハチワレ"
+                         class="w-12 h-12 object-cover rounded-xl">
+                </div>
             </div>
         </div>
     </header>
@@ -2125,68 +2187,40 @@
 
     <!-- 🐾 吉伊卡娃浮動角色貼圖（chiikawa 模式 × 桌面才顯示） -->
 
-    <!-- Chiikawa 本人 - 左側中央 -->
-    <div class="cw-sticker hidden lg:block" style="left:8px; top:45%;">
-        <svg width="90" height="96" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-1 drop-shadow-xl">
-            <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-            <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-            <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-            <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
-            <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-            <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <circle cx="32" cy="44" r="2" fill="white"/>
-            <circle cx="52" cy="44" r="2" fill="white"/>
-            <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
-            <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-            <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-            <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-        </svg>
-        <p class="text-center text-xs font-bold mt-1" style="color:#f472b6;">ちいかわ</p>
+    <!-- ちいかわ 本人 - 左側上方 -->
+    <div class="cw-sticker hidden lg:block cw-anim-1" style="left:6px; top:38%;">
+        <div class="bg-white rounded-2xl p-2 shadow-xl border border-pink-100 text-center" style="min-width:88px;">
+            <img src="images/chiikawa/chiikawa.png" alt="ちいかわ"
+                 class="w-18 h-18 object-contain" style="width:72px;height:72px;">
+            <p class="text-xs font-black mt-1" style="color:#ec4899;">ちいかわ</p>
+        </div>
     </div>
 
-    <!-- Hachiware - 左側下方 -->
-    <div class="cw-sticker hidden lg:block" style="left:8px; top:68%;">
-        <svg width="90" height="96" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-2 drop-shadow-xl">
-            <ellipse cx="23" cy="22" rx="9" ry="12" fill="#f0f4ff" stroke="#c084fc" stroke-width="1.5"/>
-            <ellipse cx="57" cy="22" rx="9" ry="12" fill="#f0f4ff" stroke="#c084fc" stroke-width="1.5"/>
-            <ellipse cx="23" cy="24" rx="5" ry="7" fill="#e0d2fe"/>
-            <ellipse cx="57" cy="24" rx="5" ry="7" fill="#e0d2fe"/>
-            <ellipse cx="40" cy="52" rx="30" ry="28" fill="#f8f6ff" stroke="#c084fc" stroke-width="1.5"/>
-            <path d="M35 32 L40 41 L45 32" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <circle cx="32" cy="44" r="2" fill="white"/>
-            <circle cx="52" cy="44" r="2" fill="white"/>
-            <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#a78bfa"/>
-            <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-            <ellipse cx="23" cy="57" rx="6" ry="3" fill="#c084fc" opacity="0.45"/>
-            <ellipse cx="57" cy="57" rx="6" ry="3" fill="#c084fc" opacity="0.45"/>
-        </svg>
-        <p class="text-center text-xs font-bold mt-1" style="color:#a855f7;">ハチワレ</p>
+    <!-- ハチワレ - 左側下方 -->
+    <div class="cw-sticker hidden lg:block cw-anim-2" style="left:4px; top:62%;">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-purple-100/60 text-center">
+            <img src="images/chiikawa/hachiware.jpg" alt="ハチワレ"
+                 class="w-16 h-16 object-cover rounded-xl">
+            <p class="text-xs font-black mt-1 text-purple-500">ハチワレ</p>
+        </div>
     </div>
 
-    <!-- Usagi - 右側中央（避開按鈕） -->
-    <div class="cw-sticker hidden lg:block" style="right:8px; top:38%;">
-        <svg width="82" height="116" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-3 drop-shadow-xl">
-            <!-- long floppy left ear -->
-            <path d="M24 45 Q16 28 17 10 Q18 0 24 14 Q28 26 28 45" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M24 45 Q18 30 19 13 Q20 5 24 16 Q27 26 27 45" fill="#fecdd3" stroke="none"/>
-            <!-- long floppy right ear -->
-            <path d="M56 45 Q64 28 63 10 Q62 0 56 14 Q52 26 52 45" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M56 45 Q62 30 61 13 Q60 5 56 16 Q53 26 53 45" fill="#fecdd3" stroke="none"/>
-            <!-- body -->
-            <ellipse cx="40" cy="76" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
-            <ellipse cx="30" cy="70" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <ellipse cx="50" cy="70" rx="5" ry="5.5" fill="#1a1a2e"/>
-            <circle cx="32" cy="67" r="2" fill="white"/>
-            <circle cx="52" cy="67" r="2" fill="white"/>
-            <ellipse cx="40" cy="77" rx="2.5" ry="1.8" fill="#fb7185"/>
-            <path d="M33 82 Q36 87 40 82 Q44 87 47 82" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-            <ellipse cx="23" cy="80" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-            <ellipse cx="57" cy="80" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
-        </svg>
-        <p class="text-center text-xs font-bold mt-1" style="color:#f472b6;">うさぎ</p>
+    <!-- うさぎ - 右側中央（避開按鈕） -->
+    <div class="cw-sticker hidden lg:block cw-anim-3" style="right:4px; top:36%;">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-pink-100/60 text-center">
+            <img src="images/chiikawa/usagi.jpg" alt="うさぎ"
+                 class="w-16 h-16 object-cover rounded-xl">
+            <p class="text-xs font-black mt-1 text-pink-500">うさぎ</p>
+        </div>
+    </div>
+
+    <!-- もんが（モモンガ）- 右側下方 -->
+    <div class="cw-sticker hidden lg:block cw-anim-1" style="right:6px; top:58%; animation-delay:1.8s">
+        <div class="bg-white rounded-2xl p-2 shadow-xl border border-purple-100 text-center" style="min-width:80px;">
+            <img src="images/chiikawa/momonga.png" alt="もんが"
+                 class="object-contain" style="width:62px;height:62px;">
+            <p class="text-xs font-black mt-1" style="color:#8b5cf6;">もんが</p>
+        </div>
     </div>
 
     <!-- Chiikawa Theme Toggle -->

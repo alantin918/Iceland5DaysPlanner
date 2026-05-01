@@ -281,11 +281,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const chiikawaToggleBtn = document.getElementById('chiikawa-toggle');
   if (chiikawaToggleBtn) {
     chiikawaToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('chiikawa');
-      if (document.documentElement.classList.contains('chiikawa')) {
+      const html = document.documentElement;
+      const isOn = html.classList.toggle('chiikawa');
+
+      if (isOn) {
         localStorage.chiikawa = '1';
+        // 記住原本主題，然後無條件強制亮色
+        localStorage.cwPrevTheme = localStorage.theme || '';
+        html.classList.remove('dark');
+        localStorage.theme = 'light';
+        // 同步更新暗黑模式按鈕圖示
+        const di = document.getElementById('theme-toggle-dark-icon');
+        const li = document.getElementById('theme-toggle-light-icon');
+        if (di) di.classList.remove('hidden');
+        if (li) li.classList.add('hidden');
       } else {
         localStorage.removeItem('chiikawa');
+        // 還原原本主題
+        const prev = localStorage.cwPrevTheme;
+        localStorage.removeItem('cwPrevTheme');
+        if (prev === 'dark') {
+          html.classList.add('dark');
+          localStorage.theme = 'dark';
+          const di = document.getElementById('theme-toggle-dark-icon');
+          const li = document.getElementById('theme-toggle-light-icon');
+          if (di) di.classList.add('hidden');
+          if (li) li.classList.remove('hidden');
+        } else if (prev === '') {
+          // 原本跟著系統，還原
+          localStorage.removeItem('theme');
+        }
       }
     });
   }
