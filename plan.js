@@ -6,7 +6,7 @@
 const PLAN = {
 
   // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
-  lastUpdated: "2026-05-01 02:01 (Asia/Taipei)",
+  lastUpdated: "2026-05-01 15:37 (Asia/Taipei)",
 
   // ── 哩程帳戶 ──────────────────────────────────────────────
 
@@ -287,6 +287,100 @@ const PLAN = {
         { name:"KEF 機場還車離開",    note:"市區→機場約 45 分鐘" }
       ]
     }
-  ]
+  ],
+
+  // ── 旅費估算 ──────────────────────────────────────────────
+  budget: {
+    people: 2,
+    note: "以 Alan + Anne 2 人計算，住宿費用為雙人房共費，餐費交通為 2 人合計",
+
+    flights: [
+      { who:"Alan", route:"TPE ↔ LHR（CI82 / CI81）", type:"方案 A 單程升等（回程豪經）", cash:48786, miles:"25,000 CI 哩（去程升艙）", color:"sky" },
+      { who:"Anne", route:"TPE ↔ LHR（CI82 / CI81）", type:"CI 直購經濟艙",               cash:40771, miles:null,                    color:"blue" },
+      { who:"2 人", route:"LGW ↔ KEF（easyJet 來回）", type:"Emirates 哩程兌換",          cash:1013,  miles:"23,446 Emirates 哩",       color:"amber" }
+    ],
+
+    uk: {
+      nights: 3,
+      days: 3,
+      note: "10/29 抵達 1 晚 + 11/3–11/4 回程 2 晚，共 3 晚",
+      sections: [
+        {
+          title: "🏨 住宿",
+          items: [
+            { label:"飯店 10/29（抵達當晚）", amount:5500, note:"市區 3–4★ 雙人房（估）" },
+            { label:"飯店 11/3–11/4（回程 2 晚）", amount:11000, note:"市區 3–4★ 雙人房 NT$5,500/晚（估）" }
+          ]
+        },
+        {
+          title: "🚇 交通",
+          items: [
+            { label:"Heathrow Express 來回", amount:2400, note:"2 人 × 2 趟 × £15 ≈ NT$600/趟" },
+            { label:"市區地鐵 Oyster 3 天",  amount:1800, note:"2 人 × 3 天 × NT$300/天" }
+          ]
+        },
+        {
+          title: "🍽️ 餐費",
+          items: [
+            { label:"早餐 3 天", amount:3000, note:"2 人 × 3 天 × NT$500（咖啡館 or 超市）" },
+            { label:"午餐 3 天", amount:6000, note:"2 人 × 3 天 × NT$1,000" },
+            { label:"晚餐 3 天", amount:9000, note:"2 人 × 3 天 × NT$1,500（餐廳）" }
+          ]
+        },
+        {
+          title: "🎟️ 景點門票",
+          items: [
+            { label:"倫敦塔",          amount:2400, note:"2 人 × £30 ≈ NT$1,200/人" },
+            { label:"其他特展 / 小景點", amount:1000, note:"大英博物館・國家畫廊免費，其他酌收（估）" }
+          ]
+        }
+      ]
+    },
+
+    iceland: {
+      nights: 4,
+      days: 5,
+      note: "10/30 抵達 – 11/3 離開，共 4 晚 5 天",
+      sections: [
+        {
+          title: "🏨 住宿",
+          items: [
+            { label:"飯店 4 晚（雷克雅維克）", amount:20000, note:"市區 3★ 雙人房 NT$5,000/晚（估）" }
+          ]
+        },
+        {
+          title: "🚗 交通",
+          items: [
+            { label:"租車 5 天（一般轎車）", amount:13000, note:"含基本保險，10 月非旺季（估）" },
+            { label:"油費",               amount:2300,  note:"約 300km 行程估算" },
+            { label:"停車費",             amount:2000,  note:"雷克雅維克市區停車 3 天（估）" }
+          ]
+        },
+        {
+          title: "🍽️ 餐費",
+          items: [
+            { label:"早餐 5 天", amount:3000,  note:"2 人 × 5 天 × NT$300（超市購買）" },
+            { label:"午餐 5 天", amount:8000,  note:"2 人 × 5 天 × NT$800（超市三明治 / 熱狗）" },
+            { label:"晚餐 5 天", amount:15000, note:"2 人 × 5 天 × NT$1,500（餐廳，冰島物價偏高）" }
+          ]
+        },
+        {
+          title: "🌌 活動",
+          items: [
+            { label:"極光追蹤行程",    amount:6000, note:"2 人 × NT$3,000（船上或陸上極光團）" },
+            { label:"Sky Lagoon 天空之潟", amount:5000, note:"2 人 × NT$2,500（含更衣儀式）" },
+            { label:"金環景點停車費",  amount:1500, note:"辛格韋利爾・蓋錫爾・黃金瀑布（停車費估）" },
+            { label:"斯奈山半島停車費", amount:500, note:"景點多為免費，僅停車費（估）" }
+          ]
+        }
+      ]
+    },
+
+    extras: [
+      { label:"旅遊保險",     amount:4000,  note:"2 人・含冰島戶外活動險（估）", icon:"🛡️" },
+      { label:"電話漫遊/SIM", amount:1500,  note:"英國 + 冰島 eSIM 各 1 張（估）", icon:"📱" },
+      { label:"購物伴手禮",   amount:10000, note:"冰島設計品・英國紅茶・巧克力等（估）", icon:"🛍️" }
+    ]
+  }
 
 }; // end PLAN

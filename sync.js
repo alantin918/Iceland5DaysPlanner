@@ -157,6 +157,126 @@ document.addEventListener('DOMContentLoaded', () => {
     `);
   }
 
+  // ── 旅費估算 ──────────────────────────────────────────────
+  const B = P.budget;
+  if (B) {
+    const fmtNT = n => 'NT$' + fmt(n);
+
+    // 機票列
+    const flightColorMap = { sky:'bg-sky-100 text-sky-700', blue:'bg-blue-100 text-blue-700', amber:'bg-amber-100 text-amber-700' };
+    let flightsCash = 0;
+    set('budget-flights-rows', B.flights.map(f => {
+      flightsCash += f.cash;
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-3 px-4 sm:px-6 py-3.5 gap-1 sm:gap-0 items-center hover:bg-gray-50 dark:hover:bg-slate-800/50">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full ${flightColorMap[f.color] || 'bg-gray-100 text-gray-600'}">${f.who}</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-300">${f.route}</span>
+          </div>
+          <span class="text-xs text-gray-400 dark:text-slate-500 sm:text-center">${f.type}${f.miles ? ' ＋ ' + f.miles : ''}</span>
+          <span class="text-right font-bold text-gray-800 dark:text-slate-100">${fmtNT(f.cash)}</span>
+        </div>
+      `;
+    }).join('') + `
+      <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-sky-50 dark:bg-sky-900/30">
+        <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">機票現金合計</span>
+        <span class="text-right font-black text-sky-600 text-lg sm:text-xl">${fmtNT(flightsCash)}</span>
+      </div>
+    `);
+    set('budget-flights-total', fmtNT(flightsCash));
+
+    // sections 結構渲染（含分類小標題）
+    const renderSections = (sections) => {
+      return sections.map(sec => {
+        const secTotal = sec.items.reduce((s, i) => s + i.amount, 0);
+        return `
+          <div class="border-t border-gray-100 dark:border-slate-700">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-2 bg-gray-50 dark:bg-slate-800/50">
+              <span class="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">${sec.title}</span>
+              <span class="text-xs font-bold text-gray-600 dark:text-slate-300">${fmtNT(secTotal)}</span>
+            </div>
+            ${sec.items.map(item => `
+              <div class="grid grid-cols-3 px-4 sm:px-6 py-3 items-center hover:bg-gray-50 dark:hover:bg-slate-800/50">
+                <div class="col-span-2">
+                  <p class="text-sm font-medium text-gray-700 dark:text-slate-300">${item.label}</p>
+                  <p class="text-xs text-gray-400 dark:text-slate-500 mt-0.5">${item.note}</p>
+                </div>
+                <span class="text-right font-bold text-gray-800 dark:text-slate-100">${fmtNT(item.amount)}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+    };
+
+    // 英國
+    const ukAllItems = B.uk.sections.flatMap(s => s.items);
+    const ukTotal = ukAllItems.reduce((s, i) => s + i.amount, 0);
+    set('budget-uk-note', B.uk.note);
+    set('budget-uk-total-badge', fmtNT(ukTotal));
+    set('budget-uk-rows', renderSections(B.uk.sections));
+    set('budget-uk-subtotal', fmtNT(ukTotal));
+    set('budget-uk-total', fmtNT(ukTotal));
+
+    // 冰島
+    const icAllItems = B.iceland.sections.flatMap(s => s.items);
+    const icTotal = icAllItems.reduce((s, i) => s + i.amount, 0);
+    set('budget-iceland-note', B.iceland.note);
+    set('budget-iceland-total-badge', fmtNT(icTotal));
+    set('budget-iceland-rows', renderSections(B.iceland.sections));
+    set('budget-iceland-subtotal', fmtNT(icTotal));
+    set('budget-iceland-total', fmtNT(icTotal));
+
+    // 其他
+    const renderExtras = (items) => items.map(item => `
+      <div class="grid grid-cols-3 px-4 sm:px-6 py-3.5 items-center hover:bg-gray-50 dark:hover:bg-slate-800/50">
+        <div class="flex items-center gap-2 col-span-2">
+          <span class="text-base flex-shrink-0">${item.icon}</span>
+          <div>
+            <p class="text-sm font-medium text-gray-700 dark:text-slate-300">${item.label}</p>
+            <p class="text-xs text-gray-400 dark:text-slate-500">${item.note}</p>
+          </div>
+        </div>
+        <span class="text-right font-bold text-gray-800 dark:text-slate-100">${fmtNT(item.amount)}</span>
+      </div>
+    `).join('');
+    const exTotal = B.extras.reduce((s, i) => s + i.amount, 0);
+    set('budget-extras-rows', renderExtras(B.extras));
+    set('budget-extras-subtotal', fmtNT(exTotal));
+
+    // 大總計
+    const grandTotal = flightsCash + ukTotal + icTotal + exTotal;
+    const perPerson = Math.round(grandTotal / B.people);
+    set('budget-grand-total', fmtNT(grandTotal));
+    set('budget-per-person', fmtNT(perPerson));
+
+    set('budget-summary-container', `
+      <div class="bg-gradient-to-br from-slate-700 to-gray-900 rounded-2xl p-5 sm:p-6 text-white shadow-lg">
+        <h3 class="font-black text-base sm:text-lg mb-4">📊 費用總結（2 人）</h3>
+        <div class="space-y-2 text-sm mb-5">
+          <div class="flex justify-between"><span class="opacity-70">✈️ 機票</span><span class="font-bold">${fmtNT(flightsCash)}</span></div>
+          <div class="flex justify-between"><span class="opacity-70">🇬🇧 英國</span><span class="font-bold">${fmtNT(ukTotal)}</span></div>
+          <div class="flex justify-between"><span class="opacity-70">🇮🇸 冰島</span><span class="font-bold">${fmtNT(icTotal)}</span></div>
+          <div class="flex justify-between"><span class="opacity-70">🎒 其他</span><span class="font-bold">${fmtNT(exTotal)}</span></div>
+          <div class="border-t border-white/20 pt-2 flex justify-between text-lg font-black">
+            <span>總計</span><span class="text-emerald-400">${fmtNT(grandTotal)}</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white/10 rounded-xl p-3 text-center">
+            <p class="text-xs opacity-60 mb-1">每人平均</p>
+            <p class="text-xl font-black text-emerald-300">${fmtNT(perPerson)}</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-3 text-center">
+            <p class="text-xs opacity-60 mb-1">另計哩程價值</p>
+            <p class="text-sm font-bold text-amber-300">CI 25,000 哩<br>Emirates 23,446 哩</p>
+          </div>
+        </div>
+        <p class="text-xs opacity-50 mt-3">※ 住宿、餐費、活動為估算值，實際費用依訂房與消費而定</p>
+      </div>
+    `);
+  }
+
   // ── 暗黑模式切換邏輯 ─────────────────────────────────────
   const themeToggleBtn = document.getElementById('theme-toggle');
   const darkIcon = document.getElementById('theme-toggle-dark-icon');

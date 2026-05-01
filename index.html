@@ -88,6 +88,10 @@
                     class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
                     <span>🗺️</span><span>英國 & 冰島行程</span>
                 </button>
+                <button onclick="switchTab('budget')" id="tab-budget"
+                    class="tab-btn flex-shrink-0 flex items-center gap-1 px-2.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-gray-500 dark:text-slate-400 whitespace-nowrap">
+                    <span>💰</span><span>旅費估算</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -1766,6 +1770,108 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <!-- ═══════════════════════════════ TAB：旅費估算 ═══════════════════════════════ -->
+        <div id="section-budget" class="section-content space-y-6 sm:space-y-8">
+
+            <!-- Hero 總覽 -->
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-5 sm:p-7 text-white shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl">💰</div>
+                    <div>
+                        <h2 class="font-black text-lg sm:text-xl">旅費估算總覽</h2>
+                        <p class="text-xs opacity-80">Alan + Anne 2 人・英國 + 冰島 10 月行程</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                    <div class="bg-white/15 rounded-xl p-3 text-center">
+                        <p class="text-xs opacity-70 mb-1">✈️ 機票合計</p>
+                        <p id="budget-flights-total" class="text-xl font-black">—</p>
+                        <p class="text-xs opacity-60">+ 哩程兌換</p>
+                    </div>
+                    <div class="bg-white/15 rounded-xl p-3 text-center">
+                        <p class="text-xs opacity-70 mb-1">🇬🇧 英國合計</p>
+                        <p id="budget-uk-total" class="text-xl font-black">—</p>
+                        <p class="text-xs opacity-60">住宿+交通+餐</p>
+                    </div>
+                    <div class="bg-white/15 rounded-xl p-3 text-center">
+                        <p class="text-xs opacity-70 mb-1">🇮🇸 冰島合計</p>
+                        <p id="budget-iceland-total" class="text-xl font-black">—</p>
+                        <p class="text-xs opacity-60">住宿+租車+餐</p>
+                    </div>
+                    <div class="bg-white/15 rounded-xl p-3 text-center">
+                        <p class="text-xs opacity-70 mb-1">💴 旅程總計</p>
+                        <p id="budget-grand-total" class="text-2xl font-black">—</p>
+                        <p class="text-xs opacity-60">2 人・不含哩程</p>
+                    </div>
+                </div>
+                <div class="mt-3 flex gap-4 text-xs opacity-70">
+                    <span>每人約 <span id="budget-per-person" class="font-bold text-white">—</span></span>
+                    <span>｜估算值，實際依訂房結果調整</span>
+                </div>
+            </div>
+
+            <!-- 機票費用 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-4 sm:p-5 text-white">
+                    <h3 class="font-black text-base sm:text-lg">✈️ 機票費用</h3>
+                    <p class="text-xs opacity-70 mt-0.5">含台北↔倫敦 + 倫敦↔冰島</p>
+                </div>
+                <div id="budget-flights-rows" class="divide-y divide-gray-100 dark:divide-slate-700"></div>
+                <div class="p-3 bg-sky-50 dark:bg-sky-900/30 border-t border-gray-100 dark:border-slate-700 text-xs text-sky-700 dark:text-sky-400">
+                    ✈️ 哩程兌換部分（CI 25,000 哩 + Emirates 23,446 哩）另計，不含在現金總計內
+                </div>
+            </div>
+
+            <!-- 英國費用 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-rose-500 to-pink-600 p-4 sm:p-5 text-white flex items-center justify-between">
+                    <div>
+                        <h3 class="font-black text-base sm:text-lg">🇬🇧 英國費用</h3>
+                        <p id="budget-uk-note" class="text-xs opacity-70 mt-0.5">—</p>
+                    </div>
+                    <p id="budget-uk-total-badge" class="text-2xl font-black">—</p>
+                </div>
+                <div id="budget-uk-rows" class="divide-y divide-gray-100 dark:divide-slate-700"></div>
+                <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-rose-50 dark:bg-rose-900/30 border-t border-gray-100 dark:border-slate-700">
+                    <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">英國小計</span>
+                    <span id="budget-uk-subtotal" class="text-right font-black text-rose-600 text-lg sm:text-xl">—</span>
+                </div>
+            </div>
+
+            <!-- 冰島費用 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-violet-500 to-purple-600 p-4 sm:p-5 text-white flex items-center justify-between">
+                    <div>
+                        <h3 class="font-black text-base sm:text-lg">🇮🇸 冰島費用</h3>
+                        <p id="budget-iceland-note" class="text-xs opacity-70 mt-0.5">—</p>
+                    </div>
+                    <p id="budget-iceland-total-badge" class="text-2xl font-black">—</p>
+                </div>
+                <div id="budget-iceland-rows" class="divide-y divide-gray-100 dark:divide-slate-700"></div>
+                <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-violet-50 dark:bg-violet-900/30 border-t border-gray-100 dark:border-slate-700">
+                    <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">冰島小計</span>
+                    <span id="budget-iceland-subtotal" class="text-right font-black text-violet-600 text-lg sm:text-xl">—</span>
+                </div>
+            </div>
+
+            <!-- 雜項費用 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 p-4 sm:p-5 text-white">
+                    <h3 class="font-black text-base sm:text-lg">🎒 其他費用</h3>
+                    <p class="text-xs opacity-70 mt-0.5">保險・通訊・購物</p>
+                </div>
+                <div id="budget-extras-rows" class="divide-y divide-gray-100 dark:divide-slate-700"></div>
+                <div class="grid grid-cols-3 px-4 sm:px-6 py-4 bg-amber-50 dark:bg-amber-900/30 border-t border-gray-100 dark:border-slate-700">
+                    <span class="font-black text-gray-800 dark:text-slate-100 col-span-2">其他小計</span>
+                    <span id="budget-extras-subtotal" class="text-right font-black text-amber-600 text-lg sm:text-xl">—</span>
+                </div>
+            </div>
+
+            <!-- 總計 -->
+            <div id="budget-summary-container"></div>
 
         </div>
 
