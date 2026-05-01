@@ -277,6 +277,22 @@ document.addEventListener('DOMContentLoaded', () => {
     `);
   }
 
+  // ── 外站票：動態注入節省金額 ──────────────────────────────────
+  const OT = P.outstationTicket;
+  if (OT) {
+    const baseline = OT.baselineTpe.price;
+    OT.options.forEach(opt => {
+      const saving    = baseline - opt.totalPrice;
+      const savingPct = Math.round((saving / baseline) * 100);
+      const set2 = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set2(`outstation-${opt.id}-total`,    'NT$' + fmt(opt.totalPrice));
+      set2(`outstation-${opt.id}-total-2`,  'NT$' + fmt(opt.totalPrice));
+      set2(`outstation-${opt.id}-saving`,   'NT$' + fmt(saving));
+      set2(`outstation-${opt.id}-saving-2`, 'NT$' + fmt(saving));
+      set2(`outstation-${opt.id}-pct`,      savingPct + '%');
+    });
+  }
+
   // ── 🐾 吉依卡娃主題切換邏輯 ─────────────────────────────────
   const chiikawaToggleBtn = document.getElementById('chiikawa-toggle');
   if (chiikawaToggleBtn) {

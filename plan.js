@@ -6,7 +6,7 @@
 const PLAN = {
 
   // ── 版本資訊（執行 commit.sh 時自動更新）────────────────────
-  lastUpdated: "2026-05-01 16:28 (Asia/Taipei)",
+  lastUpdated: "2026-05-01 18:38 (Asia/Taipei)",
 
   // ── 哩程帳戶 ──────────────────────────────────────────────
 
@@ -380,6 +380,40 @@ const PLAN = {
       { label:"旅遊保險",     amount:4000,  note:"2 人・含冰島戶外活動險（估）", icon:"🛡️" },
       { label:"電話漫遊/SIM", amount:1500,  note:"英國 + 冰島 eSIM 各 1 張（估）", icon:"📱" },
       { label:"購物伴手禮",   amount:10000, note:"冰島設計品・英國紅茶・巧克力等（估）", icon:"🛍️" }
+    ]
+  },
+
+  // ── 外站票規劃 ──────────────────────────────────────────────
+  outstationTicket: {
+    baselineTpe: {
+      label: "華航 CI TPE→LHR T 艙（現有基準）",
+      price: 57644,
+      airline: "中華航空 CI82",
+      route: "TPE→LHR 直飛",
+      duration: "約 13 小時"
+    },
+    options: [
+      {
+        id: "hkg", city: "香港", flag: "🇭🇰", cityCode: "HKG",
+        feedRoute: "TPE→HKG", feedAirline: "香港快運 / 台灣虎航", feedPrice: 3500,
+        mainRoute: "HKG→LHR", mainAirline: "國泰航空 / 英國航空", mainPrice: 41000,
+        totalPrice: 44500, saving: 13144, savingPct: 23,
+        tag: "最省方案", tagColor: "emerald"
+      },
+      {
+        id: "nrt", city: "東京", flag: "🇯🇵", cityCode: "NRT",
+        feedRoute: "TPE→NRT", feedAirline: "樂桃 / 台灣虎航 / 星宇航空", feedPrice: 4500,
+        mainRoute: "NRT→LHR", mainAirline: "日本航空 / 英國航空 / 全日空", mainPrice: 45000,
+        totalPrice: 49500, saving: 8144, savingPct: 14,
+        tag: "順遊東京", tagColor: "rose"
+      },
+      {
+        id: "icn", city: "首爾", flag: "🇰🇷", cityCode: "ICN",
+        feedRoute: "TPE→ICN", feedAirline: "韓亞航空 / 德威 / 濟州", feedPrice: 3800,
+        mainRoute: "ICN→LHR", mainAirline: "大韓航空 / 韓亞航空", mainPrice: 43000,
+        totalPrice: 46800, saving: 10844, savingPct: 19,
+        tag: "韓航直飛", tagColor: "blue"
+      }
     ]
   }
 
