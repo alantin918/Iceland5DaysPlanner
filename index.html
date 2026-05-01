@@ -67,6 +67,31 @@
             border-color: #f0abfc !important;
             box-shadow: 0 4px 16px rgba(244,114,182,.45) !important;
         }
+
+        /* ── 🐾 貼圖角色動畫 ──────────────────────────────────── */
+        .cw-sticker { display: none; pointer-events: none; user-select: none; position: fixed; z-index: 39; }
+        html.chiikawa .cw-sticker { display: block; }
+        .cw-hero-banner { display: none; }
+        html.chiikawa .cw-hero-banner { display: flex; }
+        @keyframes cw-float {
+            0%,100% { transform: translateY(0) rotate(-3deg); }
+            50%      { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes cw-sway {
+            0%,100% { transform: translateY(0) rotate(-6deg) scale(1); }
+            50%      { transform: translateY(-8px) rotate(6deg) scale(1.06); }
+        }
+        @keyframes cw-bounce {
+            0%,100% { transform: translateY(0) rotate(2deg); }
+            40%      { transform: translateY(-15px) rotate(-2deg); }
+            60%      { transform: translateY(-10px) rotate(3deg); }
+        }
+        .cw-anim-1 { animation: cw-float  3.4s ease-in-out infinite; }
+        .cw-anim-2 { animation: cw-sway   4.1s ease-in-out infinite 0.6s; }
+        .cw-anim-3 { animation: cw-bounce 3.8s ease-in-out infinite 1.2s; }
+        /* 照片牆 hover 效果 */
+        .photo-cell img { transition: transform .35s ease; }
+        .photo-cell:hover img { transform: scale(1.08); }
     </style>
 
     <script>
@@ -102,6 +127,44 @@
                 <span class="bg-sky-50 dark:bg-sky-900/30 border border-sky-400/40 rounded-full px-3 py-1.5"><span data-val="ci-total-num">34,283</span> 華航哩程 ✓</span>
                 <span class="bg-amber-50 dark:bg-amber-900/30 border border-amber-400/40 rounded-full px-3 py-1.5">28,600 阿聯酋哩程</span>
                 <span class="bg-purple-500/30 border border-purple-400/40 rounded-full px-3 py-1.5">4 晚住同一間飯店</span>
+            </div>
+
+            <!-- 🐾 吉伊卡娃模式專屬 banner（chiikawa 才顯示） -->
+            <div class="cw-hero-banner justify-center items-center gap-4 mt-6 text-white/90">
+                <!-- Chiikawa -->
+                <svg width="54" height="58" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-1 drop-shadow-lg">
+                    <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+                    <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+                    <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+                    <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+                    <circle cx="32" cy="44" r="2" fill="white"/>
+                    <circle cx="52" cy="44" r="2" fill="white"/>
+                    <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
+                    <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+                    <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+                </svg>
+                <span class="text-sm font-bold tracking-wider opacity-80">ちいかわと一緒に旅行！</span>
+                <!-- Hachiware -->
+                <svg width="54" height="58" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-2 drop-shadow-lg">
+                    <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+                    <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+                    <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+                    <path d="M35 32 L40 41 L45 32" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+                    <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+                    <circle cx="32" cy="44" r="2" fill="white"/>
+                    <circle cx="52" cy="44" r="2" fill="white"/>
+                    <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
+                    <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+                    <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+                </svg>
             </div>
         </div>
     </header>
@@ -1153,6 +1216,56 @@
                 </div>
             </div>
 
+            <!-- 🇬🇧 英國景色照片牆 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-500 to-indigo-600 px-4 sm:px-5 py-3 text-white flex items-center gap-2.5">
+                    <span class="text-xl">📸</span>
+                    <div>
+                        <h3 class="font-black text-sm sm:text-base">倫敦景色一覽</h3>
+                        <p class="text-xs opacity-70">London highlights · 10月秋季</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1.5">
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=75" alt="Tower Bridge" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">Tower Bridge</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=600&q=75" alt="Houses of Parliament" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">國會大廈 × Big Ben</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=75" alt="London Eye" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">倫敦眼 London Eye</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1569863959165-56d6aef7ff93?auto=format&fit=crop&w=600&q=75" alt="Red Phone Box" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">紅色電話亭</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1444084316844-9a7af923b42d?auto=format&fit=crop&w=600&q=75" alt="Thames River" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">泰晤士河岸</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1533929736557-1f89ac01c958?auto=format&fit=crop&w=600&q=75" alt="London Street" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">倫敦街景</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 dark:text-slate-500 text-right px-3 py-2">📷 Photo: Unsplash</p>
+            </div>
+
             <!-- 分隔線 -->
             <div class="flex items-center gap-3 py-2">
                 <div class="flex-1 border-t-2 border-dashed border-gray-200 dark:border-slate-600"></div>
@@ -1278,6 +1391,56 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- 🇮🇸 冰島景色照片牆 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div class="bg-gradient-to-r from-violet-500 to-indigo-600 px-4 sm:px-5 py-3 text-white flex items-center gap-2.5">
+                    <span class="text-xl">📸</span>
+                    <div>
+                        <h3 class="font-black text-sm sm:text-base">冰島景色一覽</h3>
+                        <p class="text-xs opacity-70">Iceland highlights · 10月極光季</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1.5">
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=600&q=75" alt="Northern Lights" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">北極光 Aurora Borealis</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?auto=format&fit=crop&w=600&q=75" alt="Iceland Landscape" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">冰島絕景公路</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=600&q=75" alt="Waterfall" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">冰島瀑布</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=75" alt="Blue Lagoon" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">藍色潟湖 Blue Lagoon</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1490682143684-14369e18dce8?auto=format&fit=crop&w=600&q=75" alt="Iceland aurora" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">極光倒影</p>
+                        </div>
+                    </div>
+                    <div class="photo-cell relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-slate-700">
+                        <img src="https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=600&q=75" alt="Reykjavik" class="w-full h-full object-cover" loading="lazy" onerror="this.closest('.photo-cell').style.display='none'">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2 opacity-0 hover:opacity-100 transition-opacity">
+                            <p class="text-white text-xs font-bold">雷克雅維克彩色屋</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 dark:text-slate-500 text-right px-3 py-2">📷 Photo: Unsplash</p>
             </div>
 
             <!-- 行程亮點 -->
@@ -1959,6 +2122,72 @@
         }
     </script>
 
+
+    <!-- 🐾 吉伊卡娃浮動角色貼圖（chiikawa 模式 × 桌面才顯示） -->
+
+    <!-- Chiikawa 本人 - 左側中央 -->
+    <div class="cw-sticker hidden lg:block" style="left:8px; top:45%;">
+        <svg width="90" height="96" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-1 drop-shadow-xl">
+            <ellipse cx="23" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+            <ellipse cx="57" cy="22" rx="9" ry="12" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+            <ellipse cx="23" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+            <ellipse cx="57" cy="24" rx="5" ry="7" fill="#fecdd3"/>
+            <ellipse cx="40" cy="52" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+            <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <circle cx="32" cy="44" r="2" fill="white"/>
+            <circle cx="52" cy="44" r="2" fill="white"/>
+            <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#fb7185"/>
+            <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <ellipse cx="23" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+            <ellipse cx="57" cy="57" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+        </svg>
+        <p class="text-center text-xs font-bold mt-1" style="color:#f472b6;">ちいかわ</p>
+    </div>
+
+    <!-- Hachiware - 左側下方 -->
+    <div class="cw-sticker hidden lg:block" style="left:8px; top:68%;">
+        <svg width="90" height="96" viewBox="0 0 80 85" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-2 drop-shadow-xl">
+            <ellipse cx="23" cy="22" rx="9" ry="12" fill="#f0f4ff" stroke="#c084fc" stroke-width="1.5"/>
+            <ellipse cx="57" cy="22" rx="9" ry="12" fill="#f0f4ff" stroke="#c084fc" stroke-width="1.5"/>
+            <ellipse cx="23" cy="24" rx="5" ry="7" fill="#e0d2fe"/>
+            <ellipse cx="57" cy="24" rx="5" ry="7" fill="#e0d2fe"/>
+            <ellipse cx="40" cy="52" rx="30" ry="28" fill="#f8f6ff" stroke="#c084fc" stroke-width="1.5"/>
+            <path d="M35 32 L40 41 L45 32" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <ellipse cx="30" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <ellipse cx="50" cy="47" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <circle cx="32" cy="44" r="2" fill="white"/>
+            <circle cx="52" cy="44" r="2" fill="white"/>
+            <ellipse cx="40" cy="54" rx="2.5" ry="1.8" fill="#a78bfa"/>
+            <path d="M33 59 Q36 64 40 59 Q44 64 47 59" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <ellipse cx="23" cy="57" rx="6" ry="3" fill="#c084fc" opacity="0.45"/>
+            <ellipse cx="57" cy="57" rx="6" ry="3" fill="#c084fc" opacity="0.45"/>
+        </svg>
+        <p class="text-center text-xs font-bold mt-1" style="color:#a855f7;">ハチワレ</p>
+    </div>
+
+    <!-- Usagi - 右側中央（避開按鈕） -->
+    <div class="cw-sticker hidden lg:block" style="right:8px; top:38%;">
+        <svg width="82" height="116" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" class="cw-anim-3 drop-shadow-xl">
+            <!-- long floppy left ear -->
+            <path d="M24 45 Q16 28 17 10 Q18 0 24 14 Q28 26 28 45" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M24 45 Q18 30 19 13 Q20 5 24 16 Q27 26 27 45" fill="#fecdd3" stroke="none"/>
+            <!-- long floppy right ear -->
+            <path d="M56 45 Q64 28 63 10 Q62 0 56 14 Q52 26 52 45" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M56 45 Q62 30 61 13 Q60 5 56 16 Q53 26 53 45" fill="#fecdd3" stroke="none"/>
+            <!-- body -->
+            <ellipse cx="40" cy="76" rx="30" ry="28" fill="#fff8f8" stroke="#fda4af" stroke-width="1.5"/>
+            <ellipse cx="30" cy="70" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <ellipse cx="50" cy="70" rx="5" ry="5.5" fill="#1a1a2e"/>
+            <circle cx="32" cy="67" r="2" fill="white"/>
+            <circle cx="52" cy="67" r="2" fill="white"/>
+            <ellipse cx="40" cy="77" rx="2.5" ry="1.8" fill="#fb7185"/>
+            <path d="M33 82 Q36 87 40 82 Q44 87 47 82" stroke="#1a1a2e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <ellipse cx="23" cy="80" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+            <ellipse cx="57" cy="80" rx="6" ry="3" fill="#fda4af" opacity="0.45"/>
+        </svg>
+        <p class="text-center text-xs font-bold mt-1" style="color:#f472b6;">うさぎ</p>
+    </div>
 
     <!-- Chiikawa Theme Toggle -->
     <button id="chiikawa-toggle" title="吉依卡娃模式 🐾" class="fixed bottom-22 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 flex items-center justify-center text-xl z-50 hover:scale-110" style="bottom: 80px;">
